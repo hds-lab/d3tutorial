@@ -1,29 +1,26 @@
 {
-  "name": "hb-bootstrap",
-  "version": "0.3.0",
-  "homepage": "https://github.com/jvandemo/hb-bootstrap",
+  "name": "d3tutorial",
+  "version": "0.0.1",
+  "homepage": "https://github.com/scclab/d3tutorial",
   "authors": [
-    "Jurgen Van de Moere <jurgen.van.de.moere@gmail.com>"
+    "Michael Brooks <mjbrooks@uw.edu>",
+    "John Robinson <soco@uw.edu>"
   ],
-  "description": "Harp Boilerplate of a Bootstrap website",
-  "keywords": [
-    "harp",
-    "boilerplate",
-    "bootstrap"
-  ],
+  "description": "Introductory tutorial for D3",
   "license": "MIT",
   "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-    "public/bower",
+    "public/vendor",
     "test",
     "tests"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "bootstrap": "~3.1.1"
+  },
   "devDependencies": {
-    "bootstrap": "~3.1.1",
     "jquery.splitter": "~0.14.0"
   }
 }

@@ -1,9 +1,15 @@
 # IDE
-.idea
+/.idea
 
 # Bower
-public/bower
+/bower_components
 
 # build directory
-www
+/www
+
+# npm modules
+/node_modules
+
+# temp files
+*~
 

@@ -1,11 +1,16 @@
 {
   "name": "d3tutorial",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.0.1",
+  "description": "Introductory tutorial for D3",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Michael Brooks <mjbrooks@uw.edu>",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-bowercopy": "^1.1.0",
+    "grunt-harp": "^0.1.4",
+    "load-grunt-tasks": "^1.0.0"
+  }
 }

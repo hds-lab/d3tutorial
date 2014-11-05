@@ -1,85 +1,74 @@
-# Bootstrap boilerplate for Harp
+# D3 Tutorial
 
-Allows you to generate a Bootstrap enabled website in seconds using [Harp](http://harpjs.com):
+System for running D3 tutorials.
 
-- Includes documentation
-- Offers theme support that doesn't interfere with Bootstrap updates
-- Allows you to easily customize Bootstrap for each individual theme
-- Uses Bower to install Bootstrap (and automate updates)
-- Supports hosting in a subdirectory using a `baseUrl` variable
-- Prevents CSS bloat by allowing you to only include the Bootstrap components that you really need
-- Includes a showcase page that allows you to conveniently see what the Bootstrap components look like while your are customizing your Bootstrap styles
-
-## Demo
-
-A clean installation of the boilerplate looks like this: [http://jvandemo.github.io/hb-bootstrap/](http://jvandemo.github.io/hb-bootstrap/)
 
 ## Installation
 
-First make sure you have Harp and Bower installed:
+First, make sure your system has Node.js (with `npm`) installed.
+You will also need to have Harp, Bower, and Grunt:
 
 ```sh
-$ sudo npm install -g harp
-$ sudo npm install -g bower
+$ sudo npm install -g harp bower grunt-cli
 ```
 
-Then initialize the boilerplate:
+Now, install the node and bower dependencies:
 
 ```sh
-$ harp init -b jvandemo/hb-bootstrap myproject
+$ node install && bower install
 ```
 
-Change the directory to the new `myproject` directory:
-
-```sh
-$ cd myproject
-```
-
-Download Bootstrap using bower:
-
-```sh
-$ bower install
-```
-
-Start the harp server from your project directory:
+You can run the harp server:
 
 ```sh
 $ harp server
 ```
 
-And navigate to `http://localhost:9000` in your browser:
+And navigate to `http://localhost:9000` in your browser.
 
-![](http://i.imgur.com/n9bcerv.png)
+You can also compile the site to static files for easy hosting:
 
-## Documentation
+```sh
+$ harp compile
+```
 
-The documentation is included in the boilerplate for your convenience (at the same time it demonstrates how you can easily create new layouts in your website):
+This produces a `www` folder that is ready for any web server.
 
-![](http://i.imgur.com/mJTLMQz.png)
 
-## Showcase page
+## Writing a Tutorial
 
-The boilerplate includes a showcase page to easily see what the Bootstrap components look like while your are customizing your Bootstrap styles:
+This project displays tutorials in a side-by-side window with JS Bin,
+to allow the reader to code along with the tutorial.
 
-![](http://i.imgur.com/g43CZge.png)
+Tutorials are located in the `public/tutorials` folder, and may be written in Markdown
+or any other format supported by Harp.
 
-## Changelog
+You can add special buttons that will let the user update the JS Bin window
+to show a specific bin. You might use this to get the user past some initial setup steps,
+or to skip ahead in the tutorial.
 
-### v0.4.0
+```html
+<a class="btn btn-primary jsbin-button"
+   href="http://jsbin.com/xexezo/5/edit?js,output"
+   target="_blank">
+   Open in JS Bin
+</a>
+```
 
-- Added support for `baseUrl`
+Note that you can insert these in Markdown as well, as long as there is a line of space
+on either side of the HTML.
 
-### v0.3.0
+When the tutorial is loaded, the url on the first button will be used
+to initialize the JS Bin window.
 
-- Added documentation as part of boilerplate
-- Update README.md
 
-### v0.2.0
+## Updating Bower Dependencies
 
-- Added support for customizing Bootstrap
-- Added two sample themes: default and flat
+If you need to update any of the "vendor" library files (in `public/vendor`),
+you will want to use this command:
 
-### v0.1.0
+```sh
+$ grunt bowercopy
+```
 
-- Initial boilerplate
-
+This will copy just the required files from the `bower_components` folder to `public/vendor`.

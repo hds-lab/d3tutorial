@@ -2,7 +2,7 @@ doctype html
 html
   head
     != partial("../_partials/head")
-    link(rel='stylesheet', href='#{baseUrl}/bower/jquery.splitter/css/jquery.splitter.css')
+    link(rel='stylesheet', href='#{baseUrl}/vendor/jquery.splitter/jquery.splitter.css')
     link(rel='stylesheet', href='#{baseUrl}/libs/prism/prism.css')
   body
     header
@@ -24,7 +24,7 @@ html
           .jsbin-container
 
     != partial("../_partials/foot")
-    script(src='#{baseUrl}/bower/jquery.splitter/js/jquery.splitter-0.14.0.js')
+    script(src='#{baseUrl}/vendor/jquery.splitter/jquery.splitter.js')
     script(src='#{baseUrl}/libs/prism/prism.js')
     script(src='#{baseUrl}/js/tutorials/jsbin.js')
     script(src='#{baseUrl}/js/tutorials/embed.js')
