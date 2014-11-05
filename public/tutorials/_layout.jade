@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    != partial("../_partials/head")
+    link(rel='stylesheet', href='#{baseUrl}/bower/jquery.splitter/css/jquery.splitter.css')
+    link(rel='stylesheet', href='#{baseUrl}/libs/prism/prism.css')
+  body
+    header
+      != partial("../_partials/header")
+
+    main
+      #tutorial-split
+        .left-col
+          .container-fluid
+            article.tutorial
+              != yield
+
+          .tutorial-nav
+            ul.nav
+
+        .right-col
+          .jsbin-placeholder
+            p.lead JS Bin Loading...
+          .jsbin-container
+
+    != partial("../_partials/foot")
+    script(src='#{baseUrl}/bower/jquery.splitter/js/jquery.splitter-0.14.0.js')
+    script(src='#{baseUrl}/libs/prism/prism.js')
+    script(src='#{baseUrl}/js/tutorials/jsbin.js')
+    script(src='#{baseUrl}/js/tutorials/embed.js')
