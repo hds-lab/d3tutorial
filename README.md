@@ -15,7 +15,7 @@ $ sudo npm install -g harp bower grunt-cli
 Now, install the node and bower dependencies:
 
 ```sh
-$ node install && bower install
+$ npm install && bower install
 ```
 
 You can run the harp server:
