@@ -3,6 +3,7 @@ module.exports = function (grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
     bowercopy: {
       options: {},
 
@@ -32,6 +33,16 @@ module.exports = function (grunt) {
       dist: {
         dest: 'www'
       }
+    },
+
+    shell: {
+      gh_pages: {
+        command: [
+          "git add www -f",
+          "git commit -m 'update www'",
+          "git subtree push --prefix www origin gh-pages"
+        ].join("&&")
+      }
     }
   });
 
@@ -40,5 +51,6 @@ module.exports = function (grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['bowercopy', 'harp:dist']);
+  grunt.registerTask('deploy', ['harp:dist', 'shell:gh_pages']);
 
 };
