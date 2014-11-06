@@ -39,8 +39,8 @@ module.exports = function (grunt) {
       gh_pages: {
         command: [
           "git add www -f",
-          "git commit -m 'update www'",
-          "git subtree push --prefix www origin gh-pages"
+          "git commit -m 'update www'"
+          //"git subtree push --prefix www origin gh-pages"
         ].join("&&")
       }
     }
