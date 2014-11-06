@@ -18,6 +18,33 @@ body{
   padding-top: @body-padding;
 }
 
+.jumbotron {
+  background: none;
+  padding: 0;
+
+  text-shadow: 0 0 8px #FFF;
+
+  .container {
+    background: url("../images/network.png") no-repeat bottom right;
+
+    padding-top: @jumbotron-padding;
+    padding-bottom: @jumbotron-padding;
+
+    @media screen and (min-width: @screen-sm-min) {
+      padding-top: (@jumbotron-padding * 1.6);
+      padding-bottom: (@jumbotron-padding * 1.6);
+    }
+  }
+}
+
+.not-found {
+  text-align: center;
+
+  h1 {
+    margin: 40px 0;
+  }
+}
+
 footer{
   margin: @grid-gutter-width 0 0 0;
   padding: (@grid-gutter-width / 2) 0;
@@ -25,35 +52,10 @@ footer{
   text-align: center;
 }
 
-ul.nav-docs{
-  margin-top: 60px;
-  h1{
-    margin: 1em 0 0 0;
-    padding: 10px 15px;
-    font-size: 1.8rem;
-  }
-}
-
-article.article-docs{
-  h1, h2, h3, h4, h5, h6{
-    margin: 1em 0;
-  }
-  h1{
-    font-size: 3rem;
-  }
-  h2{
-    font-size: 2.6rem;
-  }
-  h3{
-    font-size: 2.2rem;
-  }
-  h4{
-    font-size: 1.8rem;
-  }
-  p{
-    margin: 1em 0;
-  }
-  img{
-    width: 100%;
+.about {
+  img {
+    max-width: 100%;
+    margin: 10px 0;
+    .box-shadow(~"0 0 10px rgba(0, 0, 0, 0.5)");
   }
 }

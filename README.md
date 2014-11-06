@@ -61,6 +61,7 @@ on either side of the HTML.
 When the tutorial is loaded, the url on the first button will be used
 to initialize the JS Bin window.
 
+Add a link to your tutorial in `public/index.jade`.
 
 ## Updating Bower Dependencies
 

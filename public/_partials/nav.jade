@@ -1,0 +1,15 @@
+.navbar-header
+  button.navbar-toggle(data-toggle="collapse", data-target="#navbar-top-collapse-1")
+    span.sr-only Toggle navigation
+    span.icon-bar
+    span.icon-bar
+    span.icon-bar
+  a.navbar-brand(href="#{baseUrl}/")= name
+
+.collapse.navbar-collapse#navbar-top-collapse-1
+  ul.nav.navbar-nav.navbar-right
+    li
+      a(href="#{baseUrl}/help.html") Instructions
+    each link in header_links
+      li
+        a(href=link[1],target='_blank')= link[0]

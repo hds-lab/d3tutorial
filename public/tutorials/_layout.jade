@@ -1,15 +1,15 @@
 doctype html
-html
+html.full-page
   head
     != partial("../_partials/head")
     link(rel='stylesheet', href='#{baseUrl}/vendor/jquery.splitter/jquery.splitter.css')
     link(rel='stylesheet', href='#{baseUrl}/js/prism/prism.css')
   body
     header
-      != partial("../_partials/header")
+      != partial("../_partials/header_fluid")
 
-    main
-      #tutorial-split
+    main.tutorial
+      .split-panel
         .left-col
           .container-fluid
             article.tutorial

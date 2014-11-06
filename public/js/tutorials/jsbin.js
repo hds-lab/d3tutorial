@@ -18,7 +18,7 @@
   };
 
   var setupSplitter = function() {
-    $('#tutorial-split').split({
+    $('.tutorial .split-panel').split({
       orientation: 'vertical',
       limit: 10,
       position: '40%' // if there is no percentage it interpret it as pixels
@@ -41,7 +41,9 @@
 
     buttons.click(function (e) {
       e.preventDefault();
-      loadJSBin($(this), jsbin);
+      if (confirm("Are you sure you want to load this JS Bin?\nThis will override any edits you have made.")) {
+        loadJSBin($(this), jsbin);
+      }
       return false;
     });
 

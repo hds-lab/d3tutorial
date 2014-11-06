@@ -1,6 +1,12 @@
 {
   "globals": {
     "baseUrl": "",
-    "name": "Bootstrap boilerplate for Harp"
+    "name": "D3 Workshop",
+    "repository": "https://github.com/scclab/d3tutorial",
+    "header_links": [
+      ["D3 Docs", "https://github.com/mbostock/d3/wiki/API-Reference"],
+      ["D3 Gallery", "https://github.com/mbostock/d3/wiki/Gallery"],
+      ["JS Docs", "https://developer.mozilla.org/en-US/docs/Web/JavaScript"]
+    ]
   }
 }

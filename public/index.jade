@@ -1,6 +1,13 @@
-.container-fluid
-    .jumbotron
-        h1 Congratulations
-        p Tutorial for d3
-        p
-            a.btn.btn-primary.btn-lg(href="#{baseUrl}/tutorials/example") Tutorial
+.main-background
+.jumbotron
+  .container
+    h1 Introduction to D3
+    p Get your feet wet with D3, a popular visualization library for the web.
+
+.container
+  .row
+    .col-md-6
+      != partial('_blocks/welcome.md')
+    .col-md-6.about
+      != partial('_blocks/about.md')
+

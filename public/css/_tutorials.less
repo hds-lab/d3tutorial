@@ -1,80 +1,85 @@
-html, body {
+html.full-page {
   height: 100%;
   position: relative;
+
+  body {
+    height: 100%;
+    position: relative;
+  }
 }
 
-main {
+main.tutorial {
   position: absolute;
-  top: @body-padding - 20px;
+  top: @body-padding;
   bottom: 0;
   left: 0;
   right: 0;
-}
 
-.jsbin-container {
-  height: 100%;
+  .jsbin-container {
+    height: 100%;
 
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-
-.jsbin-placeholder {
-  background-color: @well-bg;
-  height: 100%;
-
-  .lead {
-    text-align: center;
-    position: relative;
-    top: 50%;
-    margin: 0;
-    color: lighten(@text-color, 20%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
   }
-}
 
-#tutorial-split {
-  height: 100%;
+  .jsbin-placeholder {
+    background-color: @well-bg;
+    height: 100%;
 
-  //Settings for the splitter
-  &.splitter_panel {
-    .left-col > .container-fluid {
-      margin-top: 20px;
-    }
-
-    .right-col > .container-fluid {
-      padding: 0;
-    }
-
-    .vsplitter {
-      background-color: @navbar-default-bg;
-      border: 1px solid @navbar-default-border;
-      width: 8px;
-    }
-
-    //Overrides for prism's styles
-    pre[data-line] {
-      padding: 1em;
-    }
-
-    .line-highlight:before,
-    .line-highlight[data-end]:after {
-      content: normal;
-      display: none;
-    }
-
-    .line-highlight[data-end]:after {
-      content: normal;
-      display: none;
+    .lead {
+      text-align: center;
+      position: relative;
+      top: 50%;
+      margin: 0;
+      color: lighten(@text-color, 20%);
     }
   }
 
-  //For the jsbin buttons
-  .jsbin-button {
-    display: block;
-  }
-}
+  .split-panel {
+    height: 100%;
 
-.tutorial-nav {
-  display: none;
+    //Settings for the splitter
+    &.splitter_panel {
+      .left-col > .container-fluid {
+        margin-top: 20px;
+      }
+
+      .right-col > .container-fluid {
+        padding: 0;
+      }
+
+      .vsplitter {
+        background-color: @navbar-default-bg;
+        border: 1px solid @navbar-default-border;
+        width: 8px;
+      }
+
+      //Overrides for prism's styles
+      pre[data-line] {
+        padding: 1em;
+      }
+
+      .line-highlight:before,
+      .line-highlight[data-end]:after {
+        content: normal;
+        display: none;
+      }
+
+      .line-highlight[data-end]:after {
+        content: normal;
+        display: none;
+      }
+    }
+
+    //For the jsbin buttons
+    .jsbin-button {
+      display: block;
+    }
+  }
+
+  .tutorial-nav {
+    display: none;
+  }
 }
