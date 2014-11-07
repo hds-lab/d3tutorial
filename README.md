@@ -76,16 +76,14 @@ This will copy just the required files from the `bower_components` folder to `pu
 
 ## Deployment
 
+To be safe, make sure your repository is clean -- no outstanding uncommitted changes.
+
 To update the website (which is hosted on GitHub pages at `http://scclab.github.io/d3tutorial`)
-there are two steps:
+you just need to run `grunt deploy`. This performs the following steps:
 
-1. Edit `harp.js` so that the `baseUrl` variable is set to "http://scclab.github.io/d3tutorial"
-2. Run `grunt deploy`.
+1. Sets the `baseUrl` variable in `harp.json` to "http://scclab.github.io/d3tutorial"
+2. Runs `harp compile -o dist` to build the site to the `dist` folder.
+3. Restore the original `harp.json` file.
+4. Commits the updated `dist` folder (if nothing has changed the task will fail here).
+5. Uses `git subtree push` to send the `dist` folder to the `gh-pages` branch.
 
-The deploy task compiles the site to the `dist` folder,
-commits these changes, then pushes the `dist` folder
-to the `gh-pages` branch of the repository,
-which updates the website.
-
-**Note:** If your `baseUrl` setting is anything other than `""` you will not
- be able to serve the site locally using `harp server`.

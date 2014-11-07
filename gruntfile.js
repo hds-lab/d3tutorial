@@ -1,8 +1,11 @@
 module.exports = function (grunt) {
 
+  var _ = require('lodash');
+
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    harpconf: grunt.file.readJSON('harp.json'),
 
     bowercopy: {
       options: {},
@@ -40,12 +43,57 @@ module.exports = function (grunt) {
 
     shell: {
       commit_dist: {
-        command: "git add -f dist && git commit -m \"update dist\""
+        command: ["git add -f dist",
+                  "git commit -m \"update dist\"",
+                  "git push"
+        ].join(' && ')
       },
       gh_pages: {
-        command: "git subtree push --prefix dist origin gh-pages"
+        command: ["git branch -d gh-pages || true",
+                  "git push origin :gh-pages",
+                  "git subtree push --prefix dist origin gh-pages"
+        ].join(' && ')
       }
     }
+  });
+
+  grunt.registerTask('harpjson_restore', function() {
+    if (grunt.file.exists('harp.json.bak')) {
+      grunt.file.copy('harp.json.bak', 'harp.json');
+      grunt.file.delete('harp.json.bak');
+      console.log("Original harp.json restored.");
+    }
+  });
+
+  grunt.registerTask('harpjson_setup', function(url) {
+
+    if (url === 0 || url === undefined) {
+      url = grunt.config('pkg').homepage;
+    }
+
+    var backed_up = false;
+    var harpconf = grunt.config('harpconf');
+    if (harpconf.globals.baseUrl != url) {
+
+      if (grunt.file.exists('harp.json.bak')) {
+        grunt.fail.fatal("Backup file harp.json.bak already exists!");
+      }
+
+      console.log("Temporarily overriding harp.json...");
+      //Backup the old file
+      grunt.file.copy('harp.json', 'harp.json.bak');
+
+      //Make a new conf
+      harpconf = _.cloneDeep(harpconf);
+      harpconf.globals.baseUrl = url;
+
+      //Save the conf
+      grunt.file.write('harp.json', JSON.stringify(harpconf, undefined, 2));
+      backed_up = true;
+    }
+
+    //Now build the dist folder
+    console.log("Building site for " + url);
   });
 
   // load all grunt tasks matching the `grunt-*` pattern
@@ -53,6 +101,6 @@ module.exports = function (grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['bowercopy', 'harp:www']);
-  grunt.registerTask('deploy', ['harp:dist', 'shell:commit_dist', 'shell:gh_pages']);
+  grunt.registerTask('deploy', ['harpjson_setup', 'harp:dist', 'harpjson_restore', 'shell:commit_dist', 'shell:gh_pages']);
 
 };

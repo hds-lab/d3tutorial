@@ -1,6 +1,6 @@
 {
   "globals": {
-    "baseUrl": "d3tutorial",
+    "baseUrl": "",
     "name": "D3 Workshop",
     "repository": "https://github.com/scclab/d3tutorial",
     "header_links": [
