@@ -30,16 +30,20 @@ module.exports = function (grunt) {
       server: {
         server: true
       },
-      dist: {
+      www: {
         dest: 'www'
+      },
+      dist: {
+        dest: 'dist'
       }
     },
 
     shell: {
+      commit_dist: {
+        command: "git add -f dist && git commit -m \"update dist\""
+      },
       gh_pages: {
-        command: [
-          "git subtree push --prefix www origin gh-pages"
-        ].join("&&")
+        command: "git subtree push --prefix dist origin gh-pages"
       }
     }
   });
@@ -48,7 +52,7 @@ module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
 
   // Default task(s).
-  grunt.registerTask('default', ['bowercopy', 'harp:dist']);
-  grunt.registerTask('deploy', ['shell:gh_pages']);
+  grunt.registerTask('default', ['bowercopy', 'harp:www']);
+  grunt.registerTask('deploy', ['harp:dist', 'shell:commit_dist', 'shell:gh_pages']);
 
 };

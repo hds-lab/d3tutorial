@@ -73,3 +73,19 @@ $ grunt bowercopy
 ```
 
 This will copy just the required files from the `bower_components` folder to `public/vendor`.
+
+## Deployment
+
+To update the website (which is hosted on GitHub pages at `http://scclab.github.io/d3tutorial`)
+there are two steps:
+
+1. Edit `harp.js` so that the `baseUrl` variable is set to "http://scclab.github.io/d3tutorial"
+2. Run `grunt deploy`.
+
+The deploy task compiles the site to the `dist` folder,
+commits these changes, then pushes the `dist` folder
+to the `gh-pages` branch of the repository,
+which updates the website.
+
+**Note:** If your `baseUrl` setting is anything other than `""` you will not
+ be able to serve the site locally using `harp server`.
