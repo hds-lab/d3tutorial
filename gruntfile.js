@@ -38,9 +38,7 @@ module.exports = function (grunt) {
     shell: {
       gh_pages: {
         command: [
-          "git add www -f",
-          "git commit -m 'update www'"
-          //"git subtree push --prefix www origin gh-pages"
+          "git subtree push --prefix www origin gh-pages"
         ].join("&&")
       }
     }
@@ -51,6 +49,6 @@ module.exports = function (grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['bowercopy', 'harp:dist']);
-  grunt.registerTask('deploy', ['harp:dist', 'shell:gh_pages']);
+  grunt.registerTask('deploy', ['shell:gh_pages']);
 
 };
