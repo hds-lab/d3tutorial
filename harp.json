@@ -6,7 +6,8 @@
     "header_links": [
       ["D3 Docs", "https://github.com/mbostock/d3/wiki/API-Reference"],
       ["D3 Gallery", "https://github.com/mbostock/d3/wiki/Gallery"],
-      ["JS Docs", "https://developer.mozilla.org/en-US/docs/Web/JavaScript"]
+      ["JS Docs", "https://developer.mozilla.org/en-US/docs/Web/JavaScript"],
+      ["SVG Docs", "https://developer.mozilla.org/en-US/docs/Web/SVG"]
     ]
   }
 }

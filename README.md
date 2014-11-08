@@ -2,6 +2,11 @@
 
 System for running D3 tutorials.
 
+Main features:
+- Side-by-side instructions with live code editing via [JS Bin](jsbin.com).
+- Buttons to update the JS Bin to preset checkpoints.
+- Remembers the position in the tutorial
+
 
 ## Installation
 
@@ -58,8 +63,8 @@ or to skip ahead in the tutorial.
 Note that you can insert these in Markdown as well, as long as there is a line of space
 on either side of the HTML.
 
-When the tutorial is loaded, the url on the first button will be used
-to initialize the JS Bin window.
+When the tutorial is loaded, *if* there is a button with the class `.auto-load`
+in the tutorial, its JS Bin will be used to initialize the JS Bin window.
 
 Add a link to your tutorial in `public/index.jade`.
 

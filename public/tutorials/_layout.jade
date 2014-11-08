@@ -11,8 +11,10 @@ html.full-page
     main.tutorial
       .split-panel
         .left-col
+          .tutorial-label
+            span Tutorial Instructions
           .container-fluid
-            article.tutorial
+            article
               != yield
 
           .tutorial-nav
@@ -25,6 +27,7 @@ html.full-page
 
     != partial("../_partials/foot")
     script(src='#{baseUrl}/vendor/jquery.splitter/jquery.splitter.js')
+    script(src='#{baseUrl}/vendor/jquery.cookie/jquery.cookie.js')
     script(src='#{baseUrl}/js/prism/prism.js')
     script(src='#{baseUrl}/js/tutorials/jsbin.js')
     script(src='#{baseUrl}/js/tutorials/embed.js')

@@ -22,6 +22,9 @@ module.exports = function (grunt) {
           'jquery.splitter/jquery.splitter.js': 'jquery.splitter/js/jquery.splitter-0.14.0.js',
           'jquery.splitter/jquery.splitter.css': 'jquery.splitter/css/jquery.splitter.css',
 
+          //jquery.cookie plugin
+          'jquery.cookie/jquery.cookie.js': 'jquery.cookie/jquery.cookie.js',
+
           //bootstrap
           'bootstrap/js': 'bootstrap/dist/js/*.js',
           'bootstrap/fonts': 'bootstrap/dist/fonts/*'

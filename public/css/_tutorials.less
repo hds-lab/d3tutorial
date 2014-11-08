@@ -24,6 +24,40 @@ main.tutorial {
     right: 0;
   }
 
+  article {
+    img {
+      max-width: 100%;
+      display: block;
+      margin: 20px auto 30px auto;
+      .box-shadow(~"0 0 8px rgba(0,0,0,0.5)");
+    }
+
+    h1 {
+      .page-header();
+    }
+
+    h2 {
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 3px dashed #DDD;
+    }
+  }
+
+  @tutorial-label-height: 31px;
+  .tutorial-label {
+    position: absolute;
+    height: @tutorial-label-height;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    text-align: center;
+
+    background: #EDEDED;
+    border-bottom: #BFBFBF solid 1px;
+    line-height: @tutorial-label-height;
+  }
+
   .jsbin-placeholder {
     background-color: @well-bg;
     height: 100%;
@@ -37,13 +71,27 @@ main.tutorial {
     }
   }
 
+  pre[class*="language-"] {
+    margin: 20px 0;
+  }
+
   .split-panel {
     height: 100%;
 
     //Settings for the splitter
     &.splitter_panel {
-      .left-col > .container-fluid {
-        margin-top: 20px;
+      .left-col {
+        overflow-y: hidden;
+
+        > .container-fluid {
+          overflow: auto;
+          position: absolute;
+          margin: 0;
+          top: @tutorial-label-height;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
       }
 
       .right-col > .container-fluid {
@@ -76,6 +124,7 @@ main.tutorial {
     //For the jsbin buttons
     .jsbin-button {
       display: block;
+      margin: 20px 20px;
     }
   }
 
