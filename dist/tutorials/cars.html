@@ -1,0 +1,76 @@
+<!DOCTYPE html><html class="full-page"><head><meta charset="utf8"/><title>D3 Workshop</title><link rel="stylesheet" href="http://scclab.github.io/d3tutorial/css/global.css"/><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro"/><link rel="stylesheet" href="http://scclab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.css"><link rel="stylesheet" href="http://scclab.github.io/d3tutorial/js/prism/prism.css"></head><body><header><nav role="navigation" class="navbar navbar-inverse navbar-fixed-top"><div class="container-fluid"><div class="navbar-header"><button data-toggle="collapse" data-target="#navbar-top-collapse-1" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="http://scclab.github.io/d3tutorial/" class="navbar-brand">D3 Workshop</a></div><div id="navbar-top-collapse-1" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="http://scclab.github.io/d3tutorial/help.html">Instructions</a></li><li><a href="https://github.com/mbostock/d3/wiki/API-Reference" target="_blank">D3 Docs</a></li><li><a href="https://github.com/mbostock/d3/wiki/Gallery" target="_blank">D3 Gallery</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JS Docs</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank">SVG Docs</a></li></ul></div></div></nav></header><main class="tutorial"><div class="split-panel"><div class="left-col"><div class="tutorial-label"><span>Tutorial Instructions</span></div><div class="container-fluid"><article><h1>Visualizing the Cars Data</h1>
+<p>In this tutorial we will build a colorful scatter-plot-style visualization.
+We will use four dimensions from the Cars dataset, encoded as x and y position, size, and color.</p>
+<h2>The Cars Dataset</h2>
+<p>The &quot;Cars&quot; dataset used in this tutorial is a subset
+of the 1983 ASA Data Exposition dataset that is used in the <a href="http://courses.washington.edu/hcde511/">HCDE 511</a> course.</p>
+<p>You can <a href="resources/cars/carsExercise.xls">download the data</a> in Excel format, although
+it is not necessary to complete the tutorial.</p>
+<p>Every row in the data represents an individual type of car.
+The dataset includes the following fields:</p>
+<ul>
+<li>Model: the car&#39;s model name</li>
+<li>Origin: the country where the car is from</li>
+<li>Year: the year the car was manufactured</li>
+<li>Cylinders: the number of cylinders in the car&#39;s engine</li>
+<li>Horsepower: how powerful the car&#39;s engine is</li>
+<li>MPG: how many miles per gallon the car gets (fuel efficiency)</li>
+<li>Weight: how much the car weighs, in lbs.</li>
+</ul>
+<h2>Visual Encodings</h2>
+<p>We will create a visualization of four of these fields.
+The visual encodings are illustrated in the diagram below:</p>
+<p><img src="resources/cars/visual_encodings.png" alt="Visual encodings"></p>
+<p>Here is a screenshot of the final visualization:</p>
+<p><img src="resources/cars/cars_visualization.png" alt="Final cars visualization"></p>
+<h2>1. Initial Setup</h2>
+<p>We&#39;ll skip over some of the basic setup for the visualization,
+which we already covered in other tutorials.
+Here are the steps we are skipping:</p>
+<ol>
+<li>Importing the data from the CSV.</li>
+<li>Creating the SVG element.</li>
+<li>Defining scales for the data fields.</li>
+<li>Drawing the chart axes.</li>
+</ol>
+<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/8/edit?js,output" target="_blank">Open Initial Setup in JS Bin</a></p>
+<p>You can review the code for these in the JavaScript panel to the right, if you wish.
+We have also provided some CSS to make the chart look nice, but we won&#39;t go into it here.</p>
+<h2>2. Draw some dots</h2>
+<p>Our first step will be to render a dot for each car, using SVG <code>&lt;circle&gt;</code> elements.</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/circle">More about circles</a></p>
+<p>First, we select all of the elements with class &#39;dot&#39; (they are theoretical
+dat this point) and bind the cars data to them.</p>
+<p>Add the following code to the bottom of the JavaScript in JS Bin:</p>
+<pre><code class="language-javascript">var dots = chart.selectAll(&#39;.dot&#39;)
+                .data(data);</code></pre>
+<p>Next, use the D3 data join function <code>enter()</code>
+to create a dot for every dot that doesn&#39;t yet exist.
+For the cars data, this means 26 dots.</p>
+<pre><code class="language-javascript">dots.enter()
+    .append(&quot;circle&quot;)
+    .attr(&quot;class&quot;, &quot;dot&quot;)
+    .append(&quot;title&quot;);</code></pre>
+<p><em>Note that we also added an SVG <code>&lt;title&gt;</code> element inside each dot,
+which we will use later to show a tooltip.</em></p>
+<p>This doesn&#39;t do anything in our visualization, but
+it is normal at this point to also remove any dots that you don&#39;t need:</p>
+<pre><code class="language-javascript">dots.exit().remove();</code></pre>
+<p>Now there are dots being rendered, but they don&#39;t look like anything.
+They have default size, color, and position.</p>
+<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/9/edit?js,output" target="_blank">Open in JS Bin</a></p>
+<h2>Mapping to visual attributes</h2>
+<p>To actually see our dots, we need to set their position, size,
+and color.</p>
+<p>To do this, we just add the following code:</p>
+<pre><code class="language-javascript">dots.attr(&quot;r&quot;, function(d) { return radius(d.weight); })
+    .attr(&quot;cx&quot;, function(d) { return x(d.horsepower); })
+    .attr(&quot;cy&quot;, function(d) { return y(d.mpg); })
+    .style(&quot;fill&quot;, function(d) { return color(d.origin); });</code></pre>
+<p>In the initial setup, we prepared several D3 &quot;scale&quot; objects
+that we are using here (<code>radius</code>, <code>x</code>, <code>y</code>, and <code>color</code>).
+You can scroll up through the JavaScript to find how
+these are defined.</p>
+<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/4/edit?js,output" target="_blank">Open in JS Bin</a></p>
+<h2>Adding scales</h2>
+</article></div><div class="tutorial-nav"><ul class="nav"></ul></div></div><div class="right-col"><div class="jsbin-placeholder"><p class="lead">JS Bin Loading...</p></div><div class="jsbin-container"></div></div></div></main><script src="http://scclab.github.io/d3tutorial/vendor/jquery/jquery.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/bootstrap/js/bootstrap.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.cookie/jquery.cookie.js"></script><script src="http://scclab.github.io/d3tutorial/js/prism/prism.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/jsbin.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/embed.js"></script></body></html>
