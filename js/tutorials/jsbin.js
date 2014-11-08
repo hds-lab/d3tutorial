@@ -1,8 +1,35 @@
 (function ($) {
 
-  var loadJSBin = function (button, panel) {
+  var loadInitialJSBin = function(panel, buttons) {
+    var state = getTutorialState();
+    var link;
+    if ('jsbin' in state) {
+      link = state.jsbin;
+    } else {
+      buttons = buttons.filter('.auto-load');
+      if (buttons.length) {
+        link = get_jsbin_link(buttons.first());
+      }
+    }
 
-    var link = button.attr('href').replace('/edit', '/embed');
+    if (link) {
+      loadJSBin(link, panel);
+    } else {
+      setJSBinStatus("<span style='opacity: 0.5'>Use blue buttons in tutorial to load JS Bin</span>");
+    }
+  };
+
+  var setJSBinStatus = function(message) {
+    $('.tutorial .jsbin-placeholder p').html(message);
+  };
+
+  var loadJSBin = function (link, panel) {
+    setJSBinStatus("JS Bin Loading...");
+
+    var state = getTutorialState();
+    state.jsbin = link;
+    saveTutorialState(state);
+
     if (link.indexOf('height=') < 0) {
       link += '&height=100%';
     }
@@ -31,19 +58,107 @@
     //TODO: build a nav menu
   };
 
+  var tutorialId = function() {
+    return window.location.pathname;
+  };
+
+  var getAppState = function() {
+    var state = $.cookie('tutorials');
+    if (state) {
+      return JSON.parse(state);
+    } else {
+      return {};
+    }
+  };
+  var saveAppState = function(state) {
+    $.cookie('tutorials', JSON.stringify(state));
+  };
+
+  var saveTutorialState = function(tutorial_state) {
+    var state = getAppState();
+    state[tutorialId()] = tutorial_state;
+    saveAppState(state);
+  };
+
+  var getTutorialState = function() {
+    var state = getAppState();
+    return state[tutorialId()] || {};
+  };
+
+  var updateScroll = function(scrollable) {
+    var state = getTutorialState();
+    state.scroll = scrollable.scrollTop();
+    saveTutorialState(state);
+  };
+
+  var setupTutorialScroll = function(tutorial) {
+    var scrollable = tutorial.parent();
+
+    //This mechanism prevents excessive cookie read/writes maybe
+    var timeout;
+    scrollable.scroll(function() {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+
+      timeout = setTimeout(function() {
+        if (timeout) {
+          clearTimeout(timeout);
+        }
+
+        updateScroll(scrollable);
+      }, 50);
+    });
+
+    var state = getTutorialState();
+    if ('scroll' in state) {
+      scrollable.scrollTop(state['scroll']);
+    }
+  };
+
+  var get_jsbin_link = function(button) {
+    return button.attr('href').replace('/edit', '/embed');
+  };
+
+  var get_iframe_src = function(panel) {
+    var existing = panel.find('iframe');
+    if (existing.length) {
+      return existing.attr('src');
+    }
+    return "";
+  };
+
   $(document).ready(function () {
 
     setupSplitter();
     setupNavMenu();
 
-    var jsbin = $('.jsbin-container');
-    var buttons = $('a.jsbin-button');
+    var page = $('main.tutorial');
+    var tutorial = page.find('article');
+
+    var jsbin = page.find('.jsbin-container');
+    var buttons = tutorial.find('a.jsbin-button');
 
     buttons.click(function (e) {
       e.preventDefault();
-      if (confirm("Are you sure you want to load this JS Bin?\nThis will override any edits you have made.")) {
-        loadJSBin($(this), jsbin);
+
+      var button = $(this);
+
+      var link = get_jsbin_link(button);
+      var existing = get_iframe_src(jsbin);
+
+      if (existing == link) {
+        if (confirm("This JS Bin is already loaded.\nAre you sure you want to reset any changes you have made?")) {
+          loadJSBin(link, jsbin);
+        }
+      } else if (existing) {
+        if (confirm("Are you sure you want to load this JS Bin?\nThis will override any edits you have made.")) {
+          loadJSBin(link, jsbin);
+        }
+      } else {
+        loadJSBin(link, jsbin);
       }
+
       return false;
     });
 
@@ -51,7 +166,9 @@
       $(this).append('&nbsp;<i class="glyphicon glyphicon-share-alt">')
     });
 
-    loadJSBin(buttons.first(), jsbin);
+    setupTutorialScroll(tutorial);
+
+    loadInitialJSBin(jsbin, buttons);
   });
 
   if (typeof(hljs) !== 'undefined') {
