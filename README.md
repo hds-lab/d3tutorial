@@ -83,8 +83,8 @@ This will copy just the required files from the `bower_components` folder to `pu
 
 To be safe, make sure your repository is clean -- no outstanding uncommitted changes.
 
-To update the website (which is hosted on GitHub pages at `http://scclab.github.io/d3tutorial`)
-you just need to run `grunt deploy`. This performs the following steps:
+To update the website (which is hosted on GitHub pages at http://scclab.github.io/d3tutorial,
+just run `grunt deploy`. This performs the following steps:
 
 1. Sets the `baseUrl` variable in `harp.json` to "http://scclab.github.io/d3tutorial"
 2. Runs `harp compile -o dist` to build the site to the `dist` folder.
