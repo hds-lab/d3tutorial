@@ -52,8 +52,8 @@ module.exports = function (grunt) {
         ].join(' && ')
       },
       gh_pages: {
-        command: ["git branch -d gh-pages || true",
-                  "git push origin :gh-pages",
+        command: [//"git branch -d gh-pages || true",
+                  //"git push origin :gh-pages",
                   "git subtree push --prefix dist origin gh-pages"
         ].join(' && ')
       }

@@ -122,7 +122,107 @@ these are defined.
 <a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/4/edit?js,output" target="_blank">Open in JS Bin</a>
 
 
-Adding scales
--------------
+Adding a legend
+---------------
 
-*in progress...*
+The chart as is stands is pictured below:
+
+![Chart without legend](resources/cars/no_legend.png)
+
+This is all very nice, but how is a user to know what is meant by size and color?
+To make things more clear, we'll now add a legend to the chart, in the upper
+right corner. Here's what we're going for:
+
+![Legend for car origin](resources/cars/origins_legend.png)
+
+We are going to use D3 to build this legend dynamically from some data,
+just like we are doing with our actual visualization.
+
+The data for the "legend visualization" will be the list of
+car origins (`['US', 'Japan', 'Europe']`), which we can obtain
+by calling `color.domain()` because origins are the domain
+for our color scale.
+
+We'll build up the legend in stages. First,
+add the following code:
+
+```javascript
+var origins = chart.selectAll(".legend.origin")
+  .data(color.domain())
+  .enter().append("g")
+  .attr("class", "legend origin")
+  .attr("transform",
+        function(d, i) { return "translate(0," + i * 20 + ")"; });
+```
+
+This joins the list of car origins to a "theoretical"
+set of `.legend` and `.origin` elements.
+Because these elements don't exist yet,
+they will be created.
+We also offset (translate) each part of the legend
+by about 20 pixels so that they don't all appear on top of each other.
+
+Now we have a bunch of empty and invisible `<g>` elements with
+their class attribute set to 'legend origin'.
+The code below attaches a rectangle of the appropriate color to each
+one of these `<g>` elements:
+
+<pre data-line="5"><code class="language-javascript">origins.append("rect")
+      .attr("x", graphWidth - 18)
+      .attr("width", 18)
+      .attr("height", 18)
+      .style("fill", color);
+</code></pre>
+
+Finally, we will use similar code to add the text labels:
+
+<pre data-line="6"><code class="language-javascript">origins.append("text")
+      .attr("x", graphWidth - 24)
+      .attr("y", 9)
+      .attr("dy", ".35em")
+      .style("text-anchor", "end")
+      .text(function(d) { return d; });
+</code></pre>
+
+A lot of that was just moving stuff around to make it look good.
+The highlighted `.style()` the `.text()` lines are what
+actually produce the color and text labels from the car origins data.
+
+<a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/5/edit?js,output" target="_blank">Open in JS Bin</a>
+
+
+Another legend
+--------------
+
+We also want to clearly explain what the size of dots means.
+This mostly similar to the legend above:
+
+```javascript
+var legendOffset = origins.size() * 20 + 5;
+
+//Add a legend for radius/weight
+var weights = chart.selectAll('.legend.weight')
+  .data(range.weight)
+  .enter().append('g')
+  .attr('class', 'legend weight')
+  .attr('transform', function(d, i) { return "translate(0, " + (legendOffset + i * 20) + ")"; });
+
+weights.append("circle")
+      .attr("cx", graphWidth - 9)
+      .attr("cy", 10)
+      .attr("r", radius)
+      .style("fill", 'gray');
+
+weights.append("text")
+      .attr("x", graphWidth - 24)
+      .attr("y", 9)
+      .attr("dy", ".35em")
+      .style("text-anchor", "end")
+      .text(function(d) { return d + " lbs"; });
+```
+
+The only new thing here is that we have added a `legendOffset` to start
+drawing this legend below the first legend.
+
+<a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/10/edit?js,output" target="_blank">Open in JS Bin</a>
+
