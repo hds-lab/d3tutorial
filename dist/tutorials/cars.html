@@ -72,6 +72,82 @@ that we are using here (<code>radius</code>, <code>x</code>, <code>y</code>, and
 You can scroll up through the JavaScript to find how
 these are defined.</p>
 <p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/4/edit?js,output" target="_blank">Open in JS Bin</a></p>
-<h2>Adding scales</h2>
-<p><em>in progress...</em></p>
+<h2>Adding a legend</h2>
+<p>The chart as is stands is pictured below:</p>
+<p><img src="resources/cars/no_legend.png" alt="Chart without legend"></p>
+<p>This is all very nice, but how is a user to know what is meant by size and color?
+To make things more clear, we&#39;ll now add a legend to the chart, in the upper
+right corner. Here&#39;s what we&#39;re going for:</p>
+<p><img src="resources/cars/origins_legend.png" alt="Legend for car origin"></p>
+<p>We are going to use D3 to build this legend dynamically from some data,
+just like we are doing with our actual visualization.</p>
+<p>The data for the &quot;legend visualization&quot; will be the list of
+car origins (<code>[&#39;US&#39;, &#39;Japan&#39;, &#39;Europe&#39;]</code>), which we can obtain
+by calling <code>color.domain()</code> because origins are the domain
+for our color scale.</p>
+<p>We&#39;ll build up the legend in stages. First,
+add the following code:</p>
+<pre><code class="language-javascript">var origins = chart.selectAll(&quot;.legend.origin&quot;)
+  .data(color.domain())
+  .enter().append(&quot;g&quot;)
+  .attr(&quot;class&quot;, &quot;legend origin&quot;)
+  .attr(&quot;transform&quot;,
+        function(d, i) { return &quot;translate(0,&quot; + i * 20 + &quot;)&quot;; });</code></pre>
+<p>This joins the list of car origins to a &quot;theoretical&quot;
+set of <code>.legend</code> and <code>.origin</code> elements.
+Because these elements don&#39;t exist yet,
+they will be created.
+We also offset (translate) each part of the legend
+by about 20 pixels so that they don&#39;t all appear on top of each other.</p>
+<p>Now we have a bunch of empty and invisible <code>&lt;g&gt;</code> elements with
+their class attribute set to &#39;legend origin&#39;.
+The code below attaches a rectangle of the appropriate color to each
+one of these <code>&lt;g&gt;</code> elements:</p>
+<pre data-line="5"><code class="language-javascript">origins.append("rect")
+      .attr("x", graphWidth - 18)
+      .attr("width", 18)
+      .attr("height", 18)
+      .style("fill", color);
+</code></pre>
+
+<p>Finally, we will use similar code to add the text labels:</p>
+<pre data-line="6"><code class="language-javascript">origins.append("text")
+      .attr("x", graphWidth - 24)
+      .attr("y", 9)
+      .attr("dy", ".35em")
+      .style("text-anchor", "end")
+      .text(function(d) { return d; });
+</code></pre>
+
+<p>A lot of that was just moving stuff around to make it look good.
+The highlighted <code>.style()</code> the <code>.text()</code> lines are what
+actually produce the color and text labels from the car origins data.</p>
+<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/5/edit?js,output" target="_blank">Open in JS Bin</a></p>
+<h2>Another legend</h2>
+<p>We also want to clearly explain what the size of dots means.
+This mostly similar to the legend above:</p>
+<pre><code class="language-javascript">var legendOffset = origins.size() * 20 + 5;
+
+//Add a legend for radius/weight
+var weights = chart.selectAll(&#39;.legend.weight&#39;)
+  .data(range.weight)
+  .enter().append(&#39;g&#39;)
+  .attr(&#39;class&#39;, &#39;legend weight&#39;)
+  .attr(&#39;transform&#39;, function(d, i) { return &quot;translate(0, &quot; + (legendOffset + i * 20) + &quot;)&quot;; });
+
+weights.append(&quot;circle&quot;)
+      .attr(&quot;cx&quot;, graphWidth - 9)
+      .attr(&quot;cy&quot;, 10)
+      .attr(&quot;r&quot;, radius)
+      .style(&quot;fill&quot;, &#39;gray&#39;);
+
+weights.append(&quot;text&quot;)
+      .attr(&quot;x&quot;, graphWidth - 24)
+      .attr(&quot;y&quot;, 9)
+      .attr(&quot;dy&quot;, &quot;.35em&quot;)
+      .style(&quot;text-anchor&quot;, &quot;end&quot;)
+      .text(function(d) { return d + &quot; lbs&quot;; });</code></pre>
+<p>The only new thing here is that we have added a <code>legendOffset</code> to start
+drawing this legend below the first legend.</p>
+<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/10/edit?js,output" target="_blank">Open in JS Bin</a></p>
 </article></div><div class="tutorial-nav"><ul class="nav"></ul></div></div><div class="right-col"><div class="jsbin-placeholder"><p class="lead">JS Bin Loading...</p></div><div class="jsbin-container"></div></div></div></main><script src="http://scclab.github.io/d3tutorial/vendor/jquery/jquery.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/bootstrap/js/bootstrap.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.cookie/jquery.cookie.js"></script><script src="http://scclab.github.io/d3tutorial/js/prism/prism.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/jsbin.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/embed.js"></script></body></html>
