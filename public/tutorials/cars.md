@@ -226,3 +226,62 @@ drawing this legend below the first legend.
 
 <a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/10/edit?js,output" target="_blank">Open in JS Bin</a>
 
+
+Interactivity
+-------------
+
+Let's add a little bit of interactivity so that we can see how
+to listen and respond to mouse events with D3.
+
+As you'll see if you move your mouse over the dots and the color legend,
+we have already added code to make the elements brighten when
+the mouse is hovering over them. This is all done in CSS.
+
+What if we wanted the blue dots to light up when the user
+moves their mouse over the "US" part of the legend?
+
+Add the code below:
+
+```javascript
+//Link the legend to the dots
+origins.on('mouseover', function(origin) {
+  dots.classed('brushed', function(d) {
+    return d.origin == origin;
+  });
+})
+```
+
+Now, when the `mousover` event fires on one of the legend items,
+the dots with a matching value for the `origin` field will
+have their class set to `brushed`.
+
+Unfortunately, you'll also notice that if you move your mouse
+out of one of the legend boxes, the highlighting doesn't go away.
+To fix this, add the following directly below the code you just added:
+
+```javascript
+.on('mouseout', function(origin) {
+  dots.classed('brushed', false);
+});
+```
+
+Linking the legend to the data is good, but what about the reverse?
+We can use a similar procedure to make the legend light up when
+the user hovers over a dot:
+
+```javascript
+dots.on('mouseover', function(d) {
+  origins.classed("brushed", function(origin) {
+    return d.origin == origin;
+  });
+})
+.on('mouseout', function(d) {
+  origins.classed("brushed", false);
+});
+```
+
+The visualization of the cars dataset is complete. Below is a live copy:
+
+<iframe class="embed-visualization" height="430" width="530" src="resources/cars/cars.html"></iframe>
+
+<a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/11/edit?js,output" target="_blank">Open in JS Bin</a>
