@@ -1,0 +1,73 @@
+<!DOCTYPE html><html class="full-page"><head><meta charset="utf8"/><title>D3 Workshop</title><link rel="stylesheet" href="http://scclab.github.io/d3tutorial/css/global.css"/><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro"/><link rel="stylesheet" href="http://scclab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.css"><link rel="stylesheet" href="http://scclab.github.io/d3tutorial/js/prism/prism.css"></head><body><header><nav role="navigation" class="navbar navbar-inverse navbar-fixed-top"><div class="container-fluid"><div class="navbar-header"><button data-toggle="collapse" data-target="#navbar-top-collapse-1" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="http://scclab.github.io/d3tutorial/" class="navbar-brand">D3 Workshop</a></div><div id="navbar-top-collapse-1" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="http://scclab.github.io/d3tutorial/help.html">Instructions</a></li><li><a href="https://github.com/mbostock/d3/wiki/API-Reference" target="_blank">D3 Docs</a></li><li><a href="https://github.com/mbostock/d3/wiki/Gallery" target="_blank">D3 Gallery</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JS Docs</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank">SVG Docs</a></li></ul></div></div></nav></header><main class="tutorial"><div class="split-panel"><div class="left-col"><div class="tutorial-label"><span>Tutorial Instructions</span></div><div class="container-fluid"><article><h1>Beginning with HTML</h1>
+<p>So you&#39;re interested in learning HTML? Great! 
+This guide is designed to help you get started. It is intended for people with little or no HTML experience.</p>
+<h2>What is HTML?</h2>
+<p>HTML stands for Hyper-text Markup Language. It is the foundation for every webpage you&#39;ve ever visited and provides the structure and content of every page. </p>
+<p>HTML is a way of writing text that enables rich documents to be made. Typically, HTML documents provide a deeper level of information to be included through the use of this special formatting. A common example of this is the links on a webpage. Each link can have a lot of information that you may not see in some contexts. Every actual link should have at least a destination URL. This additional information is called <strong>meta-data</strong>. Links can also contain information about how the browser should respond when the link is clicked. This might tell the browser to open the link in a new window.</p>
+<p>To specify this additional information in an HTML document, we use a combination of elements, tags, and attributes to communicate this information to the browser. </p>
+<h2>Elements, Tags, and Attributes Oh, My!</h2>
+<p>Meet the paragraph element:</p>
+<pre><code class="language-html">&lt;p&gt;Hello! I&#39;m a paragraph element.&lt;/p&gt;</code></pre>
+<h3>Elements</h3>
+<p>This sentence combined with the <code>&lt;p&gt;</code> and the <code>&lt;/p&gt;</code> is an <strong>element</strong>. In this case, the element type is a <code>p</code>, which is a paragraph. This element tells a webbrowser that everything between the opening and closing tag is a paragraph, so the browser can apply the necessary style. By default, this typically means there&#39;s vertical spacing before and after.</p>
+<h3>Tags</h3>
+<p>So let&#39;s break that down. There&#39;s clearly a sentence there: &quot;Hello! I&#39;m a paragraph element.&quot; But that sentence is wrapped in a <code>&lt;p&gt;...&lt;/p&gt;</code>. Both of these are <strong>tags</strong>. The <code>&lt;p&gt;</code> is the <em>opening tag</em>, and the <code>&lt;/p&gt;</code> is the <em>closing tag</em> (the slash makes it a closing tag.)</p>
+<h3>Attributes</h3>
+<p>Inside the <em>opening tag</em> of any element can be an <strong><em>attribute</em></strong>. These look like this:</p>
+<pre><code class="language-html">&lt;a href=&quot;http://www.google.com&quot;&gt;This link goes to google&lt;/a&gt;</code></pre>
+<p>First, this <code>&lt;a&gt;</code> tag is an anchor tag. This tag is used to create links in the document. </p>
+<p>See the <code>href=&quot;http://www.google.com&quot;</code>? That is an attribute. It is used to give the element some special properties, which are aptly named attributes. In this case, href contains the links destination. </p>
+<p>These are the basic building blocks of HTML. </p>
+<h2>Hierarchies</h2>
+<p>One fundamental property of HTML is that an element can contain another element. For example, we might want to create to italicize a word in our paragraph.</p>
+<pre><code class="language-html">&lt;p&gt;This is my &lt;i&gt;favorite&lt;/i&gt; paragraph!&lt;/p&gt;</code></pre>
+<p>In this example, the <code>&lt;i&gt;</code> is used <em>inside</em> the <code>&lt;p&gt;</code> to italicize the word favorite. </p>
+<div style="background: yellow">TODO Image showing the hierarchy?</div>
+
+
+<h2>Common Elements</h2>
+<p>Paragraphs are just one of the many elements in HTML. We will now cover some of the more common elements. If you&#39;re interested, you can see a <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">full list of elements here</a>. </p>
+<h3>Core Page Elements</h3>
+<p>So every current webpage will have at least 5 key elements in them. Here&#39;s an example:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;This is my favorite page&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;p&gt;This is the body of our page!&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>The key elements are the <code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;title&gt;</code>, and <code>&lt;body&gt;</code>. </p>
+<ul>
+<li><code>&lt;!DOCTYPE html&gt;</code> is always the first element on a page, and tells the browser that this page is HTML5. <strong>Notice that it does not have a closing tag!</strong> This is the first element we have seen like this, but there are several more.</li>
+<li><code>&lt;html&gt;</code> is the wrapper around an html document.</li>
+<li><code>&lt;head&gt;</code> is a special section that is used for key properties of the document.</li>
+<li><code>&lt;title&gt;</code> is the title of the document. Since it does not change the page structure, it appears only in the <code>&lt;head&gt;</code>. </li>
+<li><code>&lt;body&gt;</code> is the core of the document itself. All of the visible HTML you see will appear within the <code>&lt;body&gt;</code> tag. </li>
+</ul>
+<h3>Text Formatting</h3>
+<p>So far we&#39;ve explored, a few of the key elements in HTML, but there are many more. Some of the more common ones are simple stylistic ones. We used the italic element (<code>&lt;i&gt;</code>) in an earlier example, but there are a couple of more.</p>
+<ul>
+<li><code>&lt;p&gt;</code> - <strong>paragraph</strong> is used to denote paragraphs. </li>
+<li><code>&lt;i&gt;</code> - <strong>italicize</strong> is used to <em>italicize some text</em>. </li>
+<li><code>&lt;b&gt;</code> - <strong>bold</strong> is used to make it&#39;s contents <strong>bold</strong>.</li>
+<li><code>&lt;u&gt;</code> - <strong>underline</strong> is used for <u>underlining</u>. </li>
+<li><code>&lt;s&gt;</code> - <strong>strikethrough</strong> is used for <s>striking out text</s>.</li>
+<li><code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>, <code>&lt;h4&gt;</code>, <code>&lt;h5&gt;</code>, and <code>&lt;h6&gt;</code> are used to define 6 levels of headings in the document. <code>&lt;h1&gt;</code> is highest level heading and is often used for page titles that appear on the page. </li>
+</ul>
+<div style="background: yellow">TODO Example</div>
+
+<h3>Core Formatting Elements</h3>
+<p>The most common elements you&#39;ll see are the <code>&lt;span&gt;</code> and the <code>&lt;div&gt;</code>. These elements purpose are specifically to act as container elements, and they are very similar except for one key difference. The difference between these can initially be troublesome for people.</p>
+<h4>Div</h4>
+<p>In a sense, the <code>&lt;div&gt;</code> is like a paragraph element. By default, it will start on a new line and will take up the entire width of the line. </p>
+<h4>Span</h4>
+<p>A <code>&lt;span&gt;</code> does not start a new line. By default, it behaves like many of the text formatting elements such as <code>&lt;i&gt;</code> in that it can appear in the middle of a line. The width of the <code>&lt;span&gt;</code> is only as large as the elements within it. </p>
+<p>To help explain this a little further, let&#39;s experiment with an example.</p>
+<div style="background: yellow">TODO Example</div>
+
+
+<h2>Wrapup</h2>
+<p>So hopefully by now, we have learned how to construct a very basic HTML document. We have learned some of the most basic elements that can be used in HTML documents and how those can be structured. There are a lot of other elements in the HTML and you can explore some of them <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">at this website</a>. </p>
+<a href="http://scclab.github.io/d3tutorial/" class="btn btn-default btn-lg back-button">Back to tutorials</a></article></div><div class="tutorial-nav"><ul class="nav"></ul></div></div><div class="right-col"><div class="jsbin-placeholder"><p class="lead">JS Bin Loading...</p></div><div class="jsbin-container"></div></div></div></main><script src="http://scclab.github.io/d3tutorial/vendor/jquery/jquery.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/bootstrap/js/bootstrap.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.cookie/jquery.cookie.js"></script><script src="http://scclab.github.io/d3tutorial/js/prism/prism.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/jsbin.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/embed.js"></script></body></html>

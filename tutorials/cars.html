@@ -150,4 +150,43 @@ weights.append(&quot;text&quot;)
 <p>The only new thing here is that we have added a <code>legendOffset</code> to start
 drawing this legend below the first legend.</p>
 <p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/10/edit?js,output" target="_blank">Open in JS Bin</a></p>
-</article></div><div class="tutorial-nav"><ul class="nav"></ul></div></div><div class="right-col"><div class="jsbin-placeholder"><p class="lead">JS Bin Loading...</p></div><div class="jsbin-container"></div></div></div></main><script src="http://scclab.github.io/d3tutorial/vendor/jquery/jquery.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/bootstrap/js/bootstrap.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.cookie/jquery.cookie.js"></script><script src="http://scclab.github.io/d3tutorial/js/prism/prism.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/jsbin.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/embed.js"></script></body></html>
+<h2>Interactivity</h2>
+<p>Let&#39;s add a little bit of interactivity so that we can see how
+to listen and respond to mouse events with D3.</p>
+<p>As you&#39;ll see if you move your mouse over the dots and the color legend,
+we have already added code to make the elements brighten when
+the mouse is hovering over them. This is all done in CSS.</p>
+<p>What if we wanted the blue dots to light up when the user
+moves their mouse over the &quot;US&quot; part of the legend?</p>
+<p>Add the code below:</p>
+<pre><code class="language-javascript">//Link the legend to the dots
+origins.on(&#39;mouseover&#39;, function(origin) {
+  dots.classed(&#39;brushed&#39;, function(d) {
+    return d.origin == origin;
+  });
+})</code></pre>
+<p>Now, when the <code>mousover</code> event fires on one of the legend items,
+the dots with a matching value for the <code>origin</code> field will
+have their class set to <code>brushed</code>.</p>
+<p>Unfortunately, you&#39;ll also notice that if you move your mouse
+out of one of the legend boxes, the highlighting doesn&#39;t go away.
+To fix this, add the following directly below the code you just added:</p>
+<pre><code class="language-javascript">.on(&#39;mouseout&#39;, function(origin) {
+  dots.classed(&#39;brushed&#39;, false);
+});</code></pre>
+<p>Linking the legend to the data is good, but what about the reverse?
+We can use a similar procedure to make the legend light up when
+the user hovers over a dot:</p>
+<pre><code class="language-javascript">dots.on(&#39;mouseover&#39;, function(d) {
+  origins.classed(&quot;brushed&quot;, function(origin) {
+    return d.origin == origin;
+  });
+})
+.on(&#39;mouseout&#39;, function(d) {
+  origins.classed(&quot;brushed&quot;, false);
+});</code></pre>
+<p>The visualization of the cars dataset is complete. Below is a live copy:</p>
+<iframe class="embed-visualization" height="430" width="530" src="resources/cars/cars.html"></iframe>
+
+<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/11/edit?js,output" target="_blank">Open in JS Bin</a></p>
+<a href="http://scclab.github.io/d3tutorial/" class="btn btn-default btn-lg back-button">Back to tutorials</a></article></div><div class="tutorial-nav"><ul class="nav"></ul></div></div><div class="right-col"><div class="jsbin-placeholder"><p class="lead">JS Bin Loading...</p></div><div class="jsbin-container"></div></div></div></main><script src="http://scclab.github.io/d3tutorial/vendor/jquery/jquery.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/bootstrap/js/bootstrap.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.cookie/jquery.cookie.js"></script><script src="http://scclab.github.io/d3tutorial/js/prism/prism.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/jsbin.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/embed.js"></script></body></html>
