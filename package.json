@@ -7,7 +7,7 @@
   },
   "author": "Michael Brooks <mjbrooks@uw.edu>",
   "license": "MIT",
-  "repository": "https://github.com/scclab/d3tutorial",
+  "repository": "https://github.com/scclab/d3tutorial.git",
   "homepage": "http://scclab.github.io/d3tutorial",
   "devDependencies": {
     "grunt": "^0.4.5",

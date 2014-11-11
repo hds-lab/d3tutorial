@@ -6,7 +6,9 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     harpconf: grunt.file.readJSON('harp.json'),
-
+    conf: {
+      dist: 'dist'
+    },
     bowercopy: {
       options: {},
 
@@ -40,23 +42,38 @@ module.exports = function (grunt) {
         dest: 'www'
       },
       dist: {
-        dest: 'dist'
+        dest: '<%= conf.dist %>'
       }
     },
 
     shell: {
-      commit_dist: {
-        command: ["git add -f dist",
-                  "git commit -m \"update dist\"",
-                  "git push"
+      checkout_dist: {
+        command: ["rm -rf <%= conf.dist %>",
+                  "git clone --single-branch --branch gh-pages <%= pkg.repository %> <%= conf.dist %>"
         ].join(' && ')
       },
-      gh_pages: {
-        command: [//"git branch -d gh-pages || true",
-                  //"git push origin :gh-pages",
-                  "git subtree push --prefix dist origin gh-pages"
+      commit_dist: {
+        command: ["cd <%= conf.dist %>",
+                  "git commit -m \"update dist\""
         ].join(' && ')
+      },
+      deploy_dist: {
+        command: ["cd <%= conf.dist %>",
+                  "git push"
+        ].join(' %% ')
       }
+      //commit_dist: {
+      //  command: ["git add -f dist",
+      //            "git commit -m \"update dist\"",
+      //            "git push"
+      //  ].join(' && ')
+      //},
+      //gh_pages: {
+      //  command: [//"git branch -d gh-pages || true",
+      //            //"git push origin :gh-pages",
+      //            "git subtree push --prefix dist origin gh-pages"
+      //  ].join(' && ')
+      //}
     }
   });
 
@@ -104,6 +121,6 @@ module.exports = function (grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['bowercopy', 'harp:www']);
-  grunt.registerTask('deploy', ['harpjson_setup', 'harp:dist', 'harpjson_restore', 'shell:commit_dist', 'shell:gh_pages']);
+  grunt.registerTask('deploy', ['harpjson_setup', 'shell:checkout_dist', 'harp:dist', 'harpjson_restore', 'shell:commit_dist', 'shell:deploy_dist']);
 
 };
