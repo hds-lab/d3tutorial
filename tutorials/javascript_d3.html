@@ -1,0 +1,133 @@
+<!DOCTYPE html><html class="full-page"><head><meta charset="utf8"/><title>D3 Workshop</title><link rel="stylesheet" href="http://scclab.github.io/d3tutorial/css/global.css"/><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700|Open+Sans:700,400,300,300italic,400italic,700italic"/><link rel="stylesheet" href="http://scclab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.css"><link rel="stylesheet" href="http://scclab.github.io/d3tutorial/js/prism/prism.css"></head><body><header><nav role="navigation" class="navbar navbar-inverse navbar-fixed-top"><div class="container-fluid"><div class="navbar-header"><button data-toggle="collapse" data-target="#navbar-top-collapse-1" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="http://scclab.github.io/d3tutorial/" class="navbar-brand">D3 Workshop</a></div><div id="navbar-top-collapse-1" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><!--li<!--a(href="#{baseUrl}/help.html") Instructions-->--><li><a href="https://github.com/mbostock/d3/wiki/API-Reference" target="_blank">D3 Docs</a></li><li><a href="https://github.com/mbostock/d3/wiki/Gallery" target="_blank">D3 Gallery</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JS Docs</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank">SVG Docs</a></li></ul></div></div></nav></header><main class="tutorial"><div class="split-panel"><div class="left-col"><div class="tutorial-label"><span>Tutorial Instructions</span></div><div class="container-fluid"><article><h1>Introduction to Javascript and D3</h1>
+<p>This is an incredibly brief introduction to JavaScript and D3. We&#39;ll walk you some of the basics of JavaScript and then introduce some of the core concepts of D3. This is by no means a complete tutorial on either JavaScript or D3, but should be enough to get you started. There are plenty of great resources on the web for learning JavaScript. </p>
+<p>We&#39;ll start by showing you a very brief introduction to JavaScript features. Then we&#39;ll introduce how to JavaScript can interact with HTML. Lastly, we&#39;ll introduce some of the basics of D3. </p>
+<h2>JavaScript Console</h2>
+<p>First, let&#39;s introduce the javascript console in the browser. This is a special window that allows you to type in JavaScript and see results immediately. </p>
+<table class="table">
+    <thead>
+        <tr>
+            <td></td>
+            <td>Windows</td>
+            <td>MacOS</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Chrome</td>
+            <td><code>F12</code></td>
+            <td><code>Opt</code> + <code>Alt</code> + <code>J</code></td>
+        </tr>
+        <tr>
+            <td>Firefox</td>
+            <td><code>Ctrl</code> + <code>Shift</code> + <code>K</code></td>
+            <td><code>Opt</code> + <code>Cmd</code> + <code>K</code></td>
+        </tr>
+        <tr>
+            <td>IE</td>
+            <td><code>F12</code>; click console</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Safari</td>
+            <td></td>
+            <td><code>Ctrl</code> + <code>Shift</code> + <code>C</code></td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<p>Next we&#39;ll move onto some core functionality in JavaScript. We&#39;ll introduce a few very basic features of the JavaScript language. These include comments, variables, type conversion, functions, and arrays.</p>
+<h2>Comments</h2>
+<p>One of the most important aspects of any programming language is a comment. We put them everywhere to help explain what the source code is supposed to do. They&#39;re extremely helpful if you ever have to modify the code later, or if you have to modify someone else&#39;s code. Otherwise, you can spend a lot of time trying to understand what the programmers intention was. Below is an example:</p>
+<pre><code class="language-javascript">// This is a single line comment</code></pre>
+<p>the <code>//</code> tells the browser to ignore everything to the right of it. We can use this to describe what&#39;s going on, or we can also use it to disable a line of code. However, sometimes we need to have multi-line comments. You can do this in JavaScript like this:</p>
+<pre><code class="language-javascript">/*
+    This is a multi-line comment
+    You can have several lines
+
+    here and they are all ignored.
+*/</code></pre>
+<h2>Types &amp; Conversion</h2>
+<p>In JavaScript, there are a few different types of data. The simplest ones that we&#39;ll deal with are <em>numbers</em> and <em>strings</em> . </p>
+<pre><code class="language-javascript">43
+5.23 
+&quot;This is a string!&quot;
+&quot;.42 is also a string&quot;
+&#39;strings can also appear inside single quotes&#39;</code></pre>
+<p>The reason these are different are in terms of how you can manipulate them. For example, if you try to add two numbers, like 3 + 5, you&#39;ll get a mathmatical result (8). If you add two strings, it appends one to the other.</p>
+<p>If you run this in your JavaScript Console</p>
+<pre><code class="language-javascript">5 + 3</code></pre>
+<p>The answer will be &#39;8&#39;. However, if you try to add two strings like this:</p>
+<pre><code class="language-javascript">&quot;5&quot; + &quot;3&quot;</code></pre>
+<p>then you&#39;ll get &quot;53&quot;. This can get pretty confusing, but remember that strings are meant for text. This example makes a little more sense:</p>
+<pre><code class="language-javascript">&quot;Javascript is pretty&quot; + &quot; easy&quot;</code></pre>
+<div style="background: yellow">TODO: Move this to an example?</div>
+<div style="background: yellow">TODO: Conversion</div>
+
+
+<p>See Also: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures">JavaScript data types and data structures</a></p>
+<h2>Variables</h2>
+<p>In the simplest sense, variables are like cups. They can hold a lot of different things. These can be numbers, strings, or some other things we won&#39;t cover. In the number sense, they&#39;re sort of like algebraic expressions. </p>
+<pre><code class="language-javascript">var mystr = &quot;this is a string!&quot;;
+var mynum = 5;</code></pre>
+<p>Let&#39;s explore the above addition example but with variables. </p>
+<div style="background: yellow">TODO: Example</div>
+
+
+<h2>Functions</h2>
+<p>Functions in JavaScript are used to hold one or more of operations. We use them largely to help organize our code, make it easier to understand, and most importantly reduce typing! Often times, we&#39;ll use them when a series of operations are performed multiple times. For example, maybe we want to make the computer say hello to many people. We could do this like this:</p>
+<pre><code class="language-javascript">function sayHello(name) {
+    console.log(&#39;hello &#39; + name);
+}</code></pre>
+<p>Now, we can call this function as many times as we like.</p>
+<pre><code class="language-javascript">sayHello(&#39;Michael&#39;);
+sayHello(&#39;John&#39;);</code></pre>
+<p>Sometimes, though, we need the result of some operation. So variables can hand back a value to the caller. We call this <em>returning</em>. Here&#39;s an example:</p>
+<pre><code class="language-javascript">function doMaths(x,y) {
+    // pretend we&#39;re doing some important math!
+    var z = (x+1) * (y-1);
+
+    // here&#39;s the important part where we pass back the result!
+    return z;
+}
+
+// print result
+var result1 = doMaths(2,1);
+var result2 = doMaths(2,2);
+var result3 = doMaths(result1, result2)
+
+// print result
+console.log(result1);
+console.log(result2);
+console.log(result3);</code></pre>
+<p>So in that example, we have a function that does some math operation and <code>return</code>s the result. We can then store that in a variables and do other things with them later, or just print them out and move to the next example.</p>
+<h2>Arrays</h2>
+<p>So an array is a collection of datapoints. It can be a series of numbers, a series of strings, or it could be a series of HTML Elements. In the last example, we were creating multiple result variables for each result. However, since they are related, we could also store them in a single variable.</p>
+<pre><code class="language-javascript">var primes = [ 2, 3, 5, 7, 9];</code></pre>
+<p>Ok... So what does that get us? This alone saves us a little bit of space since all the numbers are related. Sure,  but how can I access the numbers? We use the square brackets and a number. That will get us the Nth number. </p>
+<pre><code class="language-javascript">var primes = [ 2, 3, 5, 7, 9];
+
+console.log( primes[0] );    // prints the first number (2)
+console.log( primes[3] );    // prints the fourth number (7)</code></pre>
+<p>There are a lot of other operations you can do with arrays, but we&#39;re going to skip them or now. If you&#39;re interested, you can read about them <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">on MDN&#39;s excellent Array page</a>.</p>
+<h2>HTML Element IDs</h2>
+<p>So back to HTML for a few minutes.  Have you started to wonder about how you connect JavaScript to the HTML? Thankfully, there&#39;s quite a few ways to do this, but we&#39;ll take the simplest one here. </p>
+<p>On every HTML element, you can add an <em>id attribute</em>. These IDs <strong>must be unique</strong>, so they can only be used once per page. </p>
+<pre><code class="language-markup">&lt;p id=&quot;fav&quot;&gt;This is my favorite!&lt;/p&gt;</code></pre>
+<p>The purpose of using these IDs is to enable you to link this element to JavaScript and CSS. There are other ways to do this, but for simplicity, we&#39;re going to use the IDs for the rest of this document. The more complicated ones are referenced using CSS Selectors and you can read more about them <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_started/Selectors">on MDN&#39;s CSS Selector page</a>. </p>
+<h2>Modifying HTML from JavaScript</h2>
+<p>Let&#39;s extend that piece of HTML code to show how we can do some changes of HTML from JavaScript. We&#39;ll start with the basics. Let&#39;s change the paragraph&#39;s text. The first thing you need to know is that HTML elements with an ID, can be accessed from JavaScript by name. So if the ID of the paragraph is <code>fav</code>, then in JavaScript we already have a variable named <code>fav</code> that is that HTML Element. In JavaScript, each HTML Element has a series of properties that we can change. Here&#39;s an example of one of those:</p>
+<pre><code class="language-javascript">fav.innerHTML = &quot;My new favorite!&quot;</code></pre>
+<p>Let&#39;s see how this would work in practice.</p>
+<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/pohoxi/2/edit?html,js,output" target="_blank">Open in JS Bin</a></p>
+<h2>Modifying SVG styles from JavaScript</h2>
+<p>Another thing you might want to do is change some colors. Here&#39;s a quick activity for you. Here are the details:</p>
+<ul>
+<li>The Element&#39;s id is <code>myCircle</code></li>
+<li>Instead of <code>innerHTML</code> you&#39;ll be changing <code>style.fill</code></li>
+<li><code>style.fill</code> takes a color name <em>as a string</em> like <code>&quot;red&quot;</code> or <code>&quot;blue&quot;</code>.</li>
+</ul>
+<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/gaguca/3/edit?html,js,output" target="_blank">Open in JS Bin</a></p>
+<h2>Finally, D3!</h2>
+<a href="http://scclab.github.io/d3tutorial/" class="btn btn-default btn-lg back-button">Back to tutorials</a></article></div><div class="tutorial-nav"><ul class="nav"></ul></div></div><div class="right-col"><div class="jsbin-placeholder"><p class="lead">JS Bin Loading...</p></div><div class="jsbin-container"></div></div></div></main><script src="http://scclab.github.io/d3tutorial/vendor/jquery/jquery.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/bootstrap/js/bootstrap.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.cookie/jquery.cookie.js"></script><script src="http://scclab.github.io/d3tutorial/js/prism/prism.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/jsbin.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/embed.js"></script></body></html>
