@@ -24,24 +24,27 @@
   };
 
   var loadJSBin = function (link, panel) {
-    setJSBinStatus("JS Bin Loading...");
 
     var state = getTutorialState();
     state.jsbin = link;
     saveTutorialState(state);
 
-    if (link.indexOf('height=') < 0) {
-      link += '&height=100%';
+    if (panel.is(':visible')) {
+      setJSBinStatus("JS Bin Loading...");
+
+      if (link.indexOf('height=') < 0) {
+        link += '&height=100%';
+      }
+
+      panel.html($('<a class="jsbin-embed">').attr('href', link));
+      readJSBinLinks();
+
+      //Override the height setting
+      panel.find('iframe').css({
+        'height': '100%',
+        'border': 'none'
+      });
     }
-
-    panel.html($('<a class="jsbin-embed">').attr('href', link));
-    readJSBinLinks();
-
-    //Override the height setting
-    panel.find('iframe').css({
-      'height': '100%',
-      'border': 'none'
-    });
   };
 
   var setupSplitter = function() {
@@ -140,26 +143,33 @@
     var buttons = tutorial.find('a.jsbin-button');
 
     buttons.click(function (e) {
-      e.preventDefault();
+
+      var side_by_side = jsbin.is(":visible");
 
       var button = $(this);
-
       var link = get_jsbin_link(button);
       var existing = get_iframe_src(jsbin);
 
-      if (existing == link) {
-        if (confirm("This JS Bin is already loaded.\nAre you sure you want to reset any changes you have made?")) {
-          loadJSBin(link, jsbin);
+      var do_load = true;
+      if (side_by_side) {
+        //Prevent accidental baddies
+        if (existing == link) {
+          do_load = confirm("This JS Bin is already loaded.\nAre you sure you want to reset any changes you have made?");
+        } else if (existing) {
+          do_load = confirm("Are you sure you want to load this JS Bin?\nThis will override any edits you have made.");
         }
-      } else if (existing) {
-        if (confirm("Are you sure you want to load this JS Bin?\nThis will override any edits you have made.")) {
-          loadJSBin(link, jsbin);
-        }
-      } else {
+      }
+
+      if (do_load) {
         loadJSBin(link, jsbin);
       }
 
-      return false;
+      if (side_by_side) {
+        e.preventDefault();
+        return false;
+      }
+
+      return true;
     });
 
     buttons.each(function() {
