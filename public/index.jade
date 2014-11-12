@@ -8,6 +8,26 @@
   .row
     .col-md-6
       != partial('_blocks/welcome.md')
+
+      ul.tutorial-list
+        li
+          h3 HTML Tutorial
+          p Get an introduction to HTML concepts.
+          a.btn.btn-default.btn-sm(href="tutorials/html.html") Get started &raquo;
+
+        li
+          h3 Building a Bar Chart
+          p Make a simple bar chart using D3.
+          p Learn about scales and the "data join".
+          a.btn.btn-default.btn-sm(href="tutorials/barchart.html") Get started &raquo;
+
+
+        li
+          h3 Visualize the Cars Data
+          p Build a scatterplot about cars.
+          p Learn to represent data using color and size.
+          a.btn.btn-default.btn-sm(href="tutorials/cars.html") Get started &raquo;
+
     .col-md-6.about
       != partial('_blocks/about.md')
 

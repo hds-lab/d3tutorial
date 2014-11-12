@@ -66,7 +66,7 @@ on either side of the HTML.
 When the tutorial is loaded, *if* there is a button with the class `.auto-load`
 in the tutorial, its JS Bin will be used to initialize the JS Bin window.
 
-Add a link to your tutorial in `public/_blocks/welcome.md`.
+Add a section about your tutorial in `public/index.jade`.
 
 ## Updating Bower Dependencies
 
