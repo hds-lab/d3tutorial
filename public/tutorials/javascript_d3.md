@@ -205,7 +205,20 @@ fav.innerHTML = "My new favorite!"
 
 Let's see how this would work in practice.
 
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/pohoxi/2/edit?js,output" target="_blank">Open in JS Bin</a>
+<a class="btn btn-primary jsbin-button" href="http://jsbin.com/pohoxi/2/edit?html,js,output" target="_blank">Open in JS Bin</a>
+
+
+Modifying SVG styles from JavaScript
+------------------------------------
+
+Another thing you might want to do is change some colors. Here's a quick activity for you. Here are the details:
+
+* The Element's id is `myCircle`
+* Instead of `innerHTML` you'll be changing `style.fill`
+* `style.fill` takes a color name _as a string_ like `"red"` or `"blue"`.
+
+<a class="btn btn-primary jsbin-button" href="http://jsbin.com/gaguca/3/edit?html,js,output" target="_blank">Open in JS Bin</a>
+
 
 
 Finally, D3!
