@@ -15,12 +15,9 @@ The dataset includes the following fields:</p>
 <li>Cylinders: the number of cylinders in the car&#39;s engine</li>
 <li>Horsepower: how powerful the car&#39;s engine is</li>
 <li>MPG: how many miles per gallon the car gets (fuel efficiency)</li>
-<li><p>Weight: how much the car weighs, in lbs.</p>
-</li>
-<li><p>Visual Encodings</p>
-</li>
+<li>Weight: how much the car weighs, in lbs.</li>
 </ul>
-<hr>
+<h2>2. Visual Encodings</h2>
 <p>We will create a visualization of four of these fields.
 The visual encodings are illustrated in the diagram below:</p>
 <p><img src="resources/cars/visual_encodings.png" alt="Visual encodings"></p>
@@ -188,6 +185,7 @@ the user hovers over a dot:</p>
 .on(&#39;mouseout&#39;, function(d) {
   origins.classed(&quot;brushed&quot;, false);
 });</code></pre>
+<h2>Congratulations!</h2>
 <p>The visualization of the cars dataset is complete. Below is a live copy:</p>
 <iframe class="embed-visualization" height="430" width="530" src="resources/cars/cars.html"></iframe>
 
