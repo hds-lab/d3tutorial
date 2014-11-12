@@ -1,5 +1,5 @@
-Building a Nice Bar Chart
-=========================
+Building a Bar Chart
+====================
 
 We've just learned some of the basic features of D3
 for building HTML elements and processing data.

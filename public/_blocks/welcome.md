@@ -1,21 +1,13 @@
 Welcome
 -------
 
-[D3](http://d3js.org/) is a widely-used library for creating
+[D3](http://d3js.org/) is a widely-used and powerful library for creating
 [visualizations on the web](https://github.com/mbostock/d3/wiki/Gallery).
-These tutorials give you an idea of what programming visualizations
-with D3 is like.
+It was created by [Mike Bostock](http://bost.ocks.org/mike/)
+as a [research project](http://vis.stanford.edu/papers/d3) at Stanford University,
+and now has an active [open source community](https://github.com/mbostock/d3).
 
-They are mostly accessible to people with little or no programming
-or web-development experience, although knowledge of HTML, CSS, and JS
-will allow you to get more out of it.
-
-Tutorials
----------
-
-Here are the tutorials we have available:
-
-1. [Example Tutorial](tutorials/example.html)
-2. [HTML Tutorial](tutorials/html.html)
-3. [Building a Nice Bar Chart](tutorials/barchart.html)
-4. [Visualizing the Cars Data](tutorials/cars.html)
+We have written these tutorials to give people with little or no programming
+or web-development experience an idea of what making visualizations
+with D3 is like. For more background on web technologies, we recommend checking
+out the free online courses on [Codecademy](http://www.codecademy.com/).
