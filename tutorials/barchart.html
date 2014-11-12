@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="full-page"><head><meta charset="utf8"/><title>D3 Workshop</title><link rel="stylesheet" href="http://scclab.github.io/d3tutorial/css/global.css"/><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro"/><link rel="stylesheet" href="http://scclab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.css"><link rel="stylesheet" href="http://scclab.github.io/d3tutorial/js/prism/prism.css"></head><body><header><nav role="navigation" class="navbar navbar-inverse navbar-fixed-top"><div class="container-fluid"><div class="navbar-header"><button data-toggle="collapse" data-target="#navbar-top-collapse-1" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="http://scclab.github.io/d3tutorial/" class="navbar-brand">D3 Workshop</a></div><div id="navbar-top-collapse-1" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="http://scclab.github.io/d3tutorial/help.html">Instructions</a></li><li><a href="https://github.com/mbostock/d3/wiki/API-Reference" target="_blank">D3 Docs</a></li><li><a href="https://github.com/mbostock/d3/wiki/Gallery" target="_blank">D3 Gallery</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JS Docs</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank">SVG Docs</a></li></ul></div></div></nav></header><main class="tutorial"><div class="split-panel"><div class="left-col"><div class="tutorial-label"><span>Tutorial Instructions</span></div><div class="container-fluid"><article><h1>Building a Nice Bar Chart</h1>
+<!DOCTYPE html><html class="full-page"><head><meta charset="utf8"/><title>D3 Workshop</title><link rel="stylesheet" href="http://scclab.github.io/d3tutorial/css/global.css"/><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700|Open+Sans:700,400,300,300italic,400italic,700italic"/><link rel="stylesheet" href="http://scclab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.css"><link rel="stylesheet" href="http://scclab.github.io/d3tutorial/js/prism/prism.css"></head><body><header><nav role="navigation" class="navbar navbar-inverse navbar-fixed-top"><div class="container-fluid"><div class="navbar-header"><button data-toggle="collapse" data-target="#navbar-top-collapse-1" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="http://scclab.github.io/d3tutorial/" class="navbar-brand">D3 Workshop</a></div><div id="navbar-top-collapse-1" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="http://scclab.github.io/d3tutorial/help.html">Instructions</a></li><li><a href="https://github.com/mbostock/d3/wiki/API-Reference" target="_blank">D3 Docs</a></li><li><a href="https://github.com/mbostock/d3/wiki/Gallery" target="_blank">D3 Gallery</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JS Docs</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank">SVG Docs</a></li></ul></div></div></nav></header><main class="tutorial"><div class="split-panel"><div class="left-col"><div class="tutorial-label"><span>Tutorial Instructions</span></div><div class="container-fluid"><article><h1>Building a Nice Bar Chart</h1>
 <p>We&#39;ve just learned some of the basic features of D3
 for building HTML elements and processing data.
 In this tutorial, we will use some data that we&#39;ve loaded
@@ -29,7 +29,8 @@ We have also already entered some CSS to make the bar chart look nice.</p>
 <p>In the following sections, we will go through each of the steps above.</p>
 <h2>2. Create an SVG element</h2>
 <p>Let&#39;s add an SVG element to the page.
-We&#39;ll also decide at this point how big we want to draw our visualization.</p>
+We&#39;ll also decide at this point how big we want to draw our visualization.
+Add the following to your JavaScript:</p>
 <pre><code class="language-javascript">var width = 500;
 var height = 400;
 var svg = d3.select(&#39;body&#39;)
@@ -37,11 +38,88 @@ var svg = d3.select(&#39;body&#39;)
   .attr(&#39;width&#39;, width)
   .attr(&#39;height&#39;, height);</code></pre>
 <p>This code uses <code>d3.select</code> to locate the <code>&lt;body&gt;</code> HTML element
-and adds an <code>&lt;svg&gt;</code> element to it.
-It then sets the <code>&lt;svg&gt;</code> element&#39;s <code>width</code> and <code>height</code> attributes
+and adds an <code>&lt;svg&gt;</code> element to it.</p>
+<p>It then sets the <code>&lt;svg&gt;</code> element&#39;s <code>width</code> and <code>height</code> attributes
 using variables.</p>
 <p>You should see a box with a thin gray border appear.</p>
 <p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/rogab/65/edit?js,output" target="_blank">Open in JS Bin</a></p>
+<h2>3. Define the x and y scales</h2>
+<p>How do we convert from numbers in the data to visual variables, like
+color, position, or size?</p>
+<p>D3 provides some <a href="https://github.com/mbostock/d3/wiki/Scales">scaling functions </a> to help us with this task.
+It defines the following major kinds of &quot;scales&quot;:</p>
+<ul>
+<li><a href="https://github.com/mbostock/d3/wiki/Quantitative-Scales">Quantitative Scales</a> for continuous values.<ul>
+<li>linear scales: <code>d3.scale.linear()</code></li>
+<li>log scales: <code>d3.scale.log()</code></li>
+<li>power scales: <code>d3.scale.power()</code></li>
+</ul>
+</li>
+<li><a href="https://github.com/mbostock/d3/wiki/Ordinal-Scales">Ordinal Scales</a> for discrete values.<ul>
+<li>basic ordinal scales: <code>d3.scale.ordinal()</code></li>
+<li>color scale shortcuts: <code>d3.scale.category10()</code></li>
+</ul>
+</li>
+<li><a href="https://github.com/mbostock/d3/wiki/Time-Scales">Time Scales</a> for mapping time values.<ul>
+<li>multi-level time scales: <code>d3.time.scale()</code></li>
+</ul>
+</li>
+</ul>
+<p>In this tutorial, we&#39;ll use <code>d3.scale.linear()</code> to map from
+hashtag frequencies onto bar width. We&#39;ll also use <code>d3.scale.ordinal()</code>
+to map hashtags to their vertical position in the bar chart.</p>
+<h3>Find the data ranges</h3>
+<p>Before we can figure out how to map hashtag frequency onto
+bar width, we need to know the range of hashtag frequencies in the data.</p>
+<p>We can do this easily in D3. The code below goes through
+all of the rows (<code>d</code>) in the data, and finds the value
+of the <code>num_tweets</code> field. D3 then returns the maximum value
+from that field:</p>
+<pre><code class="language-javascript">var max_tweets = d3.max(data, function(d) {
+  return d.num_tweets;
+});</code></pre>
+<p>We can add similar code to find the smallest value of <code>num_tweets</code>:</p>
+<pre><code class="language-javascript">var min_tweets = d3.min(data, function(d) {
+  return d.num_tweets;
+});</code></pre>
+<p>Finally, we would like to have a list of all of the hashtags in the data,
+so we will use the <code>map()</code> function to extract this field:</p>
+<pre><code class="language-javascript">var tag_names = data.map(function(d){
+  return d.hashtag;
+});</code></pre>
+<h3>Construct the scales</h3>
+<p>Now that we know the min and max of <code>num_tweets</code> and the
+hashtags in our data, we are ready to create D3 scales.</p>
+<p>Let&#39;s start with the x scale. The x scale should map
+from the domain <code>[0, max_tweets]</code> onto the range
+<code>[0, width]</code>.</p>
+<p>Note that we are <strong>not</strong> using <code>min_tweets</code> here
+because we want our bars to be based at zero.</p>
+<p>Add this:</p>
+<pre><code class="language-javascript">var x = d3.scale.linear()
+  .range([0, width])
+  .domain([0, max_tweets]);</code></pre>
+<p>Next, we will create an ordinal scale that maps hashtag
+names onto vertical positions. This will use
+a special D3 function <code>rangeRoundBands()</code> that
+is useful for ensuring your bars get spaced out correctly:</p>
+<pre><code class="language-javascript">var y = d3.scale.ordinal()
+  .domain(tag_names)
+  .rangeRoundBands([ 0, height], 0.1);</code></pre>
+<p>Now we&#39;re ready to move on to drawing the axes.</p>
+<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/rogab/66/edit?js,output" target="_blank">Open in JS Bin</a></p>
+<h2>3. Add some margins</h2>
+<pre><code class="language-javascript">var margins = {
+  top: 20,
+  right: 20,
+  bottom: 50,
+  left: 110
+};
+var graphWidth = width - margins.right - margins.left;
+var graphHeight = height - margins.top - margins.bottom;
+
+var chart = svg.append(&#39;g&#39;)
+  .attr(&#39;transform&#39;, &#39;translate(&#39; + margins.left + &#39;,&#39; + margins.top + &#39;)&#39;);</code></pre>
 <p>The bar chart visualization of is complete. Below is a live copy:</p>
 <iframe class="embed-visualization" height="430" width="530" src="resources/barchart/barchart.html"></iframe>
 
