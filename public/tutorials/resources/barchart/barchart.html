@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <meta charset="utf-8">
+  <style type="text/css">
+    body {
+      font: 10px sans-serif;
+    }
+
+    svg {
+      border: 1px solid #ddd;
+    }
+
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+    .bar {
+      fill: steelblue;
+      cursor: pointer;
+    }
+    .bar:hover {
+      fill: #6EA9DA;
+    }
+
+    .y.axis path {
+      display: none;
+    }
+
+    .area {
+      fill: steelblue;
+    }
+  </style>
+</head>
+<body>
+<script type="text/csv" id="top_20_hashtags">
+hashtag,num_tweets,num_users,num_convs
+"superbowl","1571329","1073453","35317"
+"ravens","454016","319342","19239"
+"49ers","297501","213371","14865"
+"sb47","239239","154287","6152"
+"superbowl47","167569","124203","3011"
+"superbowlsunday","158608","134937","3623"
+"beyonce","156204","133430","4380"
+"superbowl2013","131001","103636","3354"
+"nfl","129311","80243","3748"
+"superbowlxlvii","109588","77987","2763"
+"niners","54452","41081","3484"
+"ravensnation","48172","32863","1612"
+"nflhonors","45450","31988","323"
+"baltimore","41618","30913","1043"
+"ravennation","41300","28998","1951"
+"goravens","41296","34921","2504"
+"questforsix","35147","22045","1988"
+"raylewis","29302","26007","1117"
+"pepsihalftime","26664","19196","371"
+"nola","24729","15395","1075"
+</script>
+<script type="text/javascript" src="final_barchart.js"></script>
+</body>
+</html>

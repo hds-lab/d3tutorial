@@ -24,6 +24,7 @@ The dataset includes the following fields:
 - MPG: how many miles per gallon the car gets (fuel efficiency)
 - Weight: how much the car weighs, in lbs.
 
+
 2. Visual Encodings
 ----------------
 
@@ -35,6 +36,7 @@ The visual encodings are illustrated in the diagram below:
 Here is a screenshot of the final visualization:
 
 ![Final cars visualization](resources/cars/cars_visualization.png)
+
 
 3. Initial Setup
 -------------
@@ -279,6 +281,9 @@ dots.on('mouseover', function(d) {
   origins.classed("brushed", false);
 });
 ```
+
+Congratulations!
+---------------
 
 The visualization of the cars dataset is complete. Below is a live copy:
 

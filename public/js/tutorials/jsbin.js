@@ -142,6 +142,9 @@
     var jsbin = page.find('.jsbin-container');
     var buttons = tutorial.find('a.jsbin-button');
 
+    //Make links jump out
+    tutorial.find('a').not('.btn').attr('target', '_blank');
+
     buttons.click(function (e) {
 
       var side_by_side = jsbin.is(":visible");
