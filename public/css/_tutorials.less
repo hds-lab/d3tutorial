@@ -8,6 +8,8 @@ html.full-page {
   }
 }
 
+@jsbin-enabled-size: @screen-sm-min;
+
 main.tutorial {
   position: absolute;
   top: @body-padding;
@@ -54,6 +56,13 @@ main.tutorial {
       margin: 75px auto;
       width: 220px;
     }
+
+
+    //For the jsbin buttons
+    .jsbin-button {
+      display: block;
+      margin: 20px 20px;
+    }
   }
 
   @tutorial-label-height: 31px;
@@ -96,6 +105,10 @@ main.tutorial {
       .left-col {
         overflow-y: hidden;
 
+        @media (max-width: @jsbin-enabled-size) {
+          width: 100% !important;
+        }
+
         > .container-fluid {
           overflow: auto;
           position: absolute;
@@ -107,14 +120,26 @@ main.tutorial {
         }
       }
 
-      .right-col > .container-fluid {
-        padding: 0;
-      }
+      .right-col {
+        display: none;
 
+        @media (min-width: @jsbin-enabled-size) {
+          display: block;
+        }
+
+        > .container-fluid {
+          padding: 0;
+        }
+      }
       .vsplitter {
         background-color: @navbar-default-bg;
         border: 1px solid @navbar-default-border;
         width: 8px;
+
+        display: none;
+        @media (min-width: @jsbin-enabled-size) {
+          display: block;
+        }
       }
 
       //Overrides for prism's styles
@@ -132,12 +157,6 @@ main.tutorial {
         content: normal;
         display: none;
       }
-    }
-
-    //For the jsbin buttons
-    .jsbin-button {
-      display: block;
-      margin: 20px 20px;
     }
   }
 

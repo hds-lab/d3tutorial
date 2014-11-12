@@ -6,6 +6,7 @@
 
 # build directory
 /www
+/dist
 
 # npm modules
 /node_modules

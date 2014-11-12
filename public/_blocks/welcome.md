@@ -17,4 +17,5 @@ Here are the tutorials we have available:
 
 1. [Example Tutorial](tutorials/example.html)
 2. [HTML Tutorial](tutorials/html.html)
-3. [Visualizing the Cars Data](tutorials/cars.html)
+3. [Building a Nice Bar Chart](tutorials/barchart.html)
+4. [Visualizing the Cars Data](tutorials/cars.html)

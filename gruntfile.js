@@ -54,13 +54,14 @@ module.exports = function (grunt) {
       },
       commit_dist: {
         command: ["cd <%= conf.dist %>",
+                  "git add --all .",
                   "git commit -m \"update dist\""
         ].join(' && ')
       },
       deploy_dist: {
         command: ["cd <%= conf.dist %>",
                   "git push"
-        ].join(' %% ')
+        ].join(' && ')
       }
       //commit_dist: {
       //  command: ["git add -f dist",

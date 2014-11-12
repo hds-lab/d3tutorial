@@ -4,7 +4,7 @@ Visualizing the Cars Data
 In this tutorial we will build a colorful scatter-plot-style visualization.
 We will use four dimensions from the Cars dataset, encoded as x and y position, size, and color.
 
-The Cars Dataset
+1. The Cars Dataset
 ----------------
 
 The "Cars" dataset used in this tutorial is a subset
@@ -24,7 +24,7 @@ The dataset includes the following fields:
 - MPG: how many miles per gallon the car gets (fuel efficiency)
 - Weight: how much the car weighs, in lbs.
 
-Visual Encodings
+2. Visual Encodings
 ----------------
 
 We will create a visualization of four of these fields.
@@ -36,7 +36,7 @@ Here is a screenshot of the final visualization:
 
 ![Final cars visualization](resources/cars/cars_visualization.png)
 
-1. Initial Setup
+3. Initial Setup
 -------------
 
 We'll skip over some of the basic setup for the visualization,
@@ -54,7 +54,7 @@ You can review the code for these in the JavaScript panel to the right, if you w
 We have also provided some CSS to make the chart look nice, but we won't go into it here.
 
 
-2. Draw some dots
+4. Draw some dots
 -----------------
 
 Our first step will be to render a dot for each car, using SVG `<circle>` elements.
@@ -99,7 +99,7 @@ They have default size, color, and position.
 <a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/9/edit?js,output" target="_blank">Open in JS Bin</a>
 
 
-Mapping to visual attributes
+5. Mapping to visual attributes
 ----------------------------
 
 To actually see our dots, we need to set their position, size,
@@ -122,7 +122,7 @@ these are defined.
 <a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/4/edit?js,output" target="_blank">Open in JS Bin</a>
 
 
-Adding a legend
+6. Adding a legend
 ---------------
 
 The chart as is stands is pictured below:
@@ -191,7 +191,7 @@ actually produce the color and text labels from the car origins data.
 <a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/5/edit?js,output" target="_blank">Open in JS Bin</a>
 
 
-Another legend
+7. Another legend
 --------------
 
 We also want to clearly explain what the size of dots means.
@@ -227,7 +227,7 @@ drawing this legend below the first legend.
 <a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/10/edit?js,output" target="_blank">Open in JS Bin</a>
 
 
-Interactivity
+8. Interactivity
 -------------
 
 Let's add a little bit of interactivity so that we can see how
