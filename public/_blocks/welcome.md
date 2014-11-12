@@ -16,6 +16,8 @@ Tutorials
 Here are the tutorials we have available:
 
 1. [Example Tutorial](tutorials/example.html)
-2. [HTML Tutorial](tutorials/html.html)
-3. [Building a Nice Bar Chart](tutorials/barchart.html)
-4. [Visualizing the Cars Data](tutorials/cars.html)
+2. [HTML Introduction](tutorials/html.html)
+3. [SVG Introduction](tutorials/svg.html)
+4. [Javascript Introduction](tutorials/javascript.html)
+5. [Building a Nice Bar Chart](tutorials/barchart.html)
+6. [Visualizing the Cars Data](tutorials/cars.html)
