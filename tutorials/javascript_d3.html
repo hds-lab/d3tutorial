@@ -62,19 +62,12 @@
 <pre><code class="language-javascript">&quot;5&quot; + &quot;3&quot;</code></pre>
 <p>then you&#39;ll get &quot;53&quot;. This can get pretty confusing, but remember that strings are meant for text. This example makes a little more sense:</p>
 <pre><code class="language-javascript">&quot;Javascript is pretty&quot; + &quot; easy&quot;</code></pre>
-<div style="background: yellow">TODO: Move this to an example?</div>
-<div style="background: yellow">TODO: Conversion</div>
-
-
 <p>See Also: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures">JavaScript data types and data structures</a></p>
 <h2>Variables</h2>
 <p>In the simplest sense, variables are like cups. They can hold a lot of different things. These can be numbers, strings, or some other things we won&#39;t cover. In the number sense, they&#39;re sort of like algebraic expressions. </p>
 <pre><code class="language-javascript">var mystr = &quot;this is a string!&quot;;
 var mynum = 5;</code></pre>
 <p>Let&#39;s explore the above addition example but with variables. </p>
-<div style="background: yellow">TODO: Example</div>
-
-
 <h2>Functions</h2>
 <p>Functions in JavaScript are used to hold one or more of operations. We use them largely to help organize our code, make it easier to understand, and most importantly reduce typing! Often times, we&#39;ll use them when a series of operations are performed multiple times. For example, maybe we want to make the computer say hello to many people. We could do this like this:</p>
 <pre><code class="language-javascript">function sayHello(name) {
@@ -130,4 +123,32 @@ console.log( primes[3] );    // prints the fourth number (7)</code></pre>
 </ul>
 <p><a class="btn btn-default jsbin-button" href="http://jsbin.com/gaguca/3/edit?html,js,output">Open in JS Bin</a></p>
 <h2>Finally, D3!</h2>
+<p>One of the main reasons to use D3 is the adding new elements to the HTML page. It&#39;s a first step at creating dynamic and interactive visualizations. Remember adding the SVG element to the HTML page from the HTML tutorial? The HTML should look like this: </p>
+<pre><code class="language-markup">&lt;svg width=&quot;100&quot; height=&quot;100&quot;&gt;
+    ... SVG elements ...
+&lt;svg&gt;</code></pre>
+<p>To do this in D3, we use a combination of functions. We can do this:</p>
+<pre><code class="language-javascript">    var mysvg = d3.select(&quot;body&quot;).append(&quot;svg&quot;)
+        .attr(&quot;width&quot;, &quot;100&quot;)
+        .attr(&quot;height&quot;, &quot;100&quot;)</code></pre>
+<h2>Programmatically adding a circle</h2>
+<p>So let&#39;s break that down. So the &quot;d3.&quot; means that this is function from the d3 library. The <code>select</code> call finds and returns the specified element. In this case, we&#39;re asking for the body element. We then <code>append</code> a new element with the tag name &quot;svg&quot;. Then on that SVG element we set 2 attributes, the width and the height -- both to 100 pixels. The resulting SVG element is stored in the <code>mysvg</code> variable. In this case, it&#39;s important that we store this because then we can use it to append elements to that element.</p>
+<p>So now it&#39;s your turn. Using this basic framework. Add a circle at (25,25) with a radius of 10 to the svg element in JavaScript. This JSBin has created the SVG element already and stored it in the <code>svg</code> variable. </p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/tohiqu/2/edit?html,js,output">Open in JS Bin</a></p>
+<h2>Events</h2>
+<p>So now we can programmatically add elements, but how do we make this interactive? In JavaScript, we have the notion of events. They are certain types of interactions that occur that you can attach functions. When the event occurs on the specified element, your function will be called, and you can perform some action to change it. You can also read more about the types of events at <a href="https://developer.mozilla.org/en-US/docs/Web/Events">MDN&#39;s list of events</a></p>
+<p>You can attach a piece of code like this:</p>
+<pre><code class="language-javascript">
+    function onClickFn(ev) {
+        d3.select(this).style(&quot;background&quot;, &quot;red&quot;);
+    }
+
+    var svg = d3.select(&quot;svg&quot;);
+
+    svg.on(&quot;click&quot;, onClickFn);</code></pre>
+<p>This code assumes you have already created an SVG element. It then finds the SVG element within the page. It then makes a call to <code>on</code> which is the d3 function to attach a function for an event. The first argument you pass is the type of event, in this case it&#39;s the &quot;click&quot; handler. When the user clicks on the SVG element the onClickFn function is called. In the function, there is something special happening. Notice the <code>d3.select(this)</code>. When a function is called as an event, the element that triggered the event is passed in the variable <code>this</code>. So we select that object with d3 and then set the background color to red. </p>
+<p>So now it&#39;s your turn. This is a continuation of the last example, add a function that changes the <code>fill</code> color to be &quot;orange&quot; when the circle is clicked. </p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/tohiqu/6/edit?html,js,output">Open in JS Bin</a></p>
+<p>So now you&#39;ve touched on creating element in D3 and doing some basic forms of interaction. If you got stuck on the last example, here&#39;s the final version for you to see what might have went wrong:</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/tohiqu/12/edit?html,js,output">Open in JS Bin</a></p>
 <a href="http://scclab.github.io/d3tutorial/" class="btn btn-default btn-lg back-button">Back to tutorials</a></article></div><div class="tutorial-nav"><ul class="nav"></ul></div></div><div class="right-col"><div class="jsbin-placeholder"><p class="lead">JS Bin Loading...</p></div><div class="jsbin-container"></div></div></div></main><script src="http://scclab.github.io/d3tutorial/vendor/jquery/jquery.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/bootstrap/js/bootstrap.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.cookie/jquery.cookie.js"></script><script src="http://scclab.github.io/d3tutorial/js/prism/prism.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/jsbin.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/embed.js"></script></body></html>
