@@ -48,10 +48,29 @@
   };
 
   var setupSplitter = function() {
-    $('.tutorial .split-panel').split({
+    var splitPanel = $('.tutorial .split-panel');
+    var leftPanel = splitPanel.children().first();
+
+    var state = getTutorialState();
+    var split_percent = 40;
+    if ('split_percent' in state) {
+      split_percent = state.split_percent;
+    }
+    split_percent = split_percent + "%";
+
+    splitPanel.split({
       orientation: 'vertical',
       limit: 10,
-      position: '40%' // if there is no percentage it interpret it as pixels
+      position: split_percent, // if there is no percentage it interpret it as pixels
+      onDragEnd: function() {
+        var percent = leftPanel.width() / splitPanel.width();
+        percent = Math.round(100 * percent);
+        percent = Math.min(100, Math.max(0, percent));
+
+        var state = getTutorialState();
+        state.split_percent = percent;
+        saveTutorialState(state);
+      }
     });
   };
 
