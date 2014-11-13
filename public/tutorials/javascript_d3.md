@@ -274,11 +274,11 @@ This code assumes you have already created an SVG element. It then finds the SVG
 
 So now it's your turn. This is a continuation of the last example, add a function that changes the `fill` color to be "orange" when the circle is clicked. 
 
-<a class="btn btn-default jsbin-button" href="http://jsbin.com/tohiqu/12/edit?html,js,output">Open in JS Bin</a>
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/tohiqu/6/edit?html,js,output">Open in JS Bin</a>
 
 So now you've touched on creating element in D3 and doing some basic forms of interaction. If you got stuck on the last example, here's the final version for you to see what might have went wrong:
 
-
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/tohiqu/12/edit?html,js,output">Open in JS Bin</a>
 
 
 
