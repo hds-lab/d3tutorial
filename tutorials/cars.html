@@ -33,12 +33,16 @@ Here are the steps we are skipping:</p>
 <li>Defining scales for the data fields.</li>
 <li>Drawing the chart axes.</li>
 </ol>
-<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/8/edit?js,output" target="_blank">Open Initial Setup in JS Bin</a></p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/8/edit?js,output">Open in JS Bin</a></p>
 <p>You can review the code for these in the JavaScript panel to the right, if you wish.
 We have also provided some CSS to make the chart look nice, but we won&#39;t go into it here.</p>
 <h2>4. Draw some dots</h2>
-<p>Our first step will be to render a dot for each car, using SVG <code>&lt;circle&gt;</code> elements.</p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/circle">More about circles</a></p>
+<p>Our first step will be to render a dot for each car, using SVG <code>&lt;circle&gt;</code> elements
+(<a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/circle">documentation about circles</a>).
+That means we are going through the data join again.
+It has the same <em>select</em>, <em>append</em>, <em>remove</em>, <em>update</em>
+steps here as it did in the bar chart visualization.</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/8/edit?js,output">Open in JS Bin</a></p>
 <p>First, we select all of the elements with class &#39;dot&#39; (they are theoretical
 dat this point) and bind the cars data to them.</p>
 <p>Add the following code to the bottom of the JavaScript in JS Bin:</p>
@@ -56,11 +60,9 @@ which we will use later to show a tooltip.</em></p>
 <p>This doesn&#39;t do anything in our visualization, but
 it is normal at this point to also remove any dots that you don&#39;t need:</p>
 <pre><code class="language-javascript">dots.exit().remove();</code></pre>
-<p>Now there are dots being rendered, but they don&#39;t look like anything.
-They have default size, color, and position.</p>
-<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/9/edit?js,output" target="_blank">Open in JS Bin</a></p>
-<h2>5. Mapping to visual attributes</h2>
-<p>To actually see our dots, we need to set their position, size,
+<p>Now, there are dots being rendered, but they don&#39;t look like anything.
+They have default size, color, and position.
+To actually see our dots, we need to set their position, size,
 and color.</p>
 <p>To do this, we just add the following code:</p>
 <pre><code class="language-javascript">dots.attr(&quot;r&quot;, function(d) { return radius(d.weight); })
@@ -71,16 +73,17 @@ and color.</p>
 that we are using here (<code>radius</code>, <code>x</code>, <code>y</code>, and <code>color</code>).
 You can scroll up through the JavaScript to find how
 these are defined.</p>
-<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/4/edit?js,output" target="_blank">Open in JS Bin</a></p>
-<h2>6. Adding a legend</h2>
+<h2>5. Adding a legend</h2>
 <p>The chart as is stands is pictured below:</p>
 <p><img src="resources/cars/no_legend.png" alt="Chart without legend"></p>
 <p>This is all very nice, but how is a user to know what is meant by size and color?
 To make things more clear, we&#39;ll now add a legend to the chart, in the upper
 right corner. Here&#39;s what we&#39;re going for:</p>
 <p><img src="resources/cars/origins_legend.png" alt="Legend for car origin"></p>
-<p>We are going to use D3 to build this legend dynamically from some data,
-just like we are doing with our actual visualization.</p>
+<p>We are going to use D3 to build this legend dynamically,
+just like we are doing with our actual visualization.
+That means we are going to do <em>another</em> data join!</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/4/edit?js,output">Open in JS Bin</a></p>
 <p>The data for the &quot;legend visualization&quot; will be the list of
 car origins (<code>[&#39;US&#39;, &#39;Japan&#39;, &#39;Europe&#39;]</code>), which we can obtain
 by calling <code>color.domain()</code> because origins are the domain
@@ -122,10 +125,10 @@ one of these <code>&lt;g&gt;</code> elements:</p>
 <p>A lot of that was just moving stuff around to make it look good.
 The highlighted <code>.style()</code> the <code>.text()</code> lines are what
 actually produce the color and text labels from the car origins data.</p>
-<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/5/edit?js,output" target="_blank">Open in JS Bin</a></p>
-<h2>7. Another legend</h2>
-<p>We also want to clearly explain what the size of dots means.
-This mostly similar to the legend above:</p>
+<h2>6. Another legend</h2>
+<p>We also want to clearly explain what the size of dots means.</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/5/edit?js,output">Open in JS Bin</a></p>
+<p>This mostly similar to the legend above:</p>
 <pre><code class="language-javascript">var legendOffset = origins.size() * 20 + 5;
 
 //Add a legend for radius/weight
@@ -136,23 +139,23 @@ var weights = chart.selectAll(&#39;.legend.weight&#39;)
   .attr(&#39;transform&#39;, function(d, i) { return &quot;translate(0, &quot; + (legendOffset + i * 20) + &quot;)&quot;; });
 
 weights.append(&quot;circle&quot;)
-      .attr(&quot;cx&quot;, graphWidth - 9)
-      .attr(&quot;cy&quot;, 10)
-      .attr(&quot;r&quot;, radius)
-      .style(&quot;fill&quot;, &#39;gray&#39;);
+  .attr(&quot;cx&quot;, graphWidth - 9)
+  .attr(&quot;cy&quot;, 10)
+  .attr(&quot;r&quot;, radius)
+  .style(&quot;fill&quot;, &#39;gray&#39;);
 
 weights.append(&quot;text&quot;)
-      .attr(&quot;x&quot;, graphWidth - 24)
-      .attr(&quot;y&quot;, 9)
-      .attr(&quot;dy&quot;, &quot;.35em&quot;)
-      .style(&quot;text-anchor&quot;, &quot;end&quot;)
-      .text(function(d) { return d + &quot; lbs&quot;; });</code></pre>
+  .attr(&quot;x&quot;, graphWidth - 24)
+  .attr(&quot;y&quot;, 9)
+  .attr(&quot;dy&quot;, &quot;.35em&quot;)
+  .style(&quot;text-anchor&quot;, &quot;end&quot;)
+  .text(function(d) { return d + &quot; lbs&quot;; });</code></pre>
 <p>The only new thing here is that we have added a <code>legendOffset</code> to start
 drawing this legend below the first legend.</p>
-<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/10/edit?js,output" target="_blank">Open in JS Bin</a></p>
-<h2>8. Interactivity</h2>
+<h2>7. Interactivity</h2>
 <p>Let&#39;s add a little bit of interactivity so that we can see how
 to listen and respond to mouse events with D3.</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/10/edit?js,output">Open in JS Bin</a></p>
 <p>As you&#39;ll see if you move your mouse over the dots and the color legend,
 we have already added code to make the elements brighten when
 the mouse is hovering over them. This is all done in CSS.</p>
@@ -185,9 +188,9 @@ the user hovers over a dot:</p>
 .on(&#39;mouseout&#39;, function(d) {
   origins.classed(&quot;brushed&quot;, false);
 });</code></pre>
+<p>Here we go:</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/11/edit?js,output">Open in JS Bin</a></p>
 <h2>Congratulations!</h2>
 <p>The visualization of the cars dataset is complete. Below is a live copy:</p>
 <iframe class="embed-visualization" height="430" width="530" src="resources/cars/cars.html"></iframe>
-
-<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/11/edit?js,output" target="_blank">Open in JS Bin</a></p>
 <a href="http://scclab.github.io/d3tutorial/" class="btn btn-default btn-lg back-button">Back to tutorials</a></article></div><div class="tutorial-nav"><ul class="nav"></ul></div></div><div class="right-col"><div class="jsbin-placeholder"><p class="lead">JS Bin Loading...</p></div><div class="jsbin-container"></div></div></div></main><script src="http://scclab.github.io/d3tutorial/vendor/jquery/jquery.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/bootstrap/js/bootstrap.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.cookie/jquery.cookie.js"></script><script src="http://scclab.github.io/d3tutorial/js/prism/prism.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/jsbin.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/embed.js"></script></body></html>

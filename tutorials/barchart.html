@@ -23,14 +23,15 @@ on the screen. Here are the basic steps we&#39;ll be following:</p>
 </li>
 </ol>
 <p>We already talked about loading data. You can review the code for
-this in the JavaScript panel to the right, if you wish.
-We have also already entered some CSS to make the bar chart look nice.</p>
-<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/rogab/64/edit?js,output" target="_blank">Open Initial Setup in JS Bin</a></p>
-<p>In the following sections, we will go through each of the steps above.</p>
+this in the JavaScript panel to the right.</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/64/edit?js,output">Open in JS Bin</a></p>
+<p>We have also already entered some CSS to make the bar chart look nice.
+In the following sections, we will go through each of the steps above.</p>
 <h2>2. Create an SVG element</h2>
-<p>Let&#39;s add an SVG element to the page.
-We&#39;ll also decide at this point how big we want to draw our visualization.
-Add the following to your JavaScript:</p>
+<p>Let&#39;s <strong>add an SVG element to the page</strong> to hold our visualization.
+We should also decide at this point how big the visualization will be.</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/64/edit?js,output">Open in JS Bin</a></p>
+<p>Add the following to your JavaScript:</p>
 <pre><code class="language-javascript">var width = 500;
 var height = 400;
 var svg = d3.select(&#39;body&#39;)
@@ -42,7 +43,6 @@ and adds an <code>&lt;svg&gt;</code> element to it.</p>
 <p>It then sets the <code>&lt;svg&gt;</code> element&#39;s <code>width</code> and <code>height</code> attributes
 using variables.</p>
 <p>You should see a box with a thin gray border appear.</p>
-<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/rogab/65/edit?js,output" target="_blank">Open in JS Bin</a></p>
 <h2>3. Define the x and y scales</h2>
 <p>How do we convert from numbers in the data to visual variables, like
 color, position, or size?</p>
@@ -68,17 +68,19 @@ It defines the following major kinds of &quot;scales&quot;:</p>
 <p>In this tutorial, we&#39;ll use <code>d3.scale.linear()</code> to map from
 hashtag frequencies onto bar width. We&#39;ll also use <code>d3.scale.ordinal()</code>
 to map hashtags to their vertical position in the bar chart.</p>
-<h3>Find the data ranges</h3>
+<h3>Find the domains</h3>
 <p>Before we can figure out how to map hashtag frequency onto
-bar width, we need to know the range of hashtag frequencies in the data.</p>
-<p>We can do this easily in D3. The code below goes through
-all of the rows (<code>d</code>) in the data, and finds the value
-of the <code>num_tweets</code> field. D3 then returns the maximum value
-from that field:</p>
+bar width, we need to know the min and max hashtag frequencies in the data.
+D3 provides functions that make this easy.</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/65/edit?js,console">Open in JS Bin</a></p>
+<p>Add the following code:</p>
 <pre><code class="language-javascript">var max_tweets = d3.max(data, function(d) {
   return d.num_tweets;
 });</code></pre>
-<p>We can add similar code to find the smallest value of <code>num_tweets</code>:</p>
+<p>The code above goes through all of the rows <code>d</code> in the data,
+and finds the value of the <code>num_tweets</code> field for each row.
+D3&#39;s <code>max()</code> function then returns the maximum value from that field (1571329).</p>
+<p>We can add similar code to find the <em>smallest</em> value of <code>num_tweets</code> (24729):</p>
 <pre><code class="language-javascript">var min_tweets = d3.min(data, function(d) {
   return d.num_tweets;
 });</code></pre>
@@ -99,6 +101,13 @@ because we want our bars to be based at zero.</p>
 <pre><code class="language-javascript">var x = d3.scale.linear()
   .range([0, width])
   .domain([0, max_tweets]);</code></pre>
+<p>The <code>d3.scale.linear()</code> function produces an object
+that we can actually call like a function.
+You can try entering the following commands in the Console
+window in JS Bin to see what you get:</p>
+<pre><code class="language-javascript">x(0)          //should return 0 (px)
+x(200000)     //should return 63.64 (px)
+x(max_tweets) //should return 500 (px)</code></pre>
 <p>Next, we will create an ordinal scale that maps hashtag
 names onto vertical positions. This will use
 a special D3 function <code>rangeRoundBands()</code> that
@@ -106,16 +115,21 @@ is useful for ensuring your bars get spaced out correctly:</p>
 <pre><code class="language-javascript">var y = d3.scale.ordinal()
   .domain(tag_names)
   .rangeRoundBands([ 0, height], 0.1);</code></pre>
-<p>Now we&#39;re ready to move on to drawing the axes.</p>
-<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/rogab/66/edit?js,output" target="_blank">Open in JS Bin</a></p>
+<p>As with <code>x</code>, you can call <code>y</code> like a function to
+get the y-position for different hashtag bars.
+Try this in the Console:</p>
+<pre><code class="language-javascript">y(&quot;superbowl&quot;)  //should return 11 (px)
+y(&quot;baltimore&quot;)  //should return 258 (px)</code></pre>
 <h2>4. Draw the axes</h2>
-<p>We will use the D3 scales we created above to draw
+<p>Now we&#39;re ready to move on to drawing the axes.
+We will use the D3 scales we created above to draw
 the x and y axes in the visualization, along with axis labels.</p>
 <p>D3 provides a utility specifically for drawing axes.
 You give it a scale you&#39;ve already created, tell it
 whether it is drawing on the top, bottom, left, or right
 of your chart, and it does the rest.</p>
-<p>The code below initializes an axis renderer:</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/66/edit?js,output">Open in JS Bin</a></p>
+<p>The code below initializes an axis &quot;renderer&quot;:</p>
 <pre><code class="language-javascript">var xAxis = d3.svg.axis()
   .scale(x)
   .orient(&quot;top&quot;);</code></pre>
@@ -129,18 +143,18 @@ that make up the axis with this code:</p>
 If you use the debugger to inspect the SVG element, you&#39;ll see that
 it actually does contain new markup for the axis elements.
 Unfortunately, they are off screen!</p>
-<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/rogab/67/edit?js,output" target="_blank">Open in JS Bin</a></p>
 <p>Elements rendering in the wrong place is a common problem with D3.
-Let&#39;s fix that by adding some space around the outside of our visualization.</p>
+We&#39;ll fix that in the next step by adding some space
+around the outside of our visualization.</p>
 <h3>Add margins</h3>
-<p>To do this, we need to <em>back up a little bit</em> and
-change the way we set up our visualization
-so that we can have space around the outside edge.</p>
-<p>First, find the code where you start to define the x and y scales
+<p>We want to draw our visualization a little bit inside
+the outside of the SVG element.
+To do this, we need to <em>back up</em> a little bit and
+change the way we set up the visualization.</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/67/edit?js,output">Open in JS Bin</a></p>
+<p>First, <strong>find the code</strong> where you start to define the x and y scales
 (look for <code>var x = ...</code>). Right <strong>before</strong> that section, add the following:</p>
-<pre><code class="language-javascript">//add this after you set tag_names...
-
-var margins = {
+<pre><code class="language-javascript">var margins = {
   top: 20,
   right: 20,
   bottom: 50,
@@ -152,7 +166,7 @@ var graphHeight = height - margins.top - margins.bottom;
 var chart = svg.append(&#39;g&#39;)
   .attr(&#39;transform&#39;, &#39;translate(&#39; + margins.left + &#39;,&#39; + margins.top + &#39;)&#39;);
 
-//and before you start to define the scales...</code></pre>
+//this goes before you start to define the scales...</code></pre>
 <p>This sets up the margin sizes and adds a new SVG <code>&lt;g&gt;</code> (grouping) element
 to the drawing. It also <em>transforms</em> the group element by shifting it
 left and down using the margin sizes we configured above.
@@ -165,16 +179,14 @@ with <code>graphWidth</code> and <code>graphHeight</code>, respectively.</p>
 <p><strong>Append to chart:</strong> Further down, find the code where you draw the x-axis.
 Instead of using <code>svg.append</code>, you should change it to <code>chart.append</code>.</p>
 <p>Finally, you should see your x-axis miraculously appear in view!</p>
-<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/rogab/68/edit?js,output" target="_blank">Open in JS Bin</a></p>
 <h3>Add the other axis</h3>
-<p>Ok, now we need to add the y-axis.</p>
-<blockquote>
-<p>The code for this is very similar to what we used for the x-axis, so why don&#39;t you try this yourself?</p>
-</blockquote>
+<p>Ok, now we need to add the y-axis.
+The code for this is very similar to what we used for the x-axis, so why don&#39;t you try this yourself?</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/68/edit?js,output">Open in JS Bin</a></p>
 <p>Note: you won&#39;t see a long black line for the y-axis like you do for the x-axis.
 This is because of some special CSS styles that we added to make the chart look better.</p>
-<p>If you get stuck, you can always click the button below to skip ahead to the answer.</p>
-<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/rogab/69/edit?js,output" target="_blank">Open in JS Bin</a></p>
+<p>If you get stuck, you can always click the JS Bin button in the next
+section to skip ahead to the answer.</p>
 <h2>5. Draw some bars</h2>
 <p>Ok that was a lot of work just to add axis labels.
 It is finally time to draw some bars.</p>
@@ -213,14 +225,15 @@ somewhat similar to SQL, for example.</p>
 </ul>
 <h3>Ok, now draw some bars</h3>
 <p>Enough theory. Let&#39;s go through these 5 steps with our bar chart.</p>
-<p>Add the following code:</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/69/edit?js,output">Open in JS Bin</a></p>
+<p><strong>Steps 1 and 2:</strong> Add the following code:</p>
 <pre><code class="language-javascript">var bars = chart.selectAll(&#39;rect.bar&#39;)
                 .data(data);</code></pre>
 <p>The first line above asks D3 to select some rectangles (with class &quot;bar&quot;).
 Note that there are <em>no such rectangles</em> anywhere on
 the page yet. They are purely theoretical rectangles (<strong>step 1</strong>).</p>
 <p>The second line joins this selection against our hashtag dataset (<strong>step 2</strong>).</p>
-<p>On to <strong>step 3</strong>. We know there are 20 hashtags in our dataset, but there
+<p><strong>Step 3:</strong> We know there are 20 hashtags in our dataset, but there
 are 0 (zero) <code>&lt;rect&gt;</code> elements in our selection. Therefore, we
 will ask D3 to create these missing elements:</p>
 <pre><code class="language-javascript">bars.enter()
@@ -228,14 +241,14 @@ will ask D3 to create these missing elements:</p>
     .attr(&#39;class&#39;, &#39;bar&#39;);</code></pre>
 <p>The key to this step is the <code>enter()</code> function, which roughly
 translates to &quot;do this for every excess data point&quot;.</p>
-<p>Now, for <strong>step 4</strong>, it just so happens that we do not have <em>any</em>
+<p><strong>Step 4:</strong> It just so happens that we do not have <em>any</em>
 excess bars to delete. However, this is how we would ask D3 to do it:</p>
 <pre><code class="language-javascript">bars.exit()
     .remove();</code></pre>
 <p>Almost done. We now have <code>&lt;rect&gt;</code> elements on the visualization
 (you can find them in the inspector), but we dont&#39;t see them
 because we haven&#39;t set their position and size.</p>
-<p>Add this last bit of code to accomplish <strong>step 5</strong>:</p>
+<p><strong>Step 5:</strong> Add this last crucial bit of code:</p>
 <pre><code class="language-javascript">bars.attr(&#39;x&#39;, 0)
     .attr(&#39;y&#39;, function(d) {
       return y(d.hashtag);
@@ -245,8 +258,8 @@ because we haven&#39;t set their position and size.</p>
       return x(d.num_tweets);
     });</code></pre>
 <p>Let&#39;s break that down into sections.</p>
-<p>The first call, <code>.attr(&#39;x&#39;, 0)</code> just ensures
-that the left edge of each rectangle is at zero.</p>
+<p>The first line, <code>.attr(&#39;x&#39;, 0)</code> just ensures
+that the left edge of each rectangle is at zero pixels.</p>
 <p>Next, we set the <code>y</code> attribute with <code>.attr(&#39;y&#39;, function(d) {...})</code>.
 D3 goes through every element and calls the provided function
 with hashtag data matched to the element as the parameter <code>d</code>.
@@ -257,10 +270,10 @@ of each bar to some size that the y-scale object thinks is going
 to make the bars look good. This is a magic D3 feature.</p>
 <p>Finally, we set the width of each bar using the x-scale to
 translate <code>num_tweets</code> into widths.</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/69/edit?js,output">Open in JS Bin</a></p>
 <h2>The End</h2>
 <p>That&#39;s all we&#39;re going to do with this visualization.
 Below is a live copy:</p>
 <iframe class="embed-visualization" height="430" width="530" src="resources/barchart/barchart.html"></iframe>
 
-<p><a class="btn btn-primary jsbin-button" href="http://jsbin.com/rogab/69/edit?js,output" target="_blank">Open in JS Bin</a></p>
 <a href="http://scclab.github.io/d3tutorial/" class="btn btn-default btn-lg back-button">Back to tutorials</a></article></div><div class="tutorial-nav"><ul class="nav"></ul></div></div><div class="right-col"><div class="jsbin-placeholder"><p class="lead">JS Bin Loading...</p></div><div class="jsbin-container"></div></div></div></main><script src="http://scclab.github.io/d3tutorial/vendor/jquery/jquery.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/bootstrap/js/bootstrap.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.cookie/jquery.cookie.js"></script><script src="http://scclab.github.io/d3tutorial/js/prism/prism.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/jsbin.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/embed.js"></script></body></html>

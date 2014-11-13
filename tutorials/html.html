@@ -6,30 +6,30 @@ This guide is designed to help you get started. It is intended for people with l
 <p>HTML is a way of writing text that enables rich documents to be made. Typically, HTML documents provide a deeper level of information to be included through the use of this special formatting. A common example of this is the links on a webpage. Each link can have a lot of information that you may not see in some contexts. Every actual link should have at least a destination URL. This additional information is called <strong>meta-data</strong>. Links can also contain information about how the browser should respond when the link is clicked. This might tell the browser to open the link in a new window.</p>
 <p>To specify this additional information in an HTML document, we use a combination of elements, tags, and attributes to communicate this information to the browser. </p>
 <h2>Elements, Tags, and Attributes Oh, My!</h2>
+<p><img src="resources/html/element_breakdown.png" alt="Element components"></p>
 <p>Meet the paragraph element:</p>
-<pre><code class="language-html">&lt;p&gt;Hello! I&#39;m a paragraph element.&lt;/p&gt;</code></pre>
+<pre><code class="language-markup">&lt;p&gt;Hello! I&#39;m a paragraph element.&lt;/p&gt;</code></pre>
 <h3>Elements</h3>
 <p>This sentence combined with the <code>&lt;p&gt;</code> and the <code>&lt;/p&gt;</code> is an <strong>element</strong>. In this case, the element type is a <code>p</code>, which is a paragraph. This element tells a webbrowser that everything between the opening and closing tag is a paragraph, so the browser can apply the necessary style. By default, this typically means there&#39;s vertical spacing before and after.</p>
 <h3>Tags</h3>
 <p>So let&#39;s break that down. There&#39;s clearly a sentence there: &quot;Hello! I&#39;m a paragraph element.&quot; But that sentence is wrapped in a <code>&lt;p&gt;...&lt;/p&gt;</code>. Both of these are <strong>tags</strong>. The <code>&lt;p&gt;</code> is the <em>opening tag</em>, and the <code>&lt;/p&gt;</code> is the <em>closing tag</em> (the slash makes it a closing tag.)</p>
 <h3>Attributes</h3>
 <p>Inside the <em>opening tag</em> of any element can be an <strong><em>attribute</em></strong>. These look like this:</p>
-<pre><code class="language-html">&lt;a href=&quot;http://www.google.com&quot;&gt;This link goes to google&lt;/a&gt;</code></pre>
+<pre><code class="language-markup">&lt;a href=&quot;http://www.google.com&quot;&gt;This link goes to google&lt;/a&gt;</code></pre>
 <p>First, this <code>&lt;a&gt;</code> tag is an anchor tag. This tag is used to create links in the document. </p>
 <p>See the <code>href=&quot;http://www.google.com&quot;</code>? That is an attribute. It is used to give the element some special properties, which are aptly named attributes. In this case, href contains the links destination. </p>
 <p>These are the basic building blocks of HTML. </p>
 <h2>Hierarchies</h2>
+<p><img src="resources/html/html_hierarchy.png" alt="Element Hierarchy"></p>
 <p>One fundamental property of HTML is that an element can contain another element. For example, we might want to create to italicize a word in our paragraph.</p>
-<pre><code class="language-html">&lt;p&gt;This is my &lt;i&gt;favorite&lt;/i&gt; paragraph!&lt;/p&gt;</code></pre>
+<pre><code class="language-markup">&lt;p&gt;This is my &lt;i&gt;favorite&lt;/i&gt; paragraph!&lt;/p&gt;</code></pre>
 <p>In this example, the <code>&lt;i&gt;</code> is used <em>inside</em> the <code>&lt;p&gt;</code> to italicize the word favorite. </p>
-<div style="background: yellow">TODO Image showing the hierarchy?</div>
-
-
 <h2>Common Elements</h2>
-<p>Paragraphs are just one of the many elements in HTML. We will now cover some of the more common elements. If you&#39;re interested, you can see a <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">full list of elements here</a>. </p>
+<p>Paragraphs are just one of the many elements in HTML. We will now cover some of the more common elements. If you&#39;re interested, you can see a <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">full list of elements here</a>. Here&#39;s an empty JSBin to explore with as you read this.</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/pehuwe/1/edit?html,output">Open in JS Bin</a></p>
 <h3>Core Page Elements</h3>
 <p>So every current webpage will have at least 5 key elements in them. Here&#39;s an example:</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+<pre><code class="language-markup">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
     &lt;head&gt;
         &lt;title&gt;This is my favorite page&lt;/title&gt;
@@ -56,8 +56,7 @@ This guide is designed to help you get started. It is intended for people with l
 <li><code>&lt;s&gt;</code> - <strong>strikethrough</strong> is used for <s>striking out text</s>.</li>
 <li><code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>, <code>&lt;h4&gt;</code>, <code>&lt;h5&gt;</code>, and <code>&lt;h6&gt;</code> are used to define 6 levels of headings in the document. <code>&lt;h1&gt;</code> is highest level heading and is often used for page titles that appear on the page. </li>
 </ul>
-<div style="background: yellow">TODO Example</div>
-
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/ladiqu/2/edit?html,output">Open in JS Bin</a></p>
 <h3>Core Formatting Elements</h3>
 <p>The most common elements you&#39;ll see are the <code>&lt;span&gt;</code> and the <code>&lt;div&gt;</code>. These elements purpose are specifically to act as container elements, and they are very similar except for one key difference. The difference between these can initially be troublesome for people.</p>
 <h4>Div</h4>
@@ -65,9 +64,48 @@ This guide is designed to help you get started. It is intended for people with l
 <h4>Span</h4>
 <p>A <code>&lt;span&gt;</code> does not start a new line. By default, it behaves like many of the text formatting elements such as <code>&lt;i&gt;</code> in that it can appear in the middle of a line. The width of the <code>&lt;span&gt;</code> is only as large as the elements within it. </p>
 <p>To help explain this a little further, let&#39;s experiment with an example.</p>
-<div style="background: yellow">TODO Example</div>
-
-
-<h2>Wrapup</h2>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/larafa/3/edit?html,output">Open in JS Bin</a></p>
+<h2>Html Wrapup</h2>
 <p>So hopefully by now, we have learned how to construct a very basic HTML document. We have learned some of the most basic elements that can be used in HTML documents and how those can be structured. There are a lot of other elements in the HTML and you can explore some of them <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">at this website</a>. </p>
+<h2>SVG</h2>
+<p>SVG is a language very similar to HTML, but unlike HTML is specifically meant for creating graphics. Thankfully, it can live within HTML as a special element. The <code>SVG</code> element. This would look like this:</p>
+<pre><code class="language-markup">&lt;svg width=&quot;100&quot; height=&quot;100&quot;&gt;
+    ... SVG elements ...
+&lt;svg&gt;</code></pre>
+<p>Notice that this has two attributes for width and height. It is important to explicitly specify both of these attributes and give the SVG element a size. Unlike HTML elements, it will not auto-adjust the size with the content inside of it. In this case, it will be 100 pixels wide and 100 pixels tall. </p>
+<p>So two of the key elements in SVG that you&#39;ll use are the <code>circle</code> and the <code>rect</code>. </p>
+<p>Bar Attributes (The most important ones)</p>
+<table class="table">
+    <thead>
+        <tr><th>Attribute Name</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>x</td><td>X coordinate</td></tr>
+        <tr><td>y</td><td>Y coordinate</td></tr>
+        <tr><td>width</td><td>Width of rectangle</td></tr>
+        <tr><td>height</td><td>Height of rectangle</td></tr>
+        <tr><td>fill</td><td>Fill color name or HTML RGB notation</td></tr>
+    </tbody>
+</table>
+
+<p>So to insert an SVG bar, the full code in HTML would look like this:</p>
+<pre><code class="language-markup">&lt;svg width=&quot;50&quot; height=&quot;50&quot;&gt;
+    &lt;rect x=&quot;10&quot; y=&quot;10&quot; width=&quot;30&quot; height=&quot;10&quot; fill=&quot;blue&quot; /&gt;
+&lt;/svg&gt;</code></pre>
+<p>Circle Attributes</p>
+<table class="table">
+    <thead>
+        <tr><th>Attribute Name</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>cx</td><td>CX coordinate</td></tr>
+        <tr><td>cy</td><td>CY coordinate</td></tr>
+        <tr><td>r</td><td>Radius</td></tr>
+        <tr><td>fill</td><td>Fill color name or HTML RGB notation</td></tr>
+    </tbody>
+</table>
+
+
+<p>So let&#39;s try this example. Here&#39;s a pre-prepared one with the rectangle. The SVG element is 100x100 pixels, so you should add a circle in the center at (50,50) with a radius of 25 and a red fill color. </p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/zosoki/2/edit?html,output">Open in JS Bin</a></p>
 <a href="http://scclab.github.io/d3tutorial/" class="btn btn-default btn-lg back-button">Back to tutorials</a></article></div><div class="tutorial-nav"><ul class="nav"></ul></div></div><div class="right-col"><div class="jsbin-placeholder"><p class="lead">JS Bin Loading...</p></div><div class="jsbin-container"></div></div></div></main><script src="http://scclab.github.io/d3tutorial/vendor/jquery/jquery.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/bootstrap/js/bootstrap.min.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.js"></script><script src="http://scclab.github.io/d3tutorial/vendor/jquery.cookie/jquery.cookie.js"></script><script src="http://scclab.github.io/d3tutorial/js/prism/prism.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/jsbin.js"></script><script src="http://scclab.github.io/d3tutorial/js/tutorials/embed.js"></script></body></html>
