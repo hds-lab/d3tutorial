@@ -21,7 +21,7 @@ Here's a javascript code block with two lines highlighted:
 })(jQuery);
 </code></pre>
 
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/5/edit?js,output" target="_blank">Open in JS Bin</a>
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/5/edit?js,output">Open in JS Bin</a>
 
 Here's a css block:
 
@@ -39,4 +39,4 @@ Here's a css block:
 }
 ```
 
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/4/edit?js,output" target="_blank">Open in JS Bin</a>
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/4/edit?js,output">Open in JS Bin</a>

@@ -59,9 +59,15 @@ main.tutorial {
 
 
     //For the jsbin buttons
-    .jsbin-button {
-      display: block;
-      margin: 20px 20px;
+    .jsbin-button,
+    .jsbin-side-by-side {
+      margin: 5px;
+    }
+
+    .jsbin-side-by-side {
+      @media (max-width: @jsbin-enabled-size) {
+        display: none;
+      }
     }
   }
 

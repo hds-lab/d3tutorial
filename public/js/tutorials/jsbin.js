@@ -48,10 +48,29 @@
   };
 
   var setupSplitter = function() {
-    $('.tutorial .split-panel').split({
+    var splitPanel = $('.tutorial .split-panel');
+    var leftPanel = splitPanel.children().first();
+
+    var state = getTutorialState();
+    var split_percent = 40;
+    if ('split_percent' in state) {
+      split_percent = state.split_percent;
+    }
+    split_percent = split_percent + "%";
+
+    splitPanel.split({
       orientation: 'vertical',
       limit: 10,
-      position: '40%' // if there is no percentage it interpret it as pixels
+      position: split_percent, // if there is no percentage it interpret it as pixels
+      onDragEnd: function() {
+        var percent = leftPanel.width() / splitPanel.width();
+        percent = Math.round(100 * percent);
+        percent = Math.min(100, Math.max(0, percent));
+
+        var state = getTutorialState();
+        state.split_percent = percent;
+        saveTutorialState(state);
+      }
     });
   };
 
@@ -133,7 +152,6 @@
 
   $(document).ready(function () {
 
-    setupSplitter();
     setupNavMenu();
 
     var page = $('main.tutorial');
@@ -142,46 +160,61 @@
     var jsbin = page.find('.jsbin-container');
     var buttons = tutorial.find('a.jsbin-button');
 
-    //Make links jump out
+    //Make normal links and jsbin buttons jump out
     tutorial.find('a').not('.btn').attr('target', '_blank');
 
-    buttons.click(function (e) {
+    buttons.attr('target', '_blank')
+      .removeClass("btn-primary")
+      .addClass('btn-default');
 
-      var side_by_side = jsbin.is(":visible");
+    var side_by_side = jsbin.is(":visible");
 
-      var button = $(this);
-      var link = get_jsbin_link(button);
-      var existing = get_iframe_src(jsbin);
+    if (side_by_side) {
+      setupSplitter();
 
-      var do_load = true;
-      if (side_by_side) {
+      //Add a button for side-by-side
+      var next_to_buttons = buttons.map(function () {
+        var button = $(this);
+        var next_to_btn = $('<a>');
+
+        next_to_btn
+          .addClass('btn btn-primary jsbin-side-by-side')
+          .attr('href', get_jsbin_link(button))
+          .text("Open Side-by-side")
+          .append('&nbsp;<i class="glyphicon glyphicon-share-alt">');
+
+        button.after(next_to_btn);
+
+        return next_to_btn[0];
+      });
+
+      next_to_buttons.click(function (e) {
+
+        var next_to_btn = $(this);
+        var link = next_to_btn.attr('href');
+        var existing = get_iframe_src(jsbin);
+
+        var do_load = true;
+
         //Prevent accidental baddies
         if (existing == link) {
           do_load = confirm("This JS Bin is already loaded.\nAre you sure you want to reset any changes you have made?");
         } else if (existing) {
           do_load = confirm("Are you sure you want to load this JS Bin?\nThis will override any edits you have made.");
         }
-      }
 
-      if (do_load) {
-        loadJSBin(link, jsbin);
-      }
+        if (do_load) {
+          loadJSBin(link, jsbin);
+        }
 
-      if (side_by_side) {
         e.preventDefault();
         return false;
-      }
+      });
 
-      return true;
-    });
-
-    buttons.each(function() {
-      $(this).append('&nbsp;<i class="glyphicon glyphicon-share-alt">')
-    });
+      loadInitialJSBin(jsbin, buttons);
+    }
 
     setupTutorialScroll(tutorial);
-
-    loadInitialJSBin(jsbin, buttons);
   });
 
   if (typeof(hljs) !== 'undefined') {

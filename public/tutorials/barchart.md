@@ -11,6 +11,7 @@ about Twitter hashtags to build a simple bar chart:
 This visualization just shows the number of times each hashtag
 was used over a given time interval.
 
+
 1. Drawing a Visualization
 --------------------------
 
@@ -28,19 +29,22 @@ on the screen. Here are the basic steps we'll be following:
     3. Set the width based on frequency
 
 We already talked about loading data. You can review the code for
-this in the JavaScript panel to the right, if you wish.
+this in the JavaScript panel to the right.
+
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/64/edit?js,output">Open in JS Bin</a>
+
 We have also already entered some CSS to make the bar chart look nice.
-
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/rogab/64/edit?js,output" target="_blank">Open Initial Setup in JS Bin</a>
-
 In the following sections, we will go through each of the steps above.
 
 
 2. Create an SVG element
 ------------------------
 
-Let's add an SVG element to the page.
-We'll also decide at this point how big we want to draw our visualization.
+Let's **add an SVG element to the page** to hold our visualization.
+We should also decide at this point how big the visualization will be.
+
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/64/edit?js,output">Open in JS Bin</a>
+
 Add the following to your JavaScript:
 
 ```javascript
@@ -59,8 +63,6 @@ It then sets the `<svg>` element's `width` and `height` attributes
 using variables.
 
 You should see a box with a thin gray border appear.
-
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/rogab/65/edit?js,output" target="_blank">Open in JS Bin</a>
 
 
 3. Define the x and y scales
@@ -87,15 +89,15 @@ hashtag frequencies onto bar width. We'll also use `d3.scale.ordinal()`
 to map hashtags to their vertical position in the bar chart.
 
 
-### Find the data ranges
+### Find the domains
 
 Before we can figure out how to map hashtag frequency onto
-bar width, we need to know the range of hashtag frequencies in the data.
+bar width, we need to know the min and max hashtag frequencies in the data.
+D3 provides functions that make this easy.
 
-We can do this easily in D3. The code below goes through
-all of the rows (`d`) in the data, and finds the value
-of the `num_tweets` field. D3 then returns the maximum value
-from that field:
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/65/edit?js,console">Open in JS Bin</a>
+
+Add the following code:
 
 ```javascript
 var max_tweets = d3.max(data, function(d) {
@@ -103,7 +105,11 @@ var max_tweets = d3.max(data, function(d) {
 });
 ```
 
-We can add similar code to find the smallest value of `num_tweets`:
+The code above goes through all of the rows `d` in the data,
+and finds the value of the `num_tweets` field for each row.
+D3's `max()` function then returns the maximum value from that field (1571329).
+
+We can add similar code to find the *smallest* value of `num_tweets` (24729):
 
 ```javascript
 var min_tweets = d3.min(data, function(d) {
@@ -140,6 +146,17 @@ var x = d3.scale.linear()
   .domain([0, max_tweets]);
 ```
 
+The `d3.scale.linear()` function produces an object
+that we can actually call like a function.
+You can try entering the following commands in the Console
+window in JS Bin to see what you get:
+
+```javascript
+x(0)          //should return 0 (px)
+x(200000)     //should return 63.64 (px)
+x(max_tweets) //should return 500 (px)
+```
+
 Next, we will create an ordinal scale that maps hashtag
 names onto vertical positions. This will use
 a special D3 function `rangeRoundBands()` that
@@ -151,14 +168,20 @@ var y = d3.scale.ordinal()
   .rangeRoundBands([ 0, height], 0.1);
 ```
 
-Now we're ready to move on to drawing the axes.
+As with `x`, you can call `y` like a function to
+get the y-position for different hashtag bars.
+Try this in the Console:
 
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/rogab/66/edit?js,output" target="_blank">Open in JS Bin</a>
+```javascript
+y("superbowl")  //should return 11 (px)
+y("baltimore")  //should return 258 (px)
+```
 
 
 4. Draw the axes
 -----------------
 
+Now we're ready to move on to drawing the axes.
 We will use the D3 scales we created above to draw
 the x and y axes in the visualization, along with axis labels.
 
@@ -167,7 +190,9 @@ You give it a scale you've already created, tell it
 whether it is drawing on the top, bottom, left, or right
 of your chart, and it does the rest.
 
-The code below initializes an axis renderer:
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/66/edit?js,output">Open in JS Bin</a>
+
+The code below initializes an axis "renderer":
 
 ```javascript
 var xAxis = d3.svg.axis()
@@ -191,23 +216,24 @@ If you use the debugger to inspect the SVG element, you'll see that
 it actually does contain new markup for the axis elements.
 Unfortunately, they are off screen!
 
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/rogab/67/edit?js,output" target="_blank">Open in JS Bin</a>
-
 Elements rendering in the wrong place is a common problem with D3.
-Let's fix that by adding some space around the outside of our visualization.
+We'll fix that in the next step by adding some space
+around the outside of our visualization.
+
 
 ### Add margins
 
-To do this, we need to *back up a little bit* and
-change the way we set up our visualization
-so that we can have space around the outside edge.
+We want to draw our visualization a little bit inside
+the outside of the SVG element.
+To do this, we need to *back up* a little bit and
+change the way we set up the visualization.
 
-First, find the code where you start to define the x and y scales
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/67/edit?js,output">Open in JS Bin</a>
+
+First, **find the code** where you start to define the x and y scales
 (look for `var x = ...`). Right **before** that section, add the following:
 
 ```javascript
-//add this after you set tag_names...
-
 var margins = {
   top: 20,
   right: 20,
@@ -220,7 +246,7 @@ var graphHeight = height - margins.top - margins.bottom;
 var chart = svg.append('g')
   .attr('transform', 'translate(' + margins.left + ',' + margins.top + ')');
 
-//and before you start to define the scales...
+//this goes before you start to define the scales...
 ```
 
 This sets up the margin sizes and adds a new SVG `<g>` (grouping) element
@@ -241,20 +267,19 @@ Instead of using `svg.append`, you should change it to `chart.append`.
 
 Finally, you should see your x-axis miraculously appear in view!
 
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/rogab/68/edit?js,output" target="_blank">Open in JS Bin</a>
 
 ### Add the other axis
 
 Ok, now we need to add the y-axis.
+The code for this is very similar to what we used for the x-axis, so why don't you try this yourself?
 
-> The code for this is very similar to what we used for the x-axis, so why don't you try this yourself?
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/68/edit?js,output">Open in JS Bin</a>
 
 Note: you won't see a long black line for the y-axis like you do for the x-axis.
 This is because of some special CSS styles that we added to make the chart look better.
 
-If you get stuck, you can always click the button below to skip ahead to the answer.
-
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/rogab/69/edit?js,output" target="_blank">Open in JS Bin</a>
+If you get stuck, you can always click the JS Bin button in the next
+section to skip ahead to the answer.
 
 
 5. Draw some bars
@@ -303,7 +328,9 @@ You can read more about D3 joins here:
 
 Enough theory. Let's go through these 5 steps with our bar chart.
 
-Add the following code:
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/69/edit?js,output">Open in JS Bin</a>
+
+**Steps 1 and 2:** Add the following code:
 
 ```javascript
 var bars = chart.selectAll('rect.bar')
@@ -316,7 +343,7 @@ the page yet. They are purely theoretical rectangles (**step 1**).
 
 The second line joins this selection against our hashtag dataset (**step 2**).
 
-On to **step 3**. We know there are 20 hashtags in our dataset, but there
+**Step 3:** We know there are 20 hashtags in our dataset, but there
 are 0 (zero) `<rect>` elements in our selection. Therefore, we
 will ask D3 to create these missing elements:
 
@@ -329,7 +356,7 @@ bars.enter()
 The key to this step is the `enter()` function, which roughly
 translates to "do this for every excess data point".
 
-Now, for **step 4**, it just so happens that we do not have *any*
+**Step 4:** It just so happens that we do not have *any*
 excess bars to delete. However, this is how we would ask D3 to do it:
 
 ```javascript
@@ -341,7 +368,7 @@ Almost done. We now have `<rect>` elements on the visualization
 (you can find them in the inspector), but we dont't see them
 because we haven't set their position and size.
 
-Add this last bit of code to accomplish **step 5**:
+**Step 5:** Add this last crucial bit of code:
 
 ```javascript
 bars.attr('x', 0)
@@ -356,8 +383,8 @@ bars.attr('x', 0)
 
 Let's break that down into sections.
 
-The first call, `.attr('x', 0)` just ensures
-that the left edge of each rectangle is at zero.
+The first line, `.attr('x', 0)` just ensures
+that the left edge of each rectangle is at zero pixels.
 
 Next, we set the `y` attribute with `.attr('y', function(d) {...})`.
 D3 goes through every element and calls the provided function
@@ -372,6 +399,7 @@ to make the bars look good. This is a magic D3 feature.
 Finally, we set the width of each bar using the x-scale to
 translate `num_tweets` into widths.
 
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/69/edit?js,output">Open in JS Bin</a>
 
 The End
 -------
@@ -381,4 +409,3 @@ Below is a live copy:
 
 <iframe class="embed-visualization" height="430" width="530" src="resources/barchart/barchart.html"></iframe>
 
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/rogab/69/edit?js,output" target="_blank">Open in JS Bin</a>
