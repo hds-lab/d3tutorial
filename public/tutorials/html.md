@@ -18,9 +18,11 @@ To specify this additional information in an HTML document, we use a combination
 Elements, Tags, and Attributes Oh, My!
 --------------------------------------
 
+![Element components](resources/html/element_breakdown.png)
+
 Meet the paragraph element:
 
-```html
+```markup
 <p>Hello! I'm a paragraph element.</p>
 ```
 
@@ -33,7 +35,7 @@ So let's break that down. There's clearly a sentence there: "Hello! I'm a paragr
 
 ### Attributes
 Inside the _opening tag_ of any element can be an ***attribute***. These look like this:
-```html
+```markup
 <a href="http://www.google.com">This link goes to google</a>
 ```
 First, this `<a>` tag is an anchor tag. This tag is used to create links in the document. 
@@ -48,27 +50,29 @@ These are the basic building blocks of HTML.
 Hierarchies
 -----------
 
+![Element Hierarchy](resources/html/html_hierarchy.png)
+
 One fundamental property of HTML is that an element can contain another element. For example, we might want to create to italicize a word in our paragraph.
 
-```html
+```markup
 <p>This is my <i>favorite</i> paragraph!</p>
 ```
 
 In this example, the `<i>` is used _inside_ the `<p>` to italicize the word favorite. 
 
-<div style="background: yellow">TODO Image showing the hierarchy?</div>
-
 
 Common Elements
 ---------------
 
-Paragraphs are just one of the many elements in HTML. We will now cover some of the more common elements. If you're interested, you can see a [full list of elements here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element). 
+Paragraphs are just one of the many elements in HTML. We will now cover some of the more common elements. If you're interested, you can see a [full list of elements here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element). Here's an empty JSBin to explore with as you read this.
+
+<a class="btn btn-primary jsbin-button" href="http://jsbin.com/pehuwe/1/edit?html,output" target="_blank">Open in JS Bin</a>
 
 ### Core Page Elements
 
 So every current webpage will have at least 5 key elements in them. Here's an example:
 
-```html
+```markup
 <!DOCTYPE html>
 <html>
 	<head>
@@ -101,8 +105,7 @@ So far we've explored, a few of the key elements in HTML, but there are many mor
 * `<s>` - **strikethrough** is used for <s>striking out text</s>.
 * `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, and `<h6>` are used to define 6 levels of headings in the document. `<h1>` is highest level heading and is often used for page titles that appear on the page. 
 
-
-<div style="background: yellow">TODO Example</div>
+<a class="btn btn-primary jsbin-button" href="http://jsbin.com/ladiqu/2/edit?html,output" target="_blank">Open in JS Bin</a>
 
 ### Core Formatting Elements
 
@@ -119,12 +122,67 @@ A `<span>` does not start a new line. By default, it behaves like many of the te
 
 To help explain this a little further, let's experiment with an example.
 
-<div style="background: yellow">TODO Example</div>
+<a class="btn btn-primary jsbin-button" href="http://jsbin.com/larafa/3/edit?html,output" target="_blank">Open in JS Bin</a>
 
-
-Wrapup
+Html Wrapup
 ------
 
 So hopefully by now, we have learned how to construct a very basic HTML document. We have learned some of the most basic elements that can be used in HTML documents and how those can be structured. There are a lot of other elements in the HTML and you can explore some of them [at this website](https://developer.mozilla.org/en-US/docs/Web/HTML/Element). 
+
+
+SVG
+---
+
+SVG is a language very similar to HTML, but unlike HTML is specifically meant for creating graphics. Thankfully, it can live within HTML as a special element. The `SVG` element. This would look like this:
+
+```markup
+<svg width="100" height="100">
+	... SVG elements ...
+<svg>
+```
+
+Notice that this has two attributes for width and height. It is important to explicitly specify both of these attributes and give the SVG element a size. Unlike HTML elements, it will not auto-adjust the size with the content inside of it. In this case, it will be 100 pixels wide and 100 pixels tall. 
+
+So two of the key elements in SVG that you'll use are the `circle` and the `rect`. 
+
+Bar Attributes (The most important ones)
+<table class="table">
+	<thead>
+		<tr><th>Attribute Name</th><th>Description</th></tr>
+	</thead>
+	<tbody>
+		<tr><td>x</td><td>X coordinate</td></tr>
+		<tr><td>y</td><td>Y coordinate</td></tr>
+		<tr><td>width</td><td>Width of rectangle</td></tr>
+		<tr><td>height</td><td>Height of rectangle</td></tr>
+		<tr><td>fill</td><td>Fill color name or HTML RGB notation</td></tr>
+	</tbody>
+</table>
+
+So to insert an SVG bar, the full code in HTML would look like this:
+```markup
+<svg width="50" height="50">
+	<rect x="10" y="10" width="30" height="10" fill="blue" />
+</svg>
+```
+
+
+Circle Attributes
+<table class="table">
+	<thead>
+		<tr><th>Attribute Name</th><th>Description</th></tr>
+	</thead>
+	<tbody>
+		<tr><td>cx</td><td>CX coordinate</td></tr>
+		<tr><td>cy</td><td>CY coordinate</td></tr>
+		<tr><td>r</td><td>Radius</td></tr>
+		<tr><td>fill</td><td>Fill color name or HTML RGB notation</td></tr>
+	</tbody>
+</table>
+
+
+So let's try this example. Here's a pre-prepared one with the rectangle. The SVG element is 100x100 pixels, so you should add a circle in the center at (50,50) with a radius of 25 and a red fill color. 
+
+<a class="btn btn-primary jsbin-button" href="http://jsbin.com/zosoki/2/edit?html,output" target="_blank">Open in JS Bin</a>
 
 
