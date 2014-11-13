@@ -118,7 +118,7 @@ You can scroll up through the JavaScript to find how
 these are defined.
 
 
-6. Adding a legend
+5. Adding a legend
 ---------------
 
 The chart as is stands is pictured below:
@@ -188,7 +188,7 @@ The highlighted `.style()` the `.text()` lines are what
 actually produce the color and text labels from the car origins data.
 
 
-7. Another legend
+6. Another legend
 --------------
 
 We also want to clearly explain what the size of dots means.
@@ -225,7 +225,7 @@ The only new thing here is that we have added a `legendOffset` to start
 drawing this legend below the first legend.
 
 
-8. Interactivity
+7. Interactivity
 -------------
 
 Let's add a little bit of interactivity so that we can see how
