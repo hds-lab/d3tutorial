@@ -205,7 +205,7 @@ fav.innerHTML = "My new favorite!"
 
 Let's see how this would work in practice.
 
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/pohoxi/2/edit?html,js,output" target="_blank">Open in JS Bin</a>
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/pohoxi/2/edit?html,js,output">Open in JS Bin</a>
 
 
 Modifying SVG styles from JavaScript
@@ -217,10 +217,69 @@ Another thing you might want to do is change some colors. Here's a quick activit
 * Instead of `innerHTML` you'll be changing `style.fill`
 * `style.fill` takes a color name _as a string_ like `"red"` or `"blue"`.
 
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/gaguca/3/edit?html,js,output" target="_blank">Open in JS Bin</a>
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/gaguca/3/edit?html,js,output">Open in JS Bin</a>
 
 
 
 Finally, D3!
 ------------
+
+One of the main reasons to use D3 is the adding new elements to the HTML page. It's a first step at creating dynamic and interactive visualizations. Remember adding the SVG element to the HTML page from the HTML tutorial? The HTML should look like this: 
+
+```markup
+<svg width="100" height="100">
+	... SVG elements ...
+<svg>
+```
+
+
+To do this in D3, we use a combination of functions. We can do this:
+
+```javascript
+	var mysvg = d3.select("body").append("svg")
+		.attr("width", "100")
+		.attr("height", "100")
+```
+
+Programmatically adding a circle
+---------------------------------
+
+So let's break that down. So the "d3." means that this is function from the d3 library. The `select` call finds and returns the specified element. In this case, we're asking for the body element. We then `append` a new element with the tag name "svg". Then on that SVG element we set 2 attributes, the width and the height -- both to 100 pixels. The resulting SVG element is stored in the `mysvg` variable. In this case, it's important that we store this because then we can use it to append elements to that element.
+
+
+So now it's your turn. Using this basic framework. Add a circle at (25,25) with a radius of 10 to the svg element in JavaScript. This JSBin has created the SVG element already and stored it in the `svg` variable. 
+
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/tohiqu/2/edit?html,js,output">Open in JS Bin</a>
+
+
+Events
+------
+
+So now we can programmatically add elements, but how do we make this interactive? In JavaScript, we have the notion of events. They are certain types of interactions that occur that you can attach functions. When the event occurs on the specified element, your function will be called, and you can perform some action to change it. You can also read more about the types of events at [MDN's list of events](https://developer.mozilla.org/en-US/docs/Web/Events)
+
+You can attach a piece of code like this:
+
+```javascript
+
+	function onClickFn(ev) {
+		d3.select(this).style("background", "red");
+	}
+
+	var svg = d3.select("svg");
+
+	svg.on("click", onClickFn);
+```
+
+This code assumes you have already created an SVG element. It then finds the SVG element within the page. It then makes a call to `on` which is the d3 function to attach a function for an event. The first argument you pass is the type of event, in this case it's the "click" handler. When the user clicks on the SVG element the onClickFn function is called. In the function, there is something special happening. Notice the `d3.select(this)`. When a function is called as an event, the element that triggered the event is passed in the variable `this`. So we select that object with d3 and then set the background color to red. 
+
+So now it's your turn. This is a continuation of the last example, add a function that changes the `fill` color to be "orange" when the circle is clicked. 
+
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/tohiqu/12/edit?html,js,output">Open in JS Bin</a>
+
+So now you've touched on creating element in D3 and doing some basic forms of interaction. If you got stuck on the last example, here's the final version for you to see what might have went wrong:
+
+
+
+
+
 
