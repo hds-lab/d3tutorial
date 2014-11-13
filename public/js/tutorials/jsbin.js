@@ -143,7 +143,10 @@
 
     //Make normal links and jsbin buttons jump out
     tutorial.find('a').not('.btn').attr('target', '_blank');
-    buttons.attr('target', '_blank');
+
+    buttons.attr('target', '_blank')
+      .removeClass("btn-primary")
+      .addClass('btn-default');
 
     var side_by_side = jsbin.is(":visible");
 
