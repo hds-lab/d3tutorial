@@ -66,7 +66,7 @@ Common Elements
 
 Paragraphs are just one of the many elements in HTML. We will now cover some of the more common elements. If you're interested, you can see a [full list of elements here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element). Here's an empty JSBin to explore with as you read this.
 
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/pehuwe/1/edit?html,output" target="_blank">Open in JS Bin</a>
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/pehuwe/1/edit?html,output">Open in JS Bin</a>
 
 ### Core Page Elements
 
@@ -105,7 +105,7 @@ So far we've explored, a few of the key elements in HTML, but there are many mor
 * `<s>` - **strikethrough** is used for <s>striking out text</s>.
 * `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, and `<h6>` are used to define 6 levels of headings in the document. `<h1>` is highest level heading and is often used for page titles that appear on the page. 
 
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/ladiqu/2/edit?html,output" target="_blank">Open in JS Bin</a>
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/ladiqu/2/edit?html,output">Open in JS Bin</a>
 
 ### Core Formatting Elements
 
@@ -122,7 +122,7 @@ A `<span>` does not start a new line. By default, it behaves like many of the te
 
 To help explain this a little further, let's experiment with an example.
 
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/larafa/3/edit?html,output" target="_blank">Open in JS Bin</a>
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/larafa/3/edit?html,output">Open in JS Bin</a>
 
 Html Wrapup
 ------
@@ -183,6 +183,6 @@ Circle Attributes
 
 So let's try this example. Here's a pre-prepared one with the rectangle. The SVG element is 100x100 pixels, so you should add a circle in the center at (50,50) with a radius of 25 and a red fill color. 
 
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/zosoki/2/edit?html,output" target="_blank">Open in JS Bin</a>
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/zosoki/2/edit?html,output">Open in JS Bin</a>
 
 

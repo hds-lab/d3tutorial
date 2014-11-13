@@ -50,7 +50,7 @@ Here are the steps we are skipping:
 3. Defining scales for the data fields.
 4. Drawing the chart axes.
 
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/8/edit?js,output" target="_blank">Open Initial Setup in JS Bin</a>
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/8/edit?js,output">Open Initial Setup in JS Bin</a>
 
 You can review the code for these in the JavaScript panel to the right, if you wish.
 We have also provided some CSS to make the chart look nice, but we won't go into it here.
@@ -98,7 +98,7 @@ dots.exit().remove();
 Now there are dots being rendered, but they don't look like anything.
 They have default size, color, and position.
 
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/9/edit?js,output" target="_blank">Open in JS Bin</a>
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/9/edit?js,output">Open in JS Bin</a>
 
 
 5. Mapping to visual attributes
@@ -121,7 +121,7 @@ that we are using here (`radius`, `x`, `y`, and `color`).
 You can scroll up through the JavaScript to find how
 these are defined.
 
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/4/edit?js,output" target="_blank">Open in JS Bin</a>
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/4/edit?js,output">Open in JS Bin</a>
 
 
 6. Adding a legend
@@ -190,7 +190,7 @@ A lot of that was just moving stuff around to make it look good.
 The highlighted `.style()` the `.text()` lines are what
 actually produce the color and text labels from the car origins data.
 
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/5/edit?js,output" target="_blank">Open in JS Bin</a>
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/5/edit?js,output">Open in JS Bin</a>
 
 
 7. Another legend
@@ -226,7 +226,7 @@ weights.append("text")
 The only new thing here is that we have added a `legendOffset` to start
 drawing this legend below the first legend.
 
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/10/edit?js,output" target="_blank">Open in JS Bin</a>
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/10/edit?js,output">Open in JS Bin</a>
 
 
 8. Interactivity
@@ -289,4 +289,4 @@ The visualization of the cars dataset is complete. Below is a live copy:
 
 <iframe class="embed-visualization" height="430" width="530" src="resources/cars/cars.html"></iframe>
 
-<a class="btn btn-primary jsbin-button" href="http://jsbin.com/xexezo/11/edit?js,output" target="_blank">Open in JS Bin</a>
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/11/edit?js,output">Open in JS Bin</a>
