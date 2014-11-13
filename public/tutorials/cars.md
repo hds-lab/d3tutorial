@@ -50,7 +50,7 @@ Here are the steps we are skipping:
 3. Defining scales for the data fields.
 4. Drawing the chart axes.
 
-<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/8/edit?js,output">Open Initial Setup in JS Bin</a>
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/8/edit?js,output">Open in JS Bin</a>
 
 You can review the code for these in the JavaScript panel to the right, if you wish.
 We have also provided some CSS to make the chart look nice, but we won't go into it here.
@@ -59,10 +59,13 @@ We have also provided some CSS to make the chart look nice, but we won't go into
 4. Draw some dots
 -----------------
 
-Our first step will be to render a dot for each car, using SVG `<circle>` elements.
+Our first step will be to render a dot for each car, using SVG `<circle>` elements
+([documentation about circles](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/circle)).
+That means we are going through the data join again.
+It has the same *select*, *append*, *remove*, *update*
+steps here as it did in the bar chart visualization.
 
-[More about circles](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/circle)
-
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/8/edit?js,output">Open in JS Bin</a>
 
 First, we select all of the elements with class 'dot' (they are theoretical
 dat this point) and bind the cars data to them.
@@ -95,15 +98,8 @@ it is normal at this point to also remove any dots that you don't need:
 dots.exit().remove();
 ```
 
-Now there are dots being rendered, but they don't look like anything.
+Now, there are dots being rendered, but they don't look like anything.
 They have default size, color, and position.
-
-<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/9/edit?js,output">Open in JS Bin</a>
-
-
-5. Mapping to visual attributes
-----------------------------
-
 To actually see our dots, we need to set their position, size,
 and color.
 
@@ -121,8 +117,6 @@ that we are using here (`radius`, `x`, `y`, and `color`).
 You can scroll up through the JavaScript to find how
 these are defined.
 
-<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/4/edit?js,output">Open in JS Bin</a>
-
 
 6. Adding a legend
 ---------------
@@ -137,8 +131,11 @@ right corner. Here's what we're going for:
 
 ![Legend for car origin](resources/cars/origins_legend.png)
 
-We are going to use D3 to build this legend dynamically from some data,
+We are going to use D3 to build this legend dynamically,
 just like we are doing with our actual visualization.
+That means we are going to do *another* data join!
+
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/4/edit?js,output">Open in JS Bin</a>
 
 The data for the "legend visualization" will be the list of
 car origins (`['US', 'Japan', 'Europe']`), which we can obtain
@@ -190,13 +187,14 @@ A lot of that was just moving stuff around to make it look good.
 The highlighted `.style()` the `.text()` lines are what
 actually produce the color and text labels from the car origins data.
 
-<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/5/edit?js,output">Open in JS Bin</a>
-
 
 7. Another legend
 --------------
 
 We also want to clearly explain what the size of dots means.
+
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/5/edit?js,output">Open in JS Bin</a>
+
 This mostly similar to the legend above:
 
 ```javascript
@@ -210,23 +208,21 @@ var weights = chart.selectAll('.legend.weight')
   .attr('transform', function(d, i) { return "translate(0, " + (legendOffset + i * 20) + ")"; });
 
 weights.append("circle")
-      .attr("cx", graphWidth - 9)
-      .attr("cy", 10)
-      .attr("r", radius)
-      .style("fill", 'gray');
+  .attr("cx", graphWidth - 9)
+  .attr("cy", 10)
+  .attr("r", radius)
+  .style("fill", 'gray');
 
 weights.append("text")
-      .attr("x", graphWidth - 24)
-      .attr("y", 9)
-      .attr("dy", ".35em")
-      .style("text-anchor", "end")
-      .text(function(d) { return d + " lbs"; });
+  .attr("x", graphWidth - 24)
+  .attr("y", 9)
+  .attr("dy", ".35em")
+  .style("text-anchor", "end")
+  .text(function(d) { return d + " lbs"; });
 ```
 
 The only new thing here is that we have added a `legendOffset` to start
 drawing this legend below the first legend.
-
-<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/10/edit?js,output">Open in JS Bin</a>
 
 
 8. Interactivity
@@ -234,6 +230,8 @@ drawing this legend below the first legend.
 
 Let's add a little bit of interactivity so that we can see how
 to listen and respond to mouse events with D3.
+
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/10/edit?js,output">Open in JS Bin</a>
 
 As you'll see if you move your mouse over the dots and the color legend,
 we have already added code to make the elements brighten when
@@ -282,11 +280,13 @@ dots.on('mouseover', function(d) {
 });
 ```
 
+Here we go:
+
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/11/edit?js,output">Open in JS Bin</a>
+
 Congratulations!
 ---------------
 
 The visualization of the cars dataset is complete. Below is a live copy:
 
 <iframe class="embed-visualization" height="430" width="530" src="resources/cars/cars.html"></iframe>
-
-<a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/11/edit?js,output">Open in JS Bin</a>

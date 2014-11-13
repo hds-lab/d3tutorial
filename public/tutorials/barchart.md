@@ -330,7 +330,7 @@ Enough theory. Let's go through these 5 steps with our bar chart.
 
 <a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/69/edit?js,output">Open in JS Bin</a>
 
-Add the following code:
+**Steps 1 and 2:** Add the following code:
 
 ```javascript
 var bars = chart.selectAll('rect.bar')
@@ -343,7 +343,7 @@ the page yet. They are purely theoretical rectangles (**step 1**).
 
 The second line joins this selection against our hashtag dataset (**step 2**).
 
-On to **step 3**. We know there are 20 hashtags in our dataset, but there
+**Step 3:** We know there are 20 hashtags in our dataset, but there
 are 0 (zero) `<rect>` elements in our selection. Therefore, we
 will ask D3 to create these missing elements:
 
@@ -356,7 +356,7 @@ bars.enter()
 The key to this step is the `enter()` function, which roughly
 translates to "do this for every excess data point".
 
-Now, for **step 4**, it just so happens that we do not have *any*
+**Step 4:** It just so happens that we do not have *any*
 excess bars to delete. However, this is how we would ask D3 to do it:
 
 ```javascript
@@ -368,7 +368,7 @@ Almost done. We now have `<rect>` elements on the visualization
 (you can find them in the inspector), but we dont't see them
 because we haven't set their position and size.
 
-Add this last bit of code to accomplish **step 5**:
+**Step 5:** Add this last crucial bit of code:
 
 ```javascript
 bars.attr('x', 0)
@@ -383,8 +383,8 @@ bars.attr('x', 0)
 
 Let's break that down into sections.
 
-The first call, `.attr('x', 0)` just ensures
-that the left edge of each rectangle is at zero.
+The first line, `.attr('x', 0)` just ensures
+that the left edge of each rectangle is at zero pixels.
 
 Next, we set the `y` attribute with `.attr('y', function(d) {...})`.
 D3 goes through every element and calls the provided function
@@ -399,6 +399,7 @@ to make the bars look good. This is a magic D3 feature.
 Finally, we set the width of each bar using the x-scale to
 translate `num_tweets` into widths.
 
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/69/edit?js,output">Open in JS Bin</a>
 
 The End
 -------
@@ -408,4 +409,3 @@ Below is a live copy:
 
 <iframe class="embed-visualization" height="430" width="530" src="resources/barchart/barchart.html"></iframe>
 
-<a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/69/edit?js,output">Open in JS Bin</a>
