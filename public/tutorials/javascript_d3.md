@@ -96,8 +96,6 @@ then you'll get "53". This can get pretty confusing, but remember that strings a
 "Javascript is pretty" + " easy"
 ```
 
-<div style="background: yellow">TODO: Move this to an example?</div>
-<div style="background: yellow">TODO: Conversion</div>
 
 
 See Also: [JavaScript data types and data structures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures)
@@ -114,7 +112,7 @@ var mynum = 5;
 ```
 
 Let's explore the above addition example but with variables. 
-<div style="background: yellow">TODO: Example</div>
+
 
 
 Functions
