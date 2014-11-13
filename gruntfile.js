@@ -86,15 +86,16 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('harpjson_setup', function(url) {
-
-    if (url === 0 || url === undefined) {
-      url = grunt.config('pkg').homepage;
-    }
+  grunt.registerTask('harpjson_setup', function() {
 
     var backed_up = false;
     var harpconf = grunt.config('harpconf');
-    if (harpconf.globals.baseUrl != url) {
+
+    //Make a new conf for deployment
+    var deployconf = _.cloneDeep(harpconf);
+    _.extend(deployconf.globals, deployconf.deploy);
+
+    if (!_.isEqual(deployconf, harpconf)) {
 
       if (grunt.file.exists('harp.json.bak')) {
         grunt.fail.fatal("Backup file harp.json.bak already exists!");
@@ -104,17 +105,13 @@ module.exports = function (grunt) {
       //Backup the old file
       grunt.file.copy('harp.json', 'harp.json.bak');
 
-      //Make a new conf
-      harpconf = _.cloneDeep(harpconf);
-      harpconf.globals.baseUrl = url;
-
       //Save the conf
-      grunt.file.write('harp.json', JSON.stringify(harpconf, undefined, 2));
+      grunt.file.write('harp.json', JSON.stringify(deployconf, undefined, 2));
       backed_up = true;
     }
 
     //Now build the dist folder
-    console.log("Building site for " + url);
+    console.log("Building site for " + deployconf.globals.baseUrl);
   });
 
   // load all grunt tasks matching the `grunt-*` pattern

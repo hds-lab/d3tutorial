@@ -8,6 +8,11 @@
       ["D3 Gallery", "https://github.com/mbostock/d3/wiki/Gallery"],
       ["JS Docs", "https://developer.mozilla.org/en-US/docs/Web/JavaScript"],
       ["SVG Docs", "https://developer.mozilla.org/en-US/docs/Web/SVG"]
-    ]
+    ],
+    "googleAnalytics": ""
+  },
+  "deploy": {
+    "baseUrl": "//scclab.github.io/d3tutorial",
+    "googleAnalytics": "UA-56713138-1"
   }
 }
