@@ -3,6 +3,8 @@
   .container
     h1 Introduction to D3
     p Get your feet wet with D3, a popular visualization library for the web.
+    p
+      a.btn.btn-default.btn-lg(href="tutorials/intro.html") Get started &raquo;
 
 .container
   .row
@@ -11,26 +13,40 @@
 
       ul.tutorial-list
         li
-          h3 HTML Tutorial
+          h4
+            a(href="tutorials/intro.html") Quick Introduction
+          p
+            | Rapid review of HTML and JS.
+            | For more background on web technology,
+            | try Codecademy's&nbsp;
+            a(href="http://www.codecademy.com/tracks/web") HTML
+            | &nbsp;and&nbsp;
+            a(href="http://www.codecademy.com/tracks/javascript") JavaScript
+            | &nbsp;courses.
+
+        li
+          h4
+            a(href="tutorials/barchart.html") Building a Bar Chart
+          p Make a simple bar chart using D3. Learn about scales and the "data join".
+
+        li
+          h4
+            a(href="tutorials/cars.html") Visualize the Cars Data
+          p Build a scatterplot about cars. Learn to represent data using color and size.
+
+      h3 Older tutorials
+      p These tutorials are from older iterations of this workshop.
+      ul.tutorial-list
+        li
+          h4
+            a(href="tutorials/html.html") HTML Tutorial
           p Get an introduction to HTML concepts.
-          a.btn.btn-default.btn-sm(href="tutorials/html.html") Get started &raquo;
 
         li
-          h3 JavaScript and D3
+          h4
+            a(href="tutorials/javascript_d3.html") JavaScript and D3
           p Basic JavaScript programming and introduction to D3 techniques.
-          a.btn.btn-default.btn-sm(href="tutorials/javascript_d3.html") Get started &raquo;
 
-        li
-          h3 Building a Bar Chart
-          p Make a simple bar chart using D3.
-          p Learn about scales and the "data join".
-          a.btn.btn-default.btn-sm(href="tutorials/barchart.html") Get started &raquo;
-
-        li
-          h3 Visualize the Cars Data
-          p Build a scatterplot about cars.
-          p Learn to represent data using color and size.
-          a.btn.btn-default.btn-sm(href="tutorials/cars.html") Get started &raquo;
 
     .col-md-6.about
       != partial('_blocks/about.md')
