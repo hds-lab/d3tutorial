@@ -39,9 +39,18 @@ main.tutorial {
     }
 
     h2 {
-      margin-top: 40px;
-      padding-top: 30px;
+      margin-top: 60px;
+      padding-top: 50px;
       border-top: 3px dashed #DDD;
+    }
+
+    h3 {
+      margin-top: 30px;
+    }
+
+    p {
+      margin-bottom: 10px;
+      margin-top: 10px;
     }
 
     .embed-visualization {
@@ -67,6 +76,49 @@ main.tutorial {
     .jsbin-side-by-side {
       @media (max-width: @jsbin-enabled-size) {
         display: none;
+      }
+    }
+
+    .special-box() {
+      .alert();
+      margin: 30px;
+
+      &::before {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+      }
+    }
+
+    //For explore boxes
+    .explore {
+      .special-box();
+      .alert-info();
+
+      &::before {
+        content: "Extra stuff to try";
+      }
+    }
+
+    .testing {
+      .special-box();
+      .alert-warning();
+
+      &::before {
+        content: "Make sure it works";
+      }
+    }
+
+    .table {
+      width: auto;
+      margin: 5px 0;
+      > tbody,
+      > thead {
+        > tr {
+          > th, > td {
+            border-top: none;
+          }
+        }
       }
     }
   }
@@ -100,7 +152,7 @@ main.tutorial {
   }
 
   pre[class*="language-"] {
-    margin: 20px 0;
+    margin: 30px;
   }
 
   .split-panel {
