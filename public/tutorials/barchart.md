@@ -5,9 +5,7 @@ In this tutorial, we will use the Cars dataset to build a simple bar chart.
 This will let us review some important D3 concepts, like
 scales and axes and the "data join".
 
-<div class="alert alert-danger">TODO: Replace with real screenshot"</div>
-
-![Final bar chart visualization](resources/twitter_barchart/barchart_visualization.png)
+![Final bar chart visualization](resources/barchart/barchart_visualization.png)
 
 This bar chart simply shows the weight of each car.
 
@@ -47,7 +45,7 @@ on the screen. Here are the basic steps we'll be following:
 5. For every car in the data:
     1. Draw an SVG `<rect>` element
     2. Set the `y` position
-    3. Set the width based on frequency
+    3. Set the width based on weight
 
 You can review the code for loading the CSV data
 in the JavaScript panel to the right.
@@ -61,8 +59,8 @@ In the following sections, we will go through each of the steps above.
 2. Create an SVG element
 ------------------------
 
-Let's **add an SVG element to the page** to hold our visualization.
-We also need to decide the size of the SVG when we create it.
+The first step is to add an SVG element to the page to hold our visualization.
+We also need to decide what size we want the SVG.
 
 <a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/1/edit?js,output">Open in JS Bin</a>
 
@@ -284,15 +282,15 @@ If you think about it, there is a lot of stuff that goes into
 axes. There are several lines and some labels, and they all have to get
 positioned correctly based on the data and the size you are drawing them.
 
-D3 provides special "axis rendering" utilities
-specifically for drawing axes. This can save you a ton of work.
-You just have to give it a scale (like you've already created), tell it
-whether it is drawing on the top, bottom, left, or right
-of your chart, and it does the rest for you.
-
 <a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/4/edit?js,output">Open in JS Bin</a>
 
-The code below initializes an axis "renderer":
+D3 provides special ["axis rendering" utilities](https://github.com/mbostock/d3/wiki/SVG-Axes).
+This can save you a ton of work.
+You just have to give it a scale (like the ones you've already created),
+tell it whether it is drawing on the top, bottom, left, or right
+of your chart, and it does the rest for you.
+Add the code below to initialize and store an axis renderer
+in the `xAxis` variable:
 
 ```javascript
 var xAxis = d3.svg.axis()
@@ -300,8 +298,8 @@ var xAxis = d3.svg.axis()
   .orient("top");
 ```
 
-We can then use the renderer to draw the SVG elements
-that make up the axis with this code:
+To actually use the renderer to draw the SVG elements making up
+the axis, we use this code:
 
 ```javascript
 svg.append("g")
@@ -309,11 +307,22 @@ svg.append("g")
   .call(xAxis);
 ```
 
-**But where is the axis?**
+This chain of calls does the following:
 
-You might see a small black line at the top of the SVG panel.
-If you use the debugger to inspect the SVG element, you'll see that
-it actually does contain new markup for the axis elements.
+1. Reuse the `svg` object we created at the beginning.
+2. Append a new `<g>` element to the `<svg>`.
+   Note that in SVG, the `<g>` or ["group" element](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/g)
+   is just a generic container for elements, a little like div in HTML.
+3. The call to `classed()` sets the class attribute on the `<g>` element.
+4. `call(xAxis)` renders the axis inside the `<g>`.
+
+#### But where is the axis?
+
+Even if you entered the above code correctly, not much will have
+changed on the output panel.
+
+However, you might notice a small black line at the top of the SVG.
+In fact, the SVG actually does contain the new markup for the axis elements.
 Unfortunately, they are off screen!
 
 Elements rendering in the wrong place is a common problem with D3.
@@ -323,14 +332,22 @@ around the outside of our visualization.
 
 ### Add margins
 
-We want to draw our visualization a little bit inside
+To get the axes to show, we need to draw our visualization a little bit inside
 the outside of the SVG element.
+
+![SVG Width and Height](resources/barchart/width_height.png)
+
+As the above illustration shows, we will add margins to the top, left, right, and bottom
+of the SVG element and draw the chart inside the new, smaller area.
+
 To do this, we need to *back up* a little bit and
 change the way we set up the visualization.
 
-<a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/67/edit?js,output">Open in JS Bin</a>
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/5/edit?js,output">Open in JS Bin</a>
 
-First, **find the code** where you start to define the x and y scales
+#### 1. Define the margins
+
+Find the code where you start to define the x and y scales
 (look for `var x = ...`). Right **before** that section, add the following:
 
 ```javascript
@@ -356,27 +373,321 @@ We will hang all of the visualization elements off this element.
 
 Now we need to update a few other things now as well:
 
-**Use graphWidth and graphHeight:** Look immediately below this, where you
-define the scales (`var x =` and `var y =`).
+#### 2. Scales should use graphWidth and graphHeight
 
+Look immediately below, where you
+define the scales (`var x =` and `var y =`).
 In this section, you must replace `width` and `height`
 with `graphWidth` and `graphHeight`, respectively.
 
-**Append to chart:** Further down, find the code where you draw the x-axis.
+#### 3. Append to chart, not svg
+
+Further down, find the code where you draw the x-axis.
 Instead of using `svg.append`, you should change it to `chart.append`.
 
-Finally, you should see your x-axis miraculously appear in view!
+<div class="testing">
+You should see your x-axis miraculously appear in view!
+</div>
 
+### Add the other axis yourself
 
-### Add the other axis
+Ok, now we are ready to add the y-axis.
 
-Ok, now we need to add the y-axis.
-The code for this is very similar to what we used for the x-axis, so why don't you try this yourself?
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/6/edit?js,output">Open in JS Bin</a>
 
-<a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/68/edit?js,output">Open in JS Bin</a>
+The code for this is *very* similar to what we used for the x-axis, so why don't you try this yourself?
 
 Note: you won't see a long black line for the y-axis like you do for the x-axis.
 This is because of some special CSS styles that we added to make the chart look better.
 
 If you get stuck, you can always click the JS Bin button in the next
 section to skip ahead to the answer.
+
+
+5. Draw some bars
+-----------------
+
+Ok, that was a lot of work just to add axis labels.
+It is finally time to draw some bars.
+
+Remember the outline for this step that we gave
+at the beginning:
+
+*For every car in the data:*
+
+1. Draw an SVG `<rect>` element
+2. Set the `y` position
+3. Set the width based on weight
+
+If you have programmed in other languages, this might
+seem like a place for a pretty straightforward for-loop.
+
+But that's just not how things are done in D3.
+D3 uses something called a *join* to loop over data
+and create or alter many elements at once.
+
+> If you are writing a loop with d3, you are probably doing it wrong.
+
+Here's the D3 way of rewriting the "algorithm" above:
+
+1. Select all the `<rect>` elements, **even if there aren't any yet**.
+2. *Bind* the cars data to the selection.
+3. If there are excess data points, create new `<rect>` elements as needed.
+4. If there are excess `<rect>` elements, delete them.
+5. Update the `y` position and width of the remaining `<rect>` elements.
+
+D3 is not the only language that works this way.
+You might feel D3's way of thinking about loops is
+somewhat similar to SQL, for example.
+
+You can read more about D3 joins here:
+
+* [Three Little Circles](http://strongriley.github.io/d3/tutorial/circle.html), an illustrative tutorial
+* [Thinking with Joins](http://bost.ocks.org/mike/join/), a more thorough explanation
+
+
+### Fine, draw me some bars
+
+Enough theory. Let's go through these 5 steps with our bar chart.
+
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/7/edit?js,output">Open in JS Bin</a>
+
+#### 1 & 2. Select and bind
+
+Add the following code:
+
+```javascript
+var bars = chart.selectAll('rect.bar')
+                .data(data);
+```
+
+The first line above asks D3 to select some rectangles (with class "bar").
+Note that there are **no such rectangles** anywhere on
+the page yet. They are purely theoretical rectangles (**step 1**)!
+
+Given the result of the selection,
+the second line binds this selection to our cars dataset (**step 2**).
+That means D3 goes through both the selection and the dataset
+and tries to **match up** selected elements to dataset rows (cars).
+
+#### 3. Create rects for unmatched cars
+
+We know there are 25 cars in our dataset, but there
+are 0 (zero) `<rect>` elements in our selection. Therefore, we
+will ask D3 to create these missing elements:
+
+```javascript
+bars.enter()
+    .append('rect')
+    .attr('class', 'bar');
+```
+
+The key to this step is the `enter()` function, which roughly
+translates to "do the following for every data point lacking a match".
+
+#### 4. Delete rects without matching cars
+
+It just so happens that we do not have *any*
+excess bars to delete. However, this is how we would ask D3 to do it:
+
+```javascript
+bars.exit()
+    .remove();
+```
+
+Almost done. We now have `<rect>` elements on the visualization
+but we don't see them because we haven't set their position and size
+(both default to zero).
+
+
+#### 5. Configure the bars based on the data
+
+Add the following:
+
+```javascript
+bars.attr('x', 0)
+    .attr('y', function(d) {
+      return y(d.model);
+    })
+    .attr('height', y.rangeBand())
+    .attr('width', function(d) {
+      return x(d.weight);
+    });
+```
+
+Let's break that down into sections:
+
+1. The `bars` variable contains all the bar elements with matching car data.
+2. The first line, `.attr('x', 0)` ensures
+   that the left edge of each rectangle is at zero pixels (the left edge of the chart).
+3. Set the vertical position of each bar with `.attr('y', function(d) {...})`.
+   D3 goes through every bar and calls the provided function.
+   Inside the function, the car bound to the current bar is given as the parameter `d`.
+   Now, we use the y-scale object we created before to translate the car's model name into a pixel position.
+4. Set the height of each bar using `.attr('height', y.rangeBand())`.
+   This relies on the [rangeBand magic](https://github.com/mbostock/d3/wiki/Ordinal-Scales#ordinal_rangeBand)
+   provided by D3 ordinal scales to pick some size will look good.
+5. Finally, set the width of each bar using the x-scale to translate `weight` into widths.
+
+<div class="testing">
+With that code added you should see a bar chart like the image below.
+
+![Final bar chart visualization](resources/barchart/barchart_visualization.png)
+</div>
+
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/8/edit?js,output">Open in JS Bin</a>
+
+<div class="explore">
+<ol>
+    <li>Add more margin on the left side of the chart to get the model names to show.</li>
+    <li>Modify the CSS for the bars. Set the 'fill' style to "red" instead of "steelblue".</li>
+    <li>After you parse the data from CSV, try sorting the **data** array by **weight** using JavaScript's
+        [Array.sort method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
+        Note that the data is currently sorted by year.
+    </li>
+</div>
+
+Below is a live copy of the final version:
+
+<iframe class="embed-visualization" height="430" width="530" src="resources/barchart/barchart.html"></iframe>
+
+
+Further exploration
+-----------------
+
+The examples below show off how you can tweak your D3 code to create
+crazy awesome visualizations. There are tons more on the D3 [Gallery](https://github.com/mbostock/d3/wiki/Gallery).
+
+<div class="alert alert-danger">The following may not be examples of good visualization design!</div>
+
+### Convert the bars into circles
+
+Why not draw circles instead of bars, and let the radius of the circle
+scale with car weight?
+
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/10/edit?js,output">Open in JS Bin</a>
+
+```javascript
+var r = d3.scale.linear()
+  .range([0, y.rangeBand()])
+  .domain([0, max_weight]);
+
+/* ... */
+
+bars.enter()
+    .append('circle')
+    .attr('class', 'bar');
+
+/* ... */
+
+bars.attr('cx', function(d) {
+      return x(d.weight);
+    })
+    .attr('cy', function(d) {
+      return y(d.model);
+    })
+    .attr('r', function(d) {
+      return r(d.weight);
+    });
+```
+
+### Show cylinders with color
+
+There are only 5 different types of cylinders in this dataset.
+Why not treat them as categorical data and display
+this with color?
+
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/12/edit?js,output">Open in JS Bin</a>
+
+```javascript
+var cylinders = data.map(function(d) {
+  return d.cylinders;
+});
+
+var color = d3.scale.category10()
+  .domain(cylinders);
+
+bars.attr('fill', function(d) {
+      return color(d.cylinders);
+    });
+```
+
+### Chart the average weight per year
+
+D3 includes some handy functions for aggregating and transforming
+data, include the [nest](https://github.com/mbostock/d3/wiki/Arrays#-nest) function.
+
+Using this, we can convert our per-car bar chart into a per-year bar chart
+and show the average weight in each year.
+
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/15/edit?js,output">Open in JS Bin</a>
+
+```javascript
+var avgYearWeight = d3.nest()
+  .key(function(d) {return d.year;})
+  .sortKeys(d3.ascending)
+  .rollup(function(g) {
+    return d3.mean(g,function(d) {
+      return d.weight;
+    });
+  })
+  .entries(data);
+
+var years = avgYearWeight.map(function(d) {
+  return d.key;
+});
+
+/* ... */
+
+var y = d3.scale.ordinal()
+  .domain(years)
+  .rangeRoundBands([ 0, graphHeight], 0.1);
+
+/* ... */
+
+bars.attr('x', 0)
+    .attr('y', function(d) {
+      return y(d.key);
+    })
+    .attr('height', y.rangeBand())
+    .attr('width', function(d) {
+      return x(d.values);
+    });
+```
+
+### Animate the bar widths
+
+D3 makes it stupidly easy to add transitions and animations.
+We only need two new lines to animate our bar entrances:
+
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/17/edit?js,output">Open in JS Bin</a>
+
+```javascript
+bars.enter()
+    .append('rect')
+    .attr('class', 'bar')
+    .attr('width', 0);            // this is new
+
+/* ... */
+
+bars.attr('x', 0)
+    .attr('y', function(d) {
+      return y(d.model);
+    })
+    .attr('height', y.rangeBand())
+    .transition()                 // this is new
+    .attr('width', function(d) {
+      return x(d.weight);
+    });
+```
+
+### Dynamically update with streaming data
+
+D3's way of building visualizations through data binding
+makes it surprisingly simple to update visualizations based on changing
+data, such as from streaming sources.
+
+Below is an example where cars are gradually added to the bar chart.
+
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/18/edit?js,output">Open in JS Bin</a>
+

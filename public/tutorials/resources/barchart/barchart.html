@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <meta charset="utf-8">
+  <style type="text/css">
+    body {
+      font: 10px sans-serif;
+    }
+
+    svg {
+      border: 1px solid #ddd;
+    }
+
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+    .bar {
+      fill: steelblue;
+      cursor: pointer;
+    }
+    .bar:hover {
+      fill: #6EA9DA;
+    }
+
+    .y.axis path {
+      display: none;
+    }
+
+    .area {
+      fill: steelblue;
+    }
+  </style>
+</head>
+<body>
+<script type="text/csv" id="cars">
+Model,Origin,Year,Cylinders,Horsepower,MPG,Weight
+amc ambassador dpl,US,70,8,190,15,3850
+chevrolet vega (sw),US,71,4,72,22,2408
+chevrolet vega,US,72,4,90,20,2408
+ford pinto runabout,US,72,4,86,21,2226
+mazda rx2 coupe,Japan,72,3,97,19,2330
+amc matador (sw),US,72,8,150,15,3892
+ford pinto (sw),US,72,4,86,22,2395
+dodge coronet custom,US,73,8,150,15,3777
+toyota carina,Japan,73,4,88,20,2279
+chevrolet vega,US,73,4,72,21,2401
+datsun 610,Japan,73,4,94,22,2379
+ford pinto,US,73,4,85,19,2310
+chevrolet chevelle malibu classic,US,74,6,100,16,3781
+buick century,US,75,6,110,17,3907
+chevroelt chevelle malibu,US,75,6,105,16,3897
+plymouth fury,US,75,6,95,18,3785
+amc matador,US,76,8,120,15.5,3962
+mercedes-benz 280s,Europe,76,6,120,16.5,3820
+chevrolet caprice classic,US,77,8,145,17.5,3880
+chevrolet caprice classic,US,79,8,130,17,3840
+mercury grand marquis,US,79,8,138,16.5,3955
+dodge st. regis,US,79,8,135,18.2,3830
+vw rabbit,Europe,80,4,76,41.5,2144
+mazda glc,Japan,80,4,65,46.6,2110
+vw pickup,Europe,82,4,52,44,2130
+</script>
+<script type="text/javascript" src="final_barchart.js"></script>
+</body>
+</html>
