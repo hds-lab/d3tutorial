@@ -1,13 +1,27 @@
-<!DOCTYPE html><html class="full-page"><head><meta charset="utf8"/><title>D3 Workshop</title><link rel="stylesheet" href="//scclab.github.io/d3tutorial/css/global.css"/><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700|Open+Sans:700,400,300,300italic,400italic,700italic"/><link rel="stylesheet" href="//scclab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.css"><link rel="stylesheet" href="//scclab.github.io/d3tutorial/js/prism/prism.css"></head><body><header><nav role="navigation" class="navbar navbar-inverse navbar-fixed-top"><div class="container-fluid"><div class="navbar-header"><button data-toggle="collapse" data-target="#navbar-top-collapse-1" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="//scclab.github.io/d3tutorial/" class="navbar-brand">D3 Workshop</a></div><div id="navbar-top-collapse-1" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><!--li<!--a(href="#{baseUrl}/help.html") Instructions-->--><li><a href="https://github.com/mbostock/d3/wiki/API-Reference" target="_blank">D3 Docs</a></li><li><a href="https://github.com/mbostock/d3/wiki/Gallery" target="_blank">D3 Gallery</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JS Docs</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank">SVG Docs</a></li></ul></div></div></nav></header><main class="tutorial"><div class="split-panel"><div class="left-col"><div class="tutorial-label"><span>Tutorial Instructions</span></div><div class="container-fluid"><article><h1>Building a Bar Chart</h1>
-<p>We&#39;ve just learned some of the basic features of D3
-for building HTML elements and processing data.
-In this tutorial, we will use some data that we&#39;ve loaded
-about Twitter hashtags to build a simple bar chart:</p>
+<!DOCTYPE html><html class="full-page"><head><meta charset="utf8"/><title>D3 Workshop</title><link rel="stylesheet" href="//scclab.github.io/d3tutorial/css/global.css"/><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700|Open+Sans:700,400,300,300italic,400italic,700italic"/><link rel="stylesheet" href="//scclab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.css"><link rel="stylesheet" href="//scclab.github.io/d3tutorial/js/prism/prism.css"></head><body><header><nav role="navigation" class="navbar navbar-inverse navbar-fixed-top"><div class="container-fluid"><div class="navbar-header"><button data-toggle="collapse" data-target="#navbar-top-collapse-1" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="//scclab.github.io/d3tutorial/" class="navbar-brand">D3 Workshop</a></div><div id="navbar-top-collapse-1" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><!--li<!--a(href="#{baseUrl}/help.html") Instructions-->--><li><a href="https://github.com/mbostock/d3/wiki/API-Reference" target="_blank">D3 Docs</a></li><li><a href="https://github.com/mbostock/d3/wiki/Gallery" target="_blank">D3 Gallery</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JS Docs</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank">SVG Docs</a></li></ul></div></div></nav></header><main class="tutorial"><div class="split-panel"><div class="left-col"><div class="tutorial-label"><span>Tutorial Instructions</span></div><div class="container-fluid"><article><h1>Build a Bar Chart</h1>
+<p>In this tutorial, we will use the Cars dataset to build a simple bar chart.
+This will let us review some important D3 concepts, like
+scales and axes and the &quot;data join&quot;.</p>
 <p><img src="resources/barchart/barchart_visualization.png" alt="Final bar chart visualization"></p>
-<p>This visualization just shows the number of times each hashtag
-was used over a given time interval.</p>
+<p>This bar chart simply shows the weight of each car.</p>
+<h2>1. The Cars Dataset</h2>
+<p>The &quot;Cars&quot; dataset used in this tutorial is a subset
+of the 1983 ASA Data Exposition dataset that is used in the <a href="http://courses.washington.edu/hcde511/">HCDE 511</a> course.</p>
+<p>You can <a href="resources/cars/carsExercise.xls">download the data</a> in Excel format, although
+it is not necessary to complete the tutorial.</p>
+<p>Every row in the data represents an individual type of car.
+The dataset includes the following fields:</p>
+<ul>
+<li>Model: the car&#39;s model name</li>
+<li>Origin: the country where the car is from</li>
+<li>Year: the year the car was manufactured</li>
+<li>Cylinders: the number of cylinders in the car&#39;s engine</li>
+<li>Horsepower: how powerful the car&#39;s engine is</li>
+<li>MPG: how many miles per gallon the car gets (fuel efficiency)</li>
+<li>Weight: how much the car weighs, in lbs.</li>
+</ul>
 <h2>1. Drawing a Visualization</h2>
-<p>How do we get from our hashtag data to a visualization?
+<p>How do we get from our cars data to a visualization?
 Once we&#39;ve loaded the data, we have to use D3 to draw a bunch of stuff
 on the screen. Here are the basic steps we&#39;ll be following:</p>
 <ol>
@@ -15,39 +29,75 @@ on the screen. Here are the basic steps we&#39;ll be following:</p>
 <li>Create an SVG element to hold the visualization.</li>
 <li>Define x and y scales.</li>
 <li>Draw the x and y axes and labels.</li>
-<li>For every hashtag in the data:<ol>
+<li>For every car in the data:<ol>
 <li>Draw an SVG <code>&lt;rect&gt;</code> element</li>
 <li>Set the <code>y</code> position</li>
-<li>Set the width based on frequency</li>
+<li>Set the width based on weight</li>
 </ol>
 </li>
 </ol>
-<p>We already talked about loading data. You can review the code for
-this in the JavaScript panel to the right.</p>
-<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/64/edit?js,output">Open in JS Bin</a></p>
+<p>You can review the code for loading the CSV data
+in the JavaScript panel to the right.</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/1/edit?js,output">Open in JS Bin</a></p>
 <p>We have also already entered some CSS to make the bar chart look nice.
 In the following sections, we will go through each of the steps above.</p>
 <h2>2. Create an SVG element</h2>
-<p>Let&#39;s <strong>add an SVG element to the page</strong> to hold our visualization.
-We should also decide at this point how big the visualization will be.</p>
-<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/64/edit?js,output">Open in JS Bin</a></p>
-<p>Add the following to your JavaScript:</p>
+<p>The first step is to add an SVG element to the page to hold our visualization.
+We also need to decide what size we want the SVG.</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/1/edit?js,output">Open in JS Bin</a></p>
+<p>The <code>width</code> and <code>height</code> variables below will determine how big to draw the bar chart.
+Add the following to your JavaScript:</p>
 <pre><code class="language-javascript">var width = 500;
-var height = 400;
-var svg = d3.select(&#39;body&#39;)
+var height = 400;</code></pre>
+<p>Now, we ask d3 to create the SVG element and set its width and height:</p>
+<pre><code class="language-javascript">var svg = d3.select(&#39;body&#39;)
   .append(&#39;svg&#39;)
   .attr(&#39;width&#39;, width)
   .attr(&#39;height&#39;, height);</code></pre>
-<p>This code uses <code>d3.select</code> to locate the <code>&lt;body&gt;</code> HTML element
-and adds an <code>&lt;svg&gt;</code> element to it.</p>
-<p>It then sets the <code>&lt;svg&gt;</code> element&#39;s <code>width</code> and <code>height</code> attributes
-using variables.</p>
-<p>You should see a box with a thin gray border appear.</p>
+<h4>Chaining Syntax</h4>
+<p>The snippet above shows <em>chaining</em>, which is a pattern that most d3 programs use
+to get lots of stuff done in a small number of lines:</p>
+<ol>
+<li><p><code>d3.select</code> locates the <code>&lt;body&gt;</code> HTML element in the page and returns the
+<code>&lt;body&gt;</code> element as its result.</p>
+</li>
+<li><p>Onto that result, we <em>chain</em> a call to <code>append(&#39;svg&#39;)</code>.
+This creates an <code>&lt;svg&gt;</code> element as a child of the <code>&lt;body&gt;</code> element,
+and returns the <code>&lt;svg&gt;</code> that was created.</p>
+</li>
+<li><p>Onto the returned <code>&lt;svg&gt;</code> element, we chain two calls
+to <code>attr()</code> to set the <code>&lt;svg&gt;</code> element&#39;s
+<code>width</code> and <code>height</code> attributes using our two variables.</p>
+</li>
+</ol>
+<p>For more about chaining, try <a href="http://alignedleft.com/tutorials/d3/chaining-methods">this tutorial</a>.</p>
+<div class="testing">
+After adding the above code, you should see a box with a thin gray border appear
+in the output.
+</div>
+
+<div class="explore">
+Try changing the two width and height variables and check that you see the rendered SVG change sizes.
+</div>
+
+
 <h2>3. Define the x and y scales</h2>
 <p>How do we convert from numbers in the data to visual variables, like
 color, position, or size?</p>
-<p>D3 provides some <a href="https://github.com/mbostock/d3/wiki/Scales">scaling functions </a> to help us with this task.
-It defines the following major kinds of &quot;scales&quot;:</p>
+<h4>Example</h4>
+<ol>
+<li>We will map the <em>weight</em> variable in the cars dataset to bar <em>width</em>.</li>
+<li>The maximum weight in the dataset is <strong>3,962 lbs</strong>.</li>
+<li>We want the largest bar in the chart to be <strong>500 pixels</strong> wide.</li>
+<li>Then, to determine the bar width for a car of <strong>2,100 lbs.</strong>,
+we calculate <strong>500 * 2,100 / 3,962 = 265 pixels</strong>.</li>
+<li>Draw a bar that is 265 pixels wide.</li>
+</ol>
+<p>This math isn&#39;t especially complex, when your variables can be categorical, times, or
+when your visual variables might be colors, things can get more complicated.</p>
+<h4>D3 Scales</h4>
+<p>D3 provides some special utilities called <a href="https://github.com/mbostock/d3/wiki/Scales">scales</a>
+to make these conversions easier:</p>
 <ul>
 <li><a href="https://github.com/mbostock/d3/wiki/Quantitative-Scales">Quantitative Scales</a> for continuous values.<ul>
 <li>linear scales: <code>d3.scale.linear()</code></li>
@@ -66,93 +116,157 @@ It defines the following major kinds of &quot;scales&quot;:</p>
 </li>
 </ul>
 <p>In this tutorial, we&#39;ll use <code>d3.scale.linear()</code> to map from
-hashtag frequencies onto bar width. We&#39;ll also use <code>d3.scale.ordinal()</code>
-to map hashtags to their vertical position in the bar chart.</p>
+car <strong>weight</strong> onto bar width. We&#39;ll also use <code>d3.scale.ordinal()</code>
+to map car <strong>model</strong> to vertical position for the bar.</p>
 <h3>Find the domains</h3>
-<p>Before we can figure out how to map hashtag frequency onto
-bar width, we need to know the min and max hashtag frequencies in the data.
-D3 provides functions that make this easy.</p>
-<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/65/edit?js,console">Open in JS Bin</a></p>
+<p>Before we can figure out how to map car weight onto
+bar width, we need to know the maximum weight in the data.</p>
+<p>We already know it is 3,962 lbs., but D3 can calculate it for us.</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/2/edit?js,console">Open in JS Bin</a></p>
 <p>Add the following code:</p>
-<pre><code class="language-javascript">var max_tweets = d3.max(data, function(d) {
-  return d.num_tweets;
+<pre><code class="language-javascript">var max_weight = d3.max(data, function(d) {
+  return d.weight;
 });</code></pre>
-<p>The code above goes through all of the rows <code>d</code> in the data,
-and finds the value of the <code>num_tweets</code> field for each row.
-D3&#39;s <code>max()</code> function then returns the maximum value from that field (1571329).</p>
-<p>We can add similar code to find the <em>smallest</em> value of <code>num_tweets</code> (24729):</p>
-<pre><code class="language-javascript">var min_tweets = d3.min(data, function(d) {
-  return d.num_tweets;
+<p>This snippet shows how you can use D3 for <strong>iterating over data</strong>:</p>
+<ol>
+<li>The <code>d3.max</code> function goes through all of the cars in <code>data</code>.</li>
+<li>For each car, the provided &quot;accessor&quot; function is executed
+with the parameter <code>d</code> being the current car.</li>
+<li>The accessor returns the current car&#39;s weight.</li>
+<li>The <code>max</code> function returns the largest weight of all the cars.</li>
+</ol>
+<p>This pattern is common in JavaScript even beyond d3.
+For more examples, see the following documentation:</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">Array iteration with forEach()</a></li>
+<li><a href="http://api.jquery.com/jquery.each/">jQuery iteration with each()</a></li>
+<li><a href="https://github.com/mbostock/d3/wiki/Arrays">D3&#39;s array functions</a></li>
+</ul>
+<p>Each car in the dataset will be allocated one vertical position in the chart for its bar.
+The vertical position will be determined based on the car&#39;s model name, so before
+we continue we will also need to extract a list of all of the model names in the data:</p>
+<pre><code class="language-javascript">var model_names = data.map(function(d){
+  return d.model;
 });</code></pre>
-<p>Finally, we would like to have a list of all of the hashtags in the data,
-so we will use the <code>map()</code> function to extract this field:</p>
-<pre><code class="language-javascript">var tag_names = data.map(function(d){
-  return d.hashtag;
-});</code></pre>
+<p>The <code>map()</code> function is built in to JavaScript and is not d3-specific.
+See the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">documentation on MDN</a>
+for details.</p>
+<div class="testing">
+<ol>
+    <li>Open the <em>Console</em> view on JSBin and click <strong>Run</strong>.</li>
+    <li>Type <strong>max_weight</strong> in the Console and press Enter. You should see the result <strong>3962</strong>.</li>
+    <li>For <strong>model_names</strong>, you should see an array of all the car models.</li>
+</div>
+
+<div class="explore">
+<ol>
+    <li>Calculate the maximum <strong>horsepower</strong> in the dataset (190).</li>
+    <li>In addition to the max, find the <strong>minimum</strong> weight - <em><a href="https://github.com/mbostock/d3/wiki/Arrays#d3_min">Hint</a></em>.</li>
+</ol>
+</div>
+
+
 <h3>Construct the scales</h3>
-<p>Now that we know the min and max of <code>num_tweets</code> and the
-hashtags in our data, we are ready to create D3 scales.</p>
-<p>Let&#39;s start with the x scale. The x scale should map
-from the domain <code>[0, max_tweets]</code> onto the range
-<code>[0, width]</code>.</p>
-<p>Note that we are <strong>not</strong> using <code>min_tweets</code> here
-because we want our bars to be based at zero.</p>
-<p>Add this:</p>
+<p>Now that we know the max of <code>weight</code> and the
+car models in our data, we are ready to create D3 scales
+that will help us draw our bars.</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/3/edit?js,output">Open in JS Bin</a></p>
+<p>Let&#39;s start by constructing the <strong>x scale</strong>.</p>
+<p><a href="https://github.com/mbostock/d3/wiki/Quantitative-Scales">D3 scales</a>
+are simply functions that map one set of values onto
+another set of values. Borrowing terms from algebra,
+the input values are called the <em>domain</em>,
+and the output values are called the <em>range</em>.</p>
+<p>In our case, the x scale will be a function that maps
+values from the domain of <code>[0, max_weight]</code> onto the range <code>[0, width]</code>.
+Add the following JavaScript to build the scale:</p>
 <pre><code class="language-javascript">var x = d3.scale.linear()
   .range([0, width])
-  .domain([0, max_tweets]);</code></pre>
-<p>The <code>d3.scale.linear()</code> function produces an object
-that we can actually call like a function.
-You can try entering the following commands in the Console
-window in JS Bin to see what you get:</p>
-<pre><code class="language-javascript">x(0)          //should return 0 (px)
-x(200000)     //should return 63.64 (px)
-x(max_tweets) //should return 500 (px)</code></pre>
-<p>Next, we will create an ordinal scale that maps hashtag
-names onto vertical positions. This will use
-a special D3 function <code>rangeRoundBands()</code> that
-is useful for ensuring your bars get spaced out correctly:</p>
+  .domain([0, max_weight]);</code></pre>
+<p>The <code>d3.scale.linear()</code> function returns a Scale object, but this
+object is actually callable just like a function.</p>
+<div class="testing">
+<p>Try entering the following commands into the Console window and check the result:</p>
+<table class="table table-condensed">
+    <tr><th>Command</th><th>Expected result</th>
+    <tr><td>x(0)</td><td>0 (pixels)</td></tr>
+    <tr><td>x(max_weight)</td><td>500</td></tr>
+    <tr><td>x(2100)</td><td>265.0176</td></tr>
+</table>
+</div>
+
+<div class="explore">
+Try changing the domain and range for the x scale and see how it affects
+the results above.
+</div>
+
+<p>Next, we will create an <em>ordinal</em> scale that maps car model
+names onto vertical positions for the bars.
+The ordinal scale divides the space between 0 and <code>height</code>
+up into the proper number of bins given number
+of car models we are going to visualize:</p>
 <pre><code class="language-javascript">var y = d3.scale.ordinal()
-  .domain(tag_names)
-  .rangeRoundBands([ 0, height], 0.1);</code></pre>
-<p>As with <code>x</code>, you can call <code>y</code> like a function to
-get the y-position for different hashtag bars.
-Try this in the Console:</p>
-<pre><code class="language-javascript">y(&quot;superbowl&quot;)  //should return 11 (px)
-y(&quot;baltimore&quot;)  //should return 258 (px)</code></pre>
+  .domain(model_names)
+  .rangeRoundBands([0, height], 0.1);</code></pre>
+<p>We are using a magic D3 function called <code>rangeRoundBands()</code> that
+ensures your bars get spaced out correctly. You can read more on the
+<a href="https://github.com/mbostock/d3/wiki/Ordinal-Scales#ordinal_rangeRoundBands">D3 documentation</a>.</p>
+<div class="testing">
+<p>You can call the y scale like a function to get the vertical position for different car models.</p>
+<p>In the Console, type <strong>y(&quot;ford pinto&quot;)</strong> and press Enter. You should see <strong>175</strong> (pixels).</p>
+</div>
+
+
 <h2>4. Draw the axes</h2>
-<p>Now we&#39;re ready to move on to drawing the axes.
-We will use the D3 scales we created above to draw
-the x and y axes in the visualization, along with axis labels.</p>
-<p>D3 provides a utility specifically for drawing axes.
-You give it a scale you&#39;ve already created, tell it
-whether it is drawing on the top, bottom, left, or right
-of your chart, and it does the rest.</p>
-<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/66/edit?js,output">Open in JS Bin</a></p>
-<p>The code below initializes an axis &quot;renderer&quot;:</p>
+<p>Now we&#39;re ready to draw the bar chart axes.
+If you think about it, there is a lot of stuff that goes into
+axes. There are several lines and some labels, and they all have to get
+positioned correctly based on the data and the size you are drawing them.</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/4/edit?js,output">Open in JS Bin</a></p>
+<p>D3 provides special <a href="https://github.com/mbostock/d3/wiki/SVG-Axes">&quot;axis rendering&quot; utilities</a>.
+This can save you a ton of work.
+You just have to give it a scale (like the ones you&#39;ve already created),
+tell it whether it is drawing on the top, bottom, left, or right
+of your chart, and it does the rest for you.
+Add the code below to initialize and store an axis renderer
+in the <code>xAxis</code> variable:</p>
 <pre><code class="language-javascript">var xAxis = d3.svg.axis()
   .scale(x)
   .orient(&quot;top&quot;);</code></pre>
-<p>We can then use the renderer to draw the SVG elements
-that make up the axis with this code:</p>
+<p>To actually use the renderer to draw the SVG elements making up
+the axis, we use this code:</p>
 <pre><code class="language-javascript">svg.append(&quot;g&quot;)
   .classed(&quot;x axis&quot;, true)
   .call(xAxis);</code></pre>
-<p><strong>But where is the axis?</strong></p>
-<p>You might see a small black line at the top of the SVG panel.
-If you use the debugger to inspect the SVG element, you&#39;ll see that
-it actually does contain new markup for the axis elements.
+<p>This chain of calls does the following:</p>
+<ol>
+<li>Reuse the <code>svg</code> object we created at the beginning.</li>
+<li>Append a new <code>&lt;g&gt;</code> element to the <code>&lt;svg&gt;</code>.
+Note that in SVG, the <code>&lt;g&gt;</code> or <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/g">&quot;group&quot; element</a>
+is just a generic container for elements, a little like div in HTML.</li>
+<li>The call to <code>classed()</code> sets the class attribute on the <code>&lt;g&gt;</code> element.</li>
+<li><code>call(xAxis)</code> renders the axis inside the <code>&lt;g&gt;</code>.</li>
+</ol>
+<h4>But where is the axis?</h4>
+<p>Even if you entered the above code correctly, not much will have
+changed on the output panel.</p>
+<p>However, you might notice a small black line at the top of the SVG.
+In fact, the SVG actually does contain the new markup for the axis elements.
 Unfortunately, they are off screen!</p>
 <p>Elements rendering in the wrong place is a common problem with D3.
 We&#39;ll fix that in the next step by adding some space
 around the outside of our visualization.</p>
 <h3>Add margins</h3>
-<p>We want to draw our visualization a little bit inside
-the outside of the SVG element.
-To do this, we need to <em>back up</em> a little bit and
+<p>To get the axes to show, we need to draw our visualization a little bit inside
+the outside of the SVG element.</p>
+<p><img src="resources/barchart/width_height.png" alt="SVG Width and Height"></p>
+<p>As the above illustration shows, we will add margins to the top, left, right, and bottom
+of the SVG element and draw the chart inside the new, smaller area.</p>
+<p>To do this, we need to <em>back up</em> a little bit and
 change the way we set up the visualization.</p>
-<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/67/edit?js,output">Open in JS Bin</a></p>
-<p>First, <strong>find the code</strong> where you start to define the x and y scales
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/5/edit?js,output">Open in JS Bin</a></p>
+<h4>1. Define the margins</h4>
+<p>Find the code where you start to define the x and y scales
 (look for <code>var x = ...</code>). Right <strong>before</strong> that section, add the following:</p>
 <pre><code class="language-javascript">var margins = {
   top: 20,
@@ -172,45 +286,49 @@ to the drawing. It also <em>transforms</em> the group element by shifting it
 left and down using the margin sizes we configured above.
 We will hang all of the visualization elements off this element.</p>
 <p>Now we need to update a few other things now as well:</p>
-<p><strong>Use graphWidth and graphHeight:</strong> Look immediately below this, where you
-define the scales (<code>var x =</code> and <code>var y =</code>).</p>
-<p>In this section, you must replace <code>width</code> and <code>height</code>
+<h4>2. Scales should use graphWidth and graphHeight</h4>
+<p>Look immediately below, where you
+define the scales (<code>var x =</code> and <code>var y =</code>).
+In this section, you must replace <code>width</code> and <code>height</code>
 with <code>graphWidth</code> and <code>graphHeight</code>, respectively.</p>
-<p><strong>Append to chart:</strong> Further down, find the code where you draw the x-axis.
+<h4>3. Append to chart, not svg</h4>
+<p>Further down, find the code where you draw the x-axis.
 Instead of using <code>svg.append</code>, you should change it to <code>chart.append</code>.</p>
-<p>Finally, you should see your x-axis miraculously appear in view!</p>
-<h3>Add the other axis</h3>
-<p>Ok, now we need to add the y-axis.
-The code for this is very similar to what we used for the x-axis, so why don&#39;t you try this yourself?</p>
-<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/68/edit?js,output">Open in JS Bin</a></p>
+<div class="testing">
+You should see your x-axis miraculously appear in view!
+</div>
+
+<h3>Add the other axis yourself</h3>
+<p>Ok, now we are ready to add the y-axis.</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/6/edit?js,output">Open in JS Bin</a></p>
+<p>The code for this is <em>very</em> similar to what we used for the x-axis, so why don&#39;t you try this yourself?</p>
 <p>Note: you won&#39;t see a long black line for the y-axis like you do for the x-axis.
 This is because of some special CSS styles that we added to make the chart look better.</p>
 <p>If you get stuck, you can always click the JS Bin button in the next
 section to skip ahead to the answer.</p>
 <h2>5. Draw some bars</h2>
-<p>Ok that was a lot of work just to add axis labels.
+<p>Ok, that was a lot of work just to add axis labels.
 It is finally time to draw some bars.</p>
 <p>Remember the outline for this step that we gave
 at the beginning:</p>
-<p><em>For every hashtag in the data:</em></p>
+<p><em>For every car in the data:</em></p>
 <ol>
 <li>Draw an SVG <code>&lt;rect&gt;</code> element</li>
 <li>Set the <code>y</code> position</li>
-<li>Set the width based on frequency</li>
+<li>Set the width based on weight</li>
 </ol>
 <p>If you have programmed in other languages, this might
 seem like a place for a pretty straightforward for-loop.</p>
-<p>But that&#39;s not how things are done in D3.
-D3 uses something called a <em>join</em> to accomplish looping over data
-and creating or altering many elements at once.</p>
+<p>But that&#39;s just not how things are done in D3.
+D3 uses something called a <em>join</em> to loop over data
+and create or alter many elements at once.</p>
 <blockquote>
-<p>The join is at the heart of what makes D3 powerful.
-  If you are writing a loop, you are probably doing it wrong.</p>
+<p>If you are writing a loop with d3, you are probably doing it wrong.</p>
 </blockquote>
 <p>Here&#39;s the D3 way of rewriting the &quot;algorithm&quot; above:</p>
 <ol>
-<li>Select all the <code>&lt;rect&gt;</code> elements, even if there aren&#39;t any yet.</li>
-<li>Bind the hashtag data to the selection.</li>
+<li>Select all the <code>&lt;rect&gt;</code> elements, <strong>even if there aren&#39;t any yet</strong>.</li>
+<li><em>Bind</em> the cars data to the selection.</li>
 <li>If there are excess data points, create new <code>&lt;rect&gt;</code> elements as needed.</li>
 <li>If there are excess <code>&lt;rect&gt;</code> elements, delete them.</li>
 <li>Update the <code>y</code> position and width of the remaining <code>&lt;rect&gt;</code> elements.</li>
@@ -223,59 +341,189 @@ somewhat similar to SQL, for example.</p>
 <li><a href="http://strongriley.github.io/d3/tutorial/circle.html">Three Little Circles</a>, an illustrative tutorial</li>
 <li><a href="http://bost.ocks.org/mike/join/">Thinking with Joins</a>, a more thorough explanation</li>
 </ul>
-<h3>Ok, now draw some bars</h3>
+<h3>Fine, draw me some bars</h3>
 <p>Enough theory. Let&#39;s go through these 5 steps with our bar chart.</p>
-<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/69/edit?js,output">Open in JS Bin</a></p>
-<p><strong>Steps 1 and 2:</strong> Add the following code:</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/7/edit?js,output">Open in JS Bin</a></p>
+<h4>1 &amp; 2. Select and bind</h4>
+<p>Add the following code:</p>
 <pre><code class="language-javascript">var bars = chart.selectAll(&#39;rect.bar&#39;)
                 .data(data);</code></pre>
 <p>The first line above asks D3 to select some rectangles (with class &quot;bar&quot;).
-Note that there are <em>no such rectangles</em> anywhere on
-the page yet. They are purely theoretical rectangles (<strong>step 1</strong>).</p>
-<p>The second line joins this selection against our hashtag dataset (<strong>step 2</strong>).</p>
-<p><strong>Step 3:</strong> We know there are 20 hashtags in our dataset, but there
+Note that there are <strong>no such rectangles</strong> anywhere on
+the page yet. They are purely theoretical rectangles (<strong>step 1</strong>)!</p>
+<p>Given the result of the selection,
+the second line binds this selection to our cars dataset (<strong>step 2</strong>).
+That means D3 goes through both the selection and the dataset
+and tries to <strong>match up</strong> selected elements to dataset rows (cars).</p>
+<h4>3. Create rects for unmatched cars</h4>
+<p>We know there are 25 cars in our dataset, but there
 are 0 (zero) <code>&lt;rect&gt;</code> elements in our selection. Therefore, we
 will ask D3 to create these missing elements:</p>
 <pre><code class="language-javascript">bars.enter()
     .append(&#39;rect&#39;)
     .attr(&#39;class&#39;, &#39;bar&#39;);</code></pre>
 <p>The key to this step is the <code>enter()</code> function, which roughly
-translates to &quot;do this for every excess data point&quot;.</p>
-<p><strong>Step 4:</strong> It just so happens that we do not have <em>any</em>
+translates to &quot;do the following for every data point lacking a match&quot;.</p>
+<h4>4. Delete rects without matching cars</h4>
+<p>It just so happens that we do not have <em>any</em>
 excess bars to delete. However, this is how we would ask D3 to do it:</p>
 <pre><code class="language-javascript">bars.exit()
     .remove();</code></pre>
 <p>Almost done. We now have <code>&lt;rect&gt;</code> elements on the visualization
-(you can find them in the inspector), but we dont&#39;t see them
-because we haven&#39;t set their position and size.</p>
-<p><strong>Step 5:</strong> Add this last crucial bit of code:</p>
+but we don&#39;t see them because we haven&#39;t set their position and size
+(both default to zero).</p>
+<h4>5. Configure the bars based on the data</h4>
+<p>Add the following:</p>
 <pre><code class="language-javascript">bars.attr(&#39;x&#39;, 0)
     .attr(&#39;y&#39;, function(d) {
-      return y(d.hashtag);
+      return y(d.model);
     })
     .attr(&#39;height&#39;, y.rangeBand())
     .attr(&#39;width&#39;, function(d) {
-      return x(d.num_tweets);
+      return x(d.weight);
     });</code></pre>
-<p>Let&#39;s break that down into sections.</p>
-<p>The first line, <code>.attr(&#39;x&#39;, 0)</code> just ensures
-that the left edge of each rectangle is at zero pixels.</p>
-<p>Next, we set the <code>y</code> attribute with <code>.attr(&#39;y&#39;, function(d) {...})</code>.
-D3 goes through every element and calls the provided function
-with hashtag data matched to the element as the parameter <code>d</code>.
-Inside that function, we use the y-scale object we created before
-to translate the hashtag into a position.</p>
-<p>The next line, <code>.attr(&#39;height&#39;, y.rangeBand())</code> sets the height
-of each bar to some size that the y-scale object thinks is going
-to make the bars look good. This is a magic D3 feature.</p>
-<p>Finally, we set the width of each bar using the x-scale to
-translate <code>num_tweets</code> into widths.</p>
-<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/69/edit?js,output">Open in JS Bin</a></p>
-<h2>The End</h2>
-<p>That&#39;s all we&#39;re going to do with this visualization.
-Below is a live copy:</p>
+<p>Let&#39;s break that down into sections:</p>
+<ol>
+<li>The <code>bars</code> variable contains all the bar elements with matching car data.</li>
+<li>The first line, <code>.attr(&#39;x&#39;, 0)</code> ensures
+that the left edge of each rectangle is at zero pixels (the left edge of the chart).</li>
+<li>Set the vertical position of each bar with <code>.attr(&#39;y&#39;, function(d) {...})</code>.
+D3 goes through every bar and calls the provided function.
+Inside the function, the car bound to the current bar is given as the parameter <code>d</code>.
+Now, we use the y-scale object we created before to translate the car&#39;s model name into a pixel position.</li>
+<li>Set the height of each bar using <code>.attr(&#39;height&#39;, y.rangeBand())</code>.
+This relies on the <a href="https://github.com/mbostock/d3/wiki/Ordinal-Scales#ordinal_rangeBand">rangeBand magic</a>
+provided by D3 ordinal scales to pick some size will look good.</li>
+<li>Finally, set the width of each bar using the x-scale to translate <code>weight</code> into widths.</li>
+</ol>
+<div class="testing">
+With that code added you should see a bar chart like the image below.
+
+<img src="resources/barchart/barchart_visualization.png" alt="Final bar chart visualization">
+</div>
+
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/8/edit?js,output">Open in JS Bin</a></p>
+<div class="explore">
+<ol>
+    <li>Add more margin on the left side of the chart to get the model names to show.</li>
+    <li>Modify the CSS for the bars. Set the &#39;fill&#39; style to &quot;red&quot; instead of &quot;steelblue&quot;.</li>
+    <li>After you parse the data from CSV, try sorting the <strong>data</strong> array by <strong>weight</strong> using JavaScript&#39;s
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">Array.sort method</a>.
+        Note that the data is currently sorted by year.
+    </li>
+</div>
+
+<p>Below is a live copy of the final version:</p>
 <iframe class="embed-visualization" height="430" width="530" src="resources/barchart/barchart.html"></iframe>
 
+
+<h2>Further exploration</h2>
+<p>The examples below show off how you can tweak your D3 code to create
+crazy awesome visualizations. There are tons more on the D3 <a href="https://github.com/mbostock/d3/wiki/Gallery">Gallery</a>.</p>
+<div class="alert alert-danger">The following may not be examples of good visualization design!</div>
+
+<h3>Convert the bars into circles</h3>
+<p>Why not draw circles instead of bars, and let the radius of the circle
+scale with car weight?</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/10/edit?js,output">Open in JS Bin</a></p>
+<pre><code class="language-javascript">var r = d3.scale.linear()
+  .range([0, y.rangeBand()])
+  .domain([0, max_weight]);
+
+/* ... */
+
+bars.enter()
+    .append(&#39;circle&#39;)
+    .attr(&#39;class&#39;, &#39;bar&#39;);
+
+/* ... */
+
+bars.attr(&#39;cx&#39;, function(d) {
+      return x(d.weight);
+    })
+    .attr(&#39;cy&#39;, function(d) {
+      return y(d.model);
+    })
+    .attr(&#39;r&#39;, function(d) {
+      return r(d.weight);
+    });</code></pre>
+<h3>Show cylinders with color</h3>
+<p>There are only 5 different types of cylinders in this dataset.
+Why not treat them as categorical data and display
+this with color?</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/12/edit?js,output">Open in JS Bin</a></p>
+<pre><code class="language-javascript">var cylinders = data.map(function(d) {
+  return d.cylinders;
+});
+
+var color = d3.scale.category10()
+  .domain(cylinders);
+
+bars.attr(&#39;fill&#39;, function(d) {
+      return color(d.cylinders);
+    });</code></pre>
+<h3>Chart the average weight per year</h3>
+<p>D3 includes some handy functions for aggregating and transforming
+data, include the <a href="https://github.com/mbostock/d3/wiki/Arrays#-nest">nest</a> function.</p>
+<p>Using this, we can convert our per-car bar chart into a per-year bar chart
+and show the average weight in each year.</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/15/edit?js,output">Open in JS Bin</a></p>
+<pre><code class="language-javascript">var avgYearWeight = d3.nest()
+  .key(function(d) {return d.year;})
+  .sortKeys(d3.ascending)
+  .rollup(function(g) {
+    return d3.mean(g,function(d) {
+      return d.weight;
+    });
+  })
+  .entries(data);
+
+var years = avgYearWeight.map(function(d) {
+  return d.key;
+});
+
+/* ... */
+
+var y = d3.scale.ordinal()
+  .domain(years)
+  .rangeRoundBands([ 0, graphHeight], 0.1);
+
+/* ... */
+
+bars.attr(&#39;x&#39;, 0)
+    .attr(&#39;y&#39;, function(d) {
+      return y(d.key);
+    })
+    .attr(&#39;height&#39;, y.rangeBand())
+    .attr(&#39;width&#39;, function(d) {
+      return x(d.values);
+    });</code></pre>
+<h3>Animate the bar widths</h3>
+<p>D3 makes it stupidly easy to add transitions and animations.
+We only need two new lines to animate our bar entrances:</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/17/edit?js,output">Open in JS Bin</a></p>
+<pre><code class="language-javascript">bars.enter()
+    .append(&#39;rect&#39;)
+    .attr(&#39;class&#39;, &#39;bar&#39;)
+    .attr(&#39;width&#39;, 0);            // this is new
+
+/* ... */
+
+bars.attr(&#39;x&#39;, 0)
+    .attr(&#39;y&#39;, function(d) {
+      return y(d.model);
+    })
+    .attr(&#39;height&#39;, y.rangeBand())
+    .transition()                 // this is new
+    .attr(&#39;width&#39;, function(d) {
+      return x(d.weight);
+    });</code></pre>
+<h3>Dynamically update with streaming data</h3>
+<p>D3&#39;s way of building visualizations through data binding
+makes it surprisingly simple to update visualizations based on changing
+data, such as from streaming sources.</p>
+<p>Below is an example where cars are gradually added to the bar chart.</p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/18/edit?js,output">Open in JS Bin</a></p>
 <a href="//scclab.github.io/d3tutorial/" class="btn btn-default btn-lg back-button">Back to tutorials</a></article></div><div class="tutorial-nav"><ul class="nav"></ul></div></div><div class="right-col"><div class="jsbin-placeholder"><p class="lead">JS Bin Loading...</p></div><div class="jsbin-container"></div></div></div></main><script src="//scclab.github.io/d3tutorial/vendor/jquery/jquery.min.js"></script><script src="//scclab.github.io/d3tutorial/vendor/bootstrap/js/bootstrap.min.js"></script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q || []).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
