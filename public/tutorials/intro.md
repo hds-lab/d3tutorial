@@ -122,12 +122,22 @@ Here's a table of some of the attributes:
 		<tr><td>r</td><td>radius</td></tr>
 		<tr><td>fill</td><td>Fill color name or HTML RGB notation</td></tr>
 		<tr><td>stroke</td><td>Stroke/Outline color name or HTML RGB notation</td></tr>
+		<tr><td>stroke-width</td><td>The width in pixels of the outline</td></tr>
 	</tbody>
 </table>
 
 
 <div class="testing">
 ![Blue Circle Result](resources/intro/blue_circle_result.png)
+</div>
+
+<div class="explore">
+Here's a couple of other things you can try:
+	<ul>
+		<li>Change the colors of the `stroke` and `stroke-width`.</li>
+		<li>Add a few lines to the image. [MDN Docs about the line element](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/line).</li>
+		<li>Create a face with the basic elements.</li>
+	</ul>
 </div>
 
 
@@ -183,10 +193,11 @@ To test, click on any of the circles. You should see something like this:
 
 <div class="explore">
 Here's a couple of other things you can try:
-<ul>
-<li>Set/remove the `stroke` (border) color on the `mouseenter` and `mouseout` events.</li>
-<li>
-</ul>
+	<ul>
+		<li>Move the circles when clicked.</li>
+		<li>Set/remove the `stroke` (border) color on the `mouseenter` and `mouseout` events.</li>
+		<li>Change the radius back when clicked a second time.</li>
+	</ul>
 </div>
 
 
