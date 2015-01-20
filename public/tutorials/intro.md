@@ -146,6 +146,8 @@ D3
 
 To make interactive visualzations, we have to use JavaScript to modify elements on the page. To simplify our lives, we'll use D3 to find specific elements and modify them. D3 uses a namespace like notation to hide all of its functionality. For example, all d3 functions begin with "d3". One of the first functions we'll find is `select` so to access this d3 function to help you find specific elements, we use ```d3.select```.  For example, `d3.select('circle')` will find the circle you just created. If you click on the `Console` button at the top right, you can test this yourself. You should see a lot of information displayed on the screen. 
 
+<a class="btn btn-default jsbin-button" href="http://jsbin.com/mopuwobobu/5/edit?html,js,output">Open in JS Bin</a>
+
 ###Finding specific elements
 
 Let's say you have 3 circles, and you only want to modify the middle one. How do you do that? The simplest way to do this is to add a special attribute called `id` to the 2nd circle. The value you give it is a string, and it must be unique in the entire document. 
@@ -171,7 +173,7 @@ If you want to select more than one element, you can use the `d3.selectAll` func
 
 ###Changing attributes
 
-One of the key things we'll be doing with D3 is setting and changing the attributes of these elements. For example, when creating a circle element, we need to set the position attributes (`cx` and `cy`)  as well as the radious (`r`). When making things interactive, you might simply want to change a value or add a new one. For example, if you want to set the color of the middle circle from the previous example, you would do:
+One of the key things we'll be doing with D3 is setting and changing the attributes of these elements. For example, when creating a circle element, we need to set the position attributes (`cx` and `cy`)  as well as the radius (`r`). When making things interactive, you might simply want to change a value or add a new one. For example, if you want to set the color of the middle circle from the previous example, you would do:
 
 ```javascript
 d3.select("#middle-circle").style("fill", "red")
@@ -180,8 +182,6 @@ d3.select("#middle-circle").style("fill", "red")
 ###Interactivity
 
 Now, let's change the elements when they're clicked. The following example has some code provided, and you need to add code to change the radius of the `circle` when clicked. The attribute for this is `r` and you can change the size to 15. To change an attribute in d3, you use the `attr` function on a selection.
-
-<a class="btn btn-default jsbin-button" href="http://jsbin.com/mopuwobobu/5/edit?html,js,output">Open in JS Bin</a>
 
 <div class="testing">
 To test, click on any of the circles. You should see something like this:
