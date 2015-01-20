@@ -26,6 +26,26 @@ main.tutorial {
     right: 0;
   }
 
+  &.big {
+    font-size: 20px;
+
+    pre {
+      font-size: 20px;
+    }
+
+    p {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    ul, ol {
+      li {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
   article {
     img {
       max-width: 100%;
@@ -141,6 +161,13 @@ main.tutorial {
     background: #EDEDED;
     border-bottom: #BFBFBF solid 1px;
     line-height: @tutorial-label-height;
+
+    .big-button {
+      position: absolute;
+      top: 4px;
+      right: 2px;
+      padding: 2px 7px;
+    }
   }
 
   .jsbin-placeholder {
