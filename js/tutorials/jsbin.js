@@ -80,6 +80,16 @@
     //TODO: build a nav menu
   };
 
+  var setupBigButton = function(page) {
+    var bigButton = page.find('.big-button');
+    bigButton.click(function() {
+      var active = !bigButton.is('.active');
+      page.toggleClass('big', active);
+      bigButton.toggleClass('active', active);
+      bigButton.blur();
+    })
+  };
+
   var tutorialId = function() {
     return window.location.pathname;
   };
@@ -156,6 +166,8 @@
 
     var page = $('main.tutorial');
     var tutorial = page.find('article');
+
+    setupBigButton(page);
 
     var jsbin = page.find('.jsbin-container');
     var buttons = tutorial.find('a.jsbin-button');
