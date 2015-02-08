@@ -2,7 +2,7 @@
   "globals": {
     "baseUrl": "",
     "name": "D3 Workshop",
-    "repository": "https://github.com/scclab/d3tutorial",
+    "repository": "https://github.com/hds-lab/d3tutorial",
     "header_links": [
       ["D3 Docs", "https://github.com/mbostock/d3/wiki/API-Reference"],
       ["D3 Gallery", "https://github.com/mbostock/d3/wiki/Gallery"],
@@ -12,7 +12,7 @@
     "googleAnalytics": ""
   },
   "deploy": {
-    "baseUrl": "//scclab.github.io/d3tutorial",
+    "baseUrl": "//hds-lab.github.io/d3tutorial",
     "googleAnalytics": "UA-56713138-1"
   }
 }
