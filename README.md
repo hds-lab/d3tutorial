@@ -86,7 +86,7 @@ To be safe, make sure your repository is clean -- no outstanding uncommitted cha
 To update the website (which is hosted on GitHub pages at http://hds-lab.github.io/d3tutorial,
 just run `grunt deploy`. This performs the following steps:
 
-1. Sets the `baseUrl` variable in `harp.json` to "http://scclab.github.io/d3tutorial"
+1. Sets the `baseUrl` variable in `harp.json` to "http://hds-lab.github.io/d3tutorial"
 2. Runs `harp compile -o dist` to build the site to the `dist` folder.
 3. Restore the original `harp.json` file.
 4. Commits the updated `dist` folder (if nothing has changed the task will fail here).

@@ -19,5 +19,5 @@ and, we hope, more useful.
 
 The site was developed with [Harp](http://harpjs.com/)
 and [Bootstrap](http://getbootstrap.com/).
-The source code is [on GitHub](http://github.com/scclab/d3tutorial).
+The source code is [on GitHub](http://github.com/hds-lab/d3tutorial).
 
