@@ -34,7 +34,7 @@ Inside the _opening tag_ of any element can be an ***attribute***. These look li
 ```
 First, this `<a>` tag is an anchor tag. This tag is used to create links in the document. 
 
-See the `href="http://www.google.com"`? That is an attribute. It is used to give the element some special properties, which are aptly named attributes. In this case, href contains the links destination. 
+See the `href="http://www.google.com"`? That is an attribute. It is used to give the element some special properties, which are aptly named attributes. These are generally key/value pairs. In this case, href (they key) contains the links destination (the value). 
 
 
 These are the basic building blocks of HTML. 
@@ -161,22 +161,28 @@ Let's say you have 3 circles, and you only want to modify the middle one. How do
 In D3, you `select` this specific element by using this `id` in the select statement. To tell D3 we're trying to find an element with a specific `id` we prefix the name with a hash symbol (#). So in this example, we'd use:
 
 ```javascript
-d3.select("#middle-circle")
+d3.select("#middle-circle");
 ```
 
 `d3.select` returns what is called a *selection*. This gives us the first element that matches the filter you give it as an argument. In the above example, we used `#middle-circle` which matches the circle with the `id` value of "middle-circle". 
 
 ####Selecting all filtered elements
 
-If you want to select more than one element, you can use the `d3.selectAll` function instead. 
+If you want to select more than one element, you can use the `d3.selectAll` function instead. For example, to select all circles we would use:
+
+```
+d3.selectAll("circle");
+```
+
+
 
 
 ###Changing attributes
 
-One of the key things we'll be doing with D3 is setting and changing the attributes of these elements. For example, when creating a circle element, we need to set the position attributes (`cx` and `cy`)  as well as the radius (`r`). When making things interactive, you might simply want to change a value or add a new one. For example, if you want to set the color of the middle circle from the previous example, you would do:
+One of the key things we'll be doing with D3 is setting and changing the attributes of these elements. For example, when editing or creating a circle element, we need to set the position attributes (`cx` and `cy`)  as well as the radius (`r`). When making things interactive, you might simply want to change a value or add a new one. For example, if you want to set the color of the middle circle from the previous example, you would do:
 
 ```javascript
-d3.select("#middle-circle").style("fill", "red")
+d3.select("#middle-circle").style("fill", "red");
 ```
 
 ###Interactivity
