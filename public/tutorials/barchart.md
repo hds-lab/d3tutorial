@@ -81,6 +81,15 @@ var svg = d3.select('body')
   .attr('height', height);
 ```
 
+This code will create an `svg` SVG element and append it within the `body` element, so it looks something like this:
+
+```markup
+<body>
+  ...
+  <svg width="500" height="500"></svg>
+</body>
+```
+
 #### Chaining Syntax
 
 The snippet above shows *chaining*, which is a pattern that most d3 programs use
