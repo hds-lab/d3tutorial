@@ -18,7 +18,7 @@
 <p>Inside the <em>opening tag</em> of any element can be an <strong><em>attribute</em></strong>. These look like this:</p>
 <pre><code class="language-markup">&lt;a href=&quot;http://www.google.com&quot;&gt;This link goes to google&lt;/a&gt;</code></pre>
 <p>First, this <code>&lt;a&gt;</code> tag is an anchor tag. This tag is used to create links in the document. </p>
-<p>See the <code>href=&quot;http://www.google.com&quot;</code>? That is an attribute. It is used to give the element some special properties, which are aptly named attributes. In this case, href contains the links destination. </p>
+<p>See the <code>href=&quot;http://www.google.com&quot;</code>? That is an attribute. It is used to give the element some special properties, which are aptly named attributes. These are generally key/value pairs. In this case, href (they key) contains the links destination (the value). </p>
 <p>These are the basic building blocks of HTML. </p>
 <h2>Core HTML Structure</h2>
 <p>Every current webpage will have at least 5 key elements: <code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;title&gt;</code>, and <code>&lt;body&gt;</code>. Here&#39;s an example:</p>
@@ -107,13 +107,14 @@ Here&#39;s a couple of other things you can try:
 &lt;circle cx=&quot;50&quot; cy=&quot;20&quot; r=&quot;10&quot; id=&quot;middle-circle&quot;/&gt;
 &lt;circle cx=&quot;80&quot; cy=&quot;20&quot; r=&quot;10&quot; /&gt;</code></pre>
 <p>In D3, you <code>select</code> this specific element by using this <code>id</code> in the select statement. To tell D3 we&#39;re trying to find an element with a specific <code>id</code> we prefix the name with a hash symbol (#). So in this example, we&#39;d use:</p>
-<pre><code class="language-javascript">d3.select(&quot;#middle-circle&quot;)</code></pre>
+<pre><code class="language-javascript">d3.select(&quot;#middle-circle&quot;);</code></pre>
 <p><code>d3.select</code> returns what is called a <em>selection</em>. This gives us the first element that matches the filter you give it as an argument. In the above example, we used <code>#middle-circle</code> which matches the circle with the <code>id</code> value of &quot;middle-circle&quot;. </p>
 <h4>Selecting all filtered elements</h4>
-<p>If you want to select more than one element, you can use the <code>d3.selectAll</code> function instead. </p>
+<p>If you want to select more than one element, you can use the <code>d3.selectAll</code> function instead. For example, to select all circles we would use:</p>
+<pre><code>d3.selectAll(&quot;circle&quot;);</code></pre>
 <h3>Changing attributes</h3>
-<p>One of the key things we&#39;ll be doing with D3 is setting and changing the attributes of these elements. For example, when creating a circle element, we need to set the position attributes (<code>cx</code> and <code>cy</code>)  as well as the radius (<code>r</code>). When making things interactive, you might simply want to change a value or add a new one. For example, if you want to set the color of the middle circle from the previous example, you would do:</p>
-<pre><code class="language-javascript">d3.select(&quot;#middle-circle&quot;).style(&quot;fill&quot;, &quot;red&quot;)</code></pre>
+<p>One of the key things we&#39;ll be doing with D3 is setting and changing the attributes of these elements. For example, when editing or creating a circle element, we need to set the position attributes (<code>cx</code> and <code>cy</code>)  as well as the radius (<code>r</code>). When making things interactive, you might simply want to change a value or add a new one. For example, if you want to set the color of the middle circle from the previous example, you would do:</p>
+<pre><code class="language-javascript">d3.select(&quot;#middle-circle&quot;).style(&quot;fill&quot;, &quot;red&quot;);</code></pre>
 <h3>Interactivity</h3>
 <p>Now, let&#39;s change the elements when they&#39;re clicked. The following example has some code provided, and you need to add code to change the radius of the <code>circle</code> when clicked. The attribute for this is <code>r</code> and you can change the size to 15. To change an attribute in d3, you use the <code>attr</code> function on a selection.</p>
 <div class="testing">
