@@ -3,6 +3,7 @@
     "baseUrl": "",
     "name": "D3 Workshop",
     "repository": "https://github.com/hds-lab/d3tutorial",
+    "clone_url": "git@github.com:hds-lab/d3tutorial.git",
     "header_links": [
       ["D3 Docs", "https://github.com/mbostock/d3/wiki/API-Reference"],
       ["D3 Gallery", "https://github.com/mbostock/d3/wiki/Gallery"],

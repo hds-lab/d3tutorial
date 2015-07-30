@@ -49,7 +49,7 @@ module.exports = function (grunt) {
     shell: {
       checkout_dist: {
         command: ["rm -rf <%= conf.dist %>",
-                  "git clone --single-branch --branch gh-pages <%= pkg.repository %> <%= conf.dist %>"
+                  "git clone --single-branch --branch gh-pages <%= harpconf.globals.clone_url %> <%= conf.dist %>"
         ].join(' && ')
       },
       commit_dist: {
