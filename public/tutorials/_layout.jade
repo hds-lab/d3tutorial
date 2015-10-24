@@ -13,13 +13,14 @@ html.full-page
         .left-col
           .tutorial-label
             span Tutorial Instructions
-            button.btn.btn-default.btn-sm.big-button(type="button") Big
+            button.btn.btn-default.btn-sm.big-button(type="button") Large Text
           .container-fluid
             article
               != yield
               a.btn.btn-default.btn-lg.back-button(href='#{baseUrl}/') Back to tutorials
 
           .tutorial-nav
+            div(id="nav-anchor")
             ul.nav
 
         .right-col
@@ -30,6 +31,7 @@ html.full-page
     != partial("../_partials/foot")
     script(src='#{baseUrl}/vendor/jquery.splitter/jquery.splitter.js')
     script(src='#{baseUrl}/vendor/jquery.cookie/jquery.cookie.js')
+    script(src='#{baseUrl}/vendor/jquery.scrollTo/jquery.scrollTo.js')
     script(src='#{baseUrl}/js/prism/prism.js')
     script(src='#{baseUrl}/js/tutorials/jsbin.js')
     script(src='#{baseUrl}/js/tutorials/embed.js')

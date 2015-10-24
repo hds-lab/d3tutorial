@@ -1,4 +1,4 @@
-HTML, SVG, CSS, and Javascript: A Love Story
+HTML, SVG, CSS, and Javascript: A Love Story <a id='html_intro' name='html_intro' class="anchor" ></a>
 ===================
 
 This tutorial assumes you already have a brief understanding of HTML, basic programming concepts, and JavaScript. The contents of this introduction should largely be a refresher. If not, consider reading through some of these resources first:
@@ -7,10 +7,10 @@ This tutorial assumes you already have a brief understanding of HTML, basic prog
 * [Our Javascript D3 Introduction](javascript_d3.html)
 * [Mozilla Developer Network - HTML Introduction](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Introduction)
 * [Mozilla Developer Network - JavaScript Resources](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
- 
 
 
-HTML: Tags, Elements, and Attributes Oh, My!
+
+HTML: Tags, Elements, and Attributes Oh, My! <a id='html_basic' name='html_basic' class="anchor" ></a>
 --------------------------------------
 
 ![Element components](resources/intro/element_breakdown.png)
@@ -42,7 +42,7 @@ These are the basic building blocks of HTML.
 
 
 
-Core HTML Structure
+Core HTML Structure <a id='core_html' name='core_html' class="anchor" ></a>
 ---------------
 
 Every current webpage will have at least 5 key elements: `<!DOCTYPE html>`, `<html>`, `<head>`, `<title>`, and `<body>`. Here's an example:
@@ -66,7 +66,7 @@ Every current webpage will have at least 5 key elements: `<!DOCTYPE html>`, `<ht
 * `<body>` is the core of the document itself. All of the visible HTML you see will appear within the `<body>` tag. 
 
 
-SVG
+SVG <a id='svg' name='svg' class="anchor" ></a>
 =======
 
 SVG is a language very similar to HTML, but unlike HTML is specifically meant for creating graphics. Thankfully, it can live within HTML as a special element. The `SVG` element. This would look like this:
@@ -141,10 +141,10 @@ Here's a couple of other things you can try:
 </div>
 
 
-D3
+D3 <a id='d3' name='d3' class="anchor" ></a>
 ========
 
-To make interactive visualzations, we have to use JavaScript to modify elements on the page. To simplify our lives, we'll use D3 to find specific elements and modify them. D3 uses a namespace like notation to hide all of its functionality. For example, all d3 functions begin with "d3". One of the first functions we'll find is `select` so to access this d3 function to help you find specific elements, we use ```d3.select```.  For example, `d3.select('circle')` will find the circle you just created. If you click on the `Console` button at the top right, you can test this yourself. You should see a lot of information displayed on the screen. 
+To make interactive visualzations, we have to use JavaScript to modify elements on the page. To simplify our lives, we'll use D3 to find specific elements and modify them. D3 uses a namespace like notation to hide all of its functionality. For example, all d3 functions begin with "d3". One of the first functions we'll find is `select` so to access this d3 function to help you find specific elements, we use ```d3.select```.  For example, `d3.select('circle')` will find the circle you just created. If you click on the `Console` button at the top right, you can type in `d3.select('circle')` for testing, and you should see a lot of information displayed on the screen.
 
 <a class="btn btn-default jsbin-button" href="http://jsbin.com/mopuwobobu/5/edit?html,js,output">Open in JS Bin</a>
 

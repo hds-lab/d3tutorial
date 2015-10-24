@@ -207,6 +207,17 @@ main.tutorial {
           bottom: 0;
           left: 0;
           right: 0;
+          padding-left: 150px;
+        }
+
+        .tutorial-nav {
+          overflow: auto;
+          position: absolute;
+          margin: 0;
+          top: @tutorial-label-height;
+          left: 0;
+          width: 150px;
+          padding: 5px;
         }
       }
 
@@ -251,6 +262,38 @@ main.tutorial {
   }
 
   .tutorial-nav {
-    display: none;
+    /* navigation */
+
+
+    .nav ul {
+        list-style-type:none;
+        margin:0;
+        padding:0;
+    }
+
+    .nav li {
+
+    }
+    a:link,a:active,a:visited{
+      text-decoration: none;
+      color: #428bca;
+    }
+
+    a:hover{
+      text-decoration: none;
+      color: #00c3cc;
+    }
+    a.nav-active {
+        color: #00c3cc;
+        text-decoration: none;
+    }
+
+  }
+
+  a.anchor{
+	display: block;
+	position: relative;
+	top: -80px;
+	visibility: hidden;
   }
 }

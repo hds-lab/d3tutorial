@@ -31,7 +31,7 @@ The dataset includes the following fields:
 - Weight: how much the car weighs, in lbs.
 
 
-1. Drawing a Visualization
+2. Drawing a Visualization
 --------------------------
 
 How do we get from our cars data to a visualization?
@@ -56,7 +56,7 @@ We have also already entered some CSS to make the bar chart look nice.
 In the following sections, we will go through each of the steps above.
 
 
-2. Create an SVG element
+3. Create an SVG element
 ------------------------
 
 The first step is to add an SVG element to the page to hold our visualization.
@@ -118,7 +118,7 @@ Try changing the two width and height variables and check that you see the rende
 </div>
 
 
-3. Define the x and y scales
+4. Define the x and y scales
 ----------------------------
 
 How do we convert from numbers in the data to visual variables, like
@@ -283,7 +283,7 @@ ensures your bars get spaced out correctly. You can read more on the
 </div>
 
 
-4. Draw the axes
+5. Draw the axes
 -----------------
 
 Now we're ready to draw the bar chart axes.
@@ -413,7 +413,7 @@ If you get stuck, you can always click the JS Bin button in the next
 section to skip ahead to the answer.
 
 
-5. Draw some bars
+6. Draw some bars
 -----------------
 
 Ok, that was a lot of work just to add axis labels.
