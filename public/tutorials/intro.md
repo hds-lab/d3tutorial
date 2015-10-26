@@ -1,14 +1,14 @@
-HTML, SVG, CSS, and Javascript: A Love Story <a id='html_intro' name='html_intro' class="anchor" ></a>
+HTML Review <a id='html_intro' name='html_intro' class="anchor" ></a>
 ===================
-
+<div class='bg-warning info-box'>
 This tutorial assumes you already have a brief understanding of HTML, basic programming concepts, and JavaScript. The contents of this introduction should largely be a refresher. If not, consider reading through some of these resources first:
-
-* [Our Html Introduction](html.html)
-* [Our Javascript D3 Introduction](javascript_d3.html)
-* [Mozilla Developer Network - HTML Introduction](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Introduction)
-* [Mozilla Developer Network - JavaScript Resources](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-
-
+<ul>
+<li> [Our Html Introduction](html.html) </li>
+<li> [Our Javascript D3 Introduction](javascript_d3.html) </li>
+<li> [Mozilla Developer Network - HTML Introduction](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Introduction) </li>
+<li> [Mozilla Developer Network - JavaScript Resources](https://developer.mozilla.org/en-US/docs/Web/JavaScript) </li>
+</ul>
+</div>
 
 HTML: Tags, Elements, and Attributes Oh, My! <a id='html_basic' name='html_basic' class="anchor" ></a>
 --------------------------------------
