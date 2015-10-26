@@ -52,7 +52,7 @@
     var leftPanel = splitPanel.children().first();
 
     var state = getTutorialState();
-    var split_percent = 40;
+    var split_percent = 50;
     if ('split_percent' in state) {
       split_percent = state.split_percent;
     }
@@ -76,17 +76,35 @@
 
   var setupNavMenu = function() {
     var tutorial = $('.tutorial');
-    var links = tutorial.find('h1,h2');
+    var tutorial_nav = $(".tutorial-nav ul.nav");
+    var links = tutorial.find('h2,h3');
     //TODO: build a nav menu
+    var current_node = tutorial_nav;
+    links.each(function(i){
+        var ele = $(this);
+        var ele_id = ele.find('a').attr('id');
+        if ( ele.is('h2') ){
+            current_node = $('<li class="h2nav-li"><ul><span class="h2nav nav-item"><a href="#' + ele_id + '">' + ele.text() + '</a></span></ul></li>');
+            tutorial_nav.append(current_node);
+        }
+        else if ( ele.is('h3') ){
+            tutorial_nav.find('ul:last').append('<li class="h3nav-li"><span class="h3nav nav-item"><a href="#' + ele_id + '">' + ele.text() + '</a></span></li>');
+        }
+    });
   };
 
   var setupBigButton = function(page) {
     var bigButton = page.find('.big-button');
     bigButton.click(function() {
-      var active = !bigButton.is('.active');
+      var active = !(bigButton.text() == 'Small Text');
       page.toggleClass('big', active);
-      bigButton.toggleClass('active', active);
       bigButton.blur();
+      if (active){
+        bigButton.text('Small Text');
+      }
+      else {
+        bigButton.text('Large Text');
+      }
     })
   };
 
@@ -160,9 +178,67 @@
     return "";
   };
 
+  var set_smooth_scrolling = function(){
+
+        $('.tutorial .container-fluid').scroll(function(){
+            var window_top = $('.tutorial .container-fluid').scrollTop() + 12; // the "12" should equal the margin-top value for nav.stick
+            var div_top = $('#nav-anchor').offset().top;
+                if (window_top > div_top) {
+                    $('.nav').addClass('stick');
+                } else {
+                    $('.nav').removeClass('stick');
+                }
+        });
+
+        $(".tutorial-nav ul.nav a").click(function(evn){
+            evn.preventDefault();
+
+            $('.tutorial .container-fluid').scrollTo(this.hash, this.hash);
+        });
+
+        /**
+         * This part handles the highlighting functionality.
+         * We use the scroll functionality again, some array creation and
+         * manipulation, class adding and class removing, and conditional testing
+         */
+        var aChildren = $(".tutorial-nav ul.nav a"); // find the a children of the list items
+        var aArray = []; // create the empty aArray
+        for (var i=0; i < aChildren.length; i++) {
+            var aChild = aChildren[i];
+            var ahref = $(aChild).attr('href');
+            aArray.push(ahref);
+        } // this for loop fills the aArray with attribute href values
+
+        $('.tutorial .container-fluid').scroll(function(){
+            var windowPos = $('.tutorial .container-fluid').scrollTop(); // get the offset of the window from the top of page
+            var windowHeight = $(window).height(); // get the height of the window
+            var docHeight = $('.tutorial .container-fluid').height();
+            var offset_const = -600;
+
+            for (var i=0; i < aArray.length; i++) {
+                var theID = aArray[i];
+                var divPos = $(theID).offset().top; // get the offset of the div from the top
+                var theNextID, divNextPos;
+                if ( i < aArray.length - 1 ){
+                  theNextID = aArray[i + 1];
+                  divNextPos = $(theNextID).offset().top; // get the offset of the next div from the top
+                }
+                if (divPos < 200 && ((i == aArray.length - 1) || (divNextPos > windowHeight * 0.2))) {
+                    $("a[href='" + theID + "']").parents("li:first").addClass("nav-active");
+                } else {
+                    $("a[href='" + theID + "']").parents("li:first").removeClass("nav-active");
+                }
+            }
+
+        });
+
+
+  };
+
   $(document).ready(function () {
 
     setupNavMenu();
+
 
     var page = $('main.tutorial');
     var tutorial = page.find('article');
@@ -227,6 +303,7 @@
     }
 
     setupTutorialScroll(tutorial);
+    set_smooth_scrolling();
   });
 
   if (typeof(hljs) !== 'undefined') {
