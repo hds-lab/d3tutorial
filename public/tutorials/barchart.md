@@ -10,7 +10,7 @@ scales and axes and the "data join".
 This bar chart simply shows the weight of each car.
 
 
-1. The Cars Dataset
+1. The Cars Dataset <a id='car_dataset' class="anchor" ></a>
 ----------------
 
 The "Cars" dataset used in this tutorial is a subset
@@ -31,7 +31,7 @@ The dataset includes the following fields:
 - Weight: how much the car weighs, in lbs.
 
 
-2. Drawing a Visualization
+2. Drawing a Visualization <a id='drawing_a_vis' class="anchor" ></a>
 --------------------------
 
 How do we get from our cars data to a visualization?
@@ -56,7 +56,7 @@ We have also already entered some CSS to make the bar chart look nice.
 In the following sections, we will go through each of the steps above.
 
 
-3. Create an SVG element
+3. Create an SVG element <a id='create_a_svg' class="anchor" ></a>
 ------------------------
 
 The first step is to add an SVG element to the page to hold our visualization.
@@ -90,7 +90,7 @@ This code will create an `svg` SVG element and append it within the `body` eleme
 </body>
 ```
 
-#### Chaining Syntax
+### Chaining Syntax <a id='chaining' class="anchor" ></a>
 
 The snippet above shows *chaining*, which is a pattern that most d3 programs use
 to get lots of stuff done in a small number of lines:
@@ -118,7 +118,7 @@ Try changing the two width and height variables and check that you see the rende
 </div>
 
 
-4. Define the x and y scales
+4. Define the x and y scales <a id='define_x_y' class="anchor" ></a>
 ----------------------------
 
 How do we convert from numbers in the data to visual variables, like
@@ -136,7 +136,7 @@ color, position, or size?
 This math isn't especially complex, when your variables can be categorical, times, or
 when your visual variables might be colors, things can get more complicated.
 
-#### D3 Scales
+### D3 Scales <a id='d3_scales' class="anchor" ></a>
 
 D3 provides some special utilities called [scales](https://github.com/mbostock/d3/wiki/Scales)
 to make these conversions easier:
@@ -156,7 +156,7 @@ car **weight** onto bar width. We'll also use `d3.scale.ordinal()`
 to map car **model** to vertical position for the bar.
 
 
-### Find the domains
+### Find the domains <a id='find_domains' class="anchor" ></a>
 
 Before we can figure out how to map car weight onto
 bar width, we need to know the maximum weight in the data.
@@ -217,7 +217,7 @@ for details.
 </div>
 
 
-### Construct the scales
+### Construct the scales <a id='construct_scales' class="anchor" ></a>
 
 Now that we know the max of `weight` and the
 car models in our data, we are ready to create D3 scales
@@ -283,7 +283,7 @@ ensures your bars get spaced out correctly. You can read more on the
 </div>
 
 
-5. Draw the axes
+5. Draw the axes <a id='draw_axes' class="anchor" ></a>
 -----------------
 
 Now we're ready to draw the bar chart axes.
@@ -339,7 +339,7 @@ We'll fix that in the next step by adding some space
 around the outside of our visualization.
 
 
-### Add margins
+### Add margins <a id='add_margins' class="anchor" ></a>
 
 To get the axes to show, we need to draw our visualization a little bit inside
 the outside of the SVG element.
@@ -398,7 +398,7 @@ Instead of using `svg.append`, you should change it to `chart.append`.
 You should see your x-axis miraculously appear in view!
 </div>
 
-### Add the other axis yourself
+### Add the other axis yourself <a id='other_axis' class="anchor" ></a>
 
 Ok, now we are ready to add the y-axis.
 
@@ -413,7 +413,7 @@ If you get stuck, you can always click the JS Bin button in the next
 section to skip ahead to the answer.
 
 
-6. Draw some bars
+6. Draw some bars <a id='draw_bars' class="anchor" ></a>
 -----------------
 
 Ok, that was a lot of work just to add axis labels.
@@ -455,7 +455,7 @@ You can read more about D3 joins here:
 * [Thinking with Joins](http://bost.ocks.org/mike/join/), a more thorough explanation
 
 
-### Fine, draw me some bars
+### Fine, draw me some bars<a id='bar_steps' class="anchor" ></a>
 
 Enough theory. Let's go through these 5 steps with our bar chart.
 
@@ -561,7 +561,7 @@ Below is a live copy of the final version:
 <iframe class="embed-visualization" height="430" width="530" src="resources/barchart/barchart.html"></iframe>
 
 
-Further exploration
+Further exploration <a id='further_exploration' class="anchor" ></a>
 -----------------
 
 The examples below show off how you can tweak your D3 code to create
@@ -569,7 +569,7 @@ crazy awesome visualizations. There are tons more on the D3 [Gallery](https://gi
 
 <div class="alert alert-danger">The following may not be examples of good visualization design!</div>
 
-### Convert the bars into circles
+### Convert the bars into circles <a id='convert' class="anchor" ></a>
 
 Why not draw circles instead of bars, and let the radius of the circle
 scale with car weight?
@@ -600,7 +600,7 @@ bars.attr('cx', function(d) {
     });
 ```
 
-### Show cylinders with color
+### Show cylinders with color <a id='show_with_color' class="anchor" ></a>
 
 There are only 5 different types of cylinders in this dataset.
 Why not treat them as categorical data and display
@@ -621,7 +621,7 @@ bars.attr('fill', function(d) {
     });
 ```
 
-### Chart the average weight per year
+### Chart the average weight per year <a id='avg_weight' class="anchor" ></a>
 
 D3 includes some handy functions for aggregating and transforming
 data, include the [nest](https://github.com/mbostock/d3/wiki/Arrays#-nest) function.
@@ -664,7 +664,7 @@ bars.attr('x', 0)
     });
 ```
 
-### Animate the bar widths
+### Animate the bar widths <a id='animate' class="anchor" ></a>
 
 D3 makes it stupidly easy to add transitions and animations.
 We only need two new lines to animate our bar entrances:
@@ -690,7 +690,7 @@ bars.attr('x', 0)
     });
 ```
 
-### Dynamically update with streaming data
+### Dynamically update with streaming data <a id='streaming_data' class="anchor" ></a>
 
 D3's way of building visualizations through data binding
 makes it surprisingly simple to update visualizations based on changing
@@ -700,3 +700,22 @@ Below is an example where cars are gradually added to the bar chart.
 
 <a class="btn btn-default jsbin-button" href="http://jsbin.com/pamago/18/edit?js,output">Open in JS Bin</a>
 
+
+<a class='btn btn-primary btn-lg back-button' href='cars.html'>Go to the next tutorial</a>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

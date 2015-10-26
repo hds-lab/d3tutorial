@@ -4,7 +4,7 @@ Visualizing the Cars Data
 In this tutorial we will build a colorful scatter-plot-style visualization.
 We will use four dimensions from the Cars dataset, encoded as x and y position, size, and color.
 
-1. The Cars Dataset
+1. The Cars Dataset <a id='car_data' class="anchor" ></a>
 ----------------
 
 The "Cars" dataset used in this tutorial is a subset
@@ -25,7 +25,7 @@ The dataset includes the following fields:
 - Weight: how much the car weighs, in lbs.
 
 
-2. Visual Encodings
+2. Visual Encodings <a id='encoding' class="anchor" ></a>
 ----------------
 
 We will create a visualization of four of these fields.
@@ -38,7 +38,7 @@ Here is a screenshot of the final visualization:
 ![Final cars visualization](resources/cars/cars_visualization.png)
 
 
-3. Initial Setup
+3. Initial Setup <a id='initial_setup' class="anchor" ></a>
 -------------
 
 We'll skip over some of the basic setup for the visualization,
@@ -56,7 +56,7 @@ You can review the code for these in the JavaScript panel to the right, if you w
 We have also provided some CSS to make the chart look nice, but we won't go into it here.
 
 
-4. Draw some dots
+4. Draw some dots <a id='draw_dots' class="anchor" ></a>
 -----------------
 
 Our first step will be to render a dot for each car, using SVG `<circle>` elements
@@ -118,7 +118,7 @@ You can scroll up through the JavaScript to find how
 these are defined.
 
 
-5. Adding a legend
+5. Adding a legend <a id='add_legend' class="anchor" ></a>
 ---------------
 
 The chart as is stands is pictured below:
@@ -188,7 +188,7 @@ The highlighted `.style()` the `.text()` lines are what
 actually produce the color and text labels from the car origins data.
 
 
-6. Another legend
+6. Another legend <a id='another_legend' class="anchor" ></a>
 --------------
 
 We also want to clearly explain what the size of dots means.
@@ -225,7 +225,7 @@ The only new thing here is that we have added a `legendOffset` to start
 drawing this legend below the first legend.
 
 
-7. Interactivity
+7. Interactivity <a id='interactivity' class="anchor" ></a>
 -------------
 
 Let's add a little bit of interactivity so that we can see how
@@ -284,7 +284,7 @@ Here we go:
 
 <a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/11/edit?js,output">Open in JS Bin</a>
 
-Congratulations!
+Congratulations! <a id='congratulations' class="anchor" ></a>
 ---------------
 
 The visualization of the cars dataset is complete. Below is a live copy:

@@ -77,17 +77,18 @@
   var setupNavMenu = function() {
     var tutorial = $('.tutorial');
     var tutorial_nav = $(".tutorial-nav ul.nav");
-    var links = tutorial.find('h1,h2');
+    var links = tutorial.find('h2,h3');
     //TODO: build a nav menu
     var current_node = tutorial_nav;
     links.each(function(i){
         var ele = $(this);
-        if ( ele.is('h1') ){
-            current_node = $('<li><ul><a href="#' + ele.find('a').attr('name') + '">' + ele.text() + '</a></ul></li>');
+        var ele_id = ele.find('a').attr('id');
+        if ( ele.is('h2') ){
+            current_node = $('<li class="h2nav-li"><ul><span class="h2nav nav-item"><a href="#' + ele_id + '">' + ele.text() + '</a></span></ul></li>');
             tutorial_nav.append(current_node);
         }
-        else if ( ele.is('h2') ){
-            tutorial_nav.find('ul:last').append('<li><a href="#' + ele.find('a').attr('name') + '">' + ele.text() + '</a></li>');
+        else if ( ele.is('h3') ){
+            tutorial_nav.find('ul:last').append('<li class="h3nav-li"><span class="h3nav nav-item"><a href="#' + ele_id + '">' + ele.text() + '</a></span></li>');
         }
     });
   };
@@ -223,19 +224,12 @@
                   divNextPos = $(theNextID).offset().top; // get the offset of the next div from the top
                 }
                 if (divPos < 200 && ((i == aArray.length - 1) || (divNextPos > windowHeight * 0.2))) {
-                    $("a[href='" + theID + "']").addClass("nav-active");
+                    $("a[href='" + theID + "']").parents("li:first").addClass("nav-active");
                 } else {
-                    $("a[href='" + theID + "']").removeClass("nav-active");
+                    $("a[href='" + theID + "']").parents("li:first").removeClass("nav-active");
                 }
             }
 
-            if(windowPos + windowHeight == docHeight) {
-                if (!$(".tutorial-nav ul.nav li:last-child a").hasClass("nav-active")) {
-                    var navActiveCurrent = $(".nav-active").attr("href");
-                    $("a[href='" + navActiveCurrent + "']").removeClass("nav-active");
-                    $(".tutorial-nav ul.nav li:last-child a").addClass("nav-active");
-                }
-            }
         });
 
 

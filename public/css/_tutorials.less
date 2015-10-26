@@ -59,8 +59,8 @@ main.tutorial {
     }
 
     h2 {
-      margin-top: 60px;
-      padding-top: 50px;
+      margin-top: 50px;
+      padding-top: 30px;
       border-top: 3px dashed #DDD;
     }
 
@@ -210,15 +210,7 @@ main.tutorial {
           padding-left: 150px;
         }
 
-        .tutorial-nav {
-          overflow: auto;
-          position: absolute;
-          margin: 0;
-          top: @tutorial-label-height;
-          left: 0;
-          width: 150px;
-          padding: 5px;
-        }
+
       }
 
       .right-col {
@@ -263,17 +255,41 @@ main.tutorial {
 
   .tutorial-nav {
     /* navigation */
-
+    overflow: auto;
+    position: absolute;
+    margin: 0;
+    top: @tutorial-label-height;
+    left: 0;
+    width: 140px;
+    padding: 5px;
 
     .nav ul {
-        list-style-type:none;
+        list-style-type: none;
         margin:0;
-        padding:0;
+        padding: 10px 0;
+        .h2nav{
+          font-size: 10px;
+          padding: 10px 0;
+        }
+        .h3nav{
+          font-size: 8px;
+          padding: 10px 0;
+
+        }
+        li {
+          margin-left: 8px;
+          margin-bottom: 5px;
+          padding-left: 5px;
+          border-radius: 2px 2px 2px 2px;
+          -moz-border-radius: 2px 2px 2px 2px;
+          -webkit-border-radius: 2px 2px 2px 2px;
+          border-left: 5px solid #ddd;
+        }
+
+        border-bottom: 1px solid #ccc;
     }
 
-    .nav li {
 
-    }
     a:link,a:active,a:visited{
       text-decoration: none;
       color: #428bca;
@@ -283,9 +299,17 @@ main.tutorial {
       text-decoration: none;
       color: #00c3cc;
     }
-    a.nav-active {
-        color: #00c3cc;
-        text-decoration: none;
+    @highlight-color: #c7254e;
+    .nav-active{
+        &.h2nav-li .h2nav a,&.h3nav-li .h3nav a{
+          color: @highlight-color;
+          text-decoration: none;
+        }
+
+        &.h3nav-li {
+          border-left: 5px solid @highlight-color;
+        }
+
     }
 
   }
