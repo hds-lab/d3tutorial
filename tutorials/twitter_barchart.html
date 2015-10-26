@@ -1,13 +1,11 @@
-<!DOCTYPE html><html class="full-page"><head><meta charset="utf8"/><title>D3 Workshop</title><link rel="stylesheet" href="//hds-lab.github.io/d3tutorial/css/global.css"/><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700|Open+Sans:700,400,300,300italic,400italic,700italic"/><link rel="stylesheet" href="//hds-lab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.css"><link rel="stylesheet" href="//hds-lab.github.io/d3tutorial/js/prism/prism.css"></head><body><header><nav role="navigation" class="navbar navbar-inverse navbar-fixed-top"><div class="container-fluid"><div class="navbar-header"><button data-toggle="collapse" data-target="#navbar-top-collapse-1" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="//hds-lab.github.io/d3tutorial/" class="navbar-brand">D3 Workshop</a></div><div id="navbar-top-collapse-1" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><!--li<!--a(href="#{baseUrl}/help.html") Instructions-->--><li><a href="https://github.com/mbostock/d3/wiki/API-Reference" target="_blank">D3 Docs</a></li><li><a href="https://github.com/mbostock/d3/wiki/Gallery" target="_blank">D3 Gallery</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JS Docs</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank">SVG Docs</a></li></ul></div></div></nav></header><main class="tutorial"><div class="split-panel"><div class="left-col"><div class="tutorial-label"><span>Tutorial Instructions</span><button type="button" class="btn btn-default btn-sm big-button">Large Text</button></div><div class="container-fluid"><article><h1>Building a Bar Chart</h1>
-<p>We&#39;ve just learned some of the basic features of D3
+<!DOCTYPE html><html class="full-page"><head><meta charset="utf8"/><title>D3 Workshop</title><link rel="stylesheet" href="//hds-lab.github.io/d3tutorial/css/global.css"/><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700|Open+Sans:700,400,300,300italic,400italic,700italic"/><link rel="stylesheet" href="//hds-lab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.css"><link rel="stylesheet" href="//hds-lab.github.io/d3tutorial/js/prism/prism.css"></head><body><header><nav role="navigation" class="navbar navbar-inverse navbar-fixed-top"><div class="container-fluid"><div class="navbar-header"><button data-toggle="collapse" data-target="#navbar-top-collapse-1" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="//hds-lab.github.io/d3tutorial/" class="navbar-brand">D3 Workshop</a></div><div id="navbar-top-collapse-1" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><!--li//a(href="//hds-lab.github.io/d3tutorial/help.html") Instructions--><li><a href="https://github.com/mbostock/d3/wiki/API-Reference" target="_blank">D3 Docs</a></li><li><a href="https://github.com/mbostock/d3/wiki/Gallery" target="_blank">D3 Gallery</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JS Docs</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank">SVG Docs</a></li></ul></div></div></nav></header><main class="tutorial"><div class="split-panel"><div class="left-col"><div class="tutorial-label"><span>Tutorial Instructions</span><button type="button" class="btn btn-default btn-sm big-button">Large Text</button></div><div class="container-fluid"><article><h1>Building a Bar Chart</h1><p>We&#39;ve just learned some of the basic features of D3
 for building HTML elements and processing data.
 In this tutorial, we will use some data that we&#39;ve loaded
 about Twitter hashtags to build a simple bar chart:</p>
 <p><img src="resources/twitter_barchart/barchart_visualization.png" alt="Final bar chart visualization"></p>
 <p>This visualization just shows the number of times each hashtag
 was used over a given time interval.</p>
-<h2>1. Drawing a Visualization</h2>
-<p>How do we get from our hashtag data to a visualization?
+<h2>1. Drawing a Visualization</h2><p>How do we get from our hashtag data to a visualization?
 Once we&#39;ve loaded the data, we have to use D3 to draw a bunch of stuff
 on the screen. Here are the basic steps we&#39;ll be following:</p>
 <ol>
@@ -27,8 +25,7 @@ this in the JavaScript panel to the right.</p>
 <p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/64/edit?js,output">Open in JS Bin</a></p>
 <p>We have also already entered some CSS to make the bar chart look nice.
 In the following sections, we will go through each of the steps above.</p>
-<h2>2. Create an SVG element</h2>
-<p>Let&#39;s <strong>add an SVG element to the page</strong> to hold our visualization.
+<h2>2. Create an SVG element</h2><p>Let&#39;s <strong>add an SVG element to the page</strong> to hold our visualization.
 We should also decide at this point how big the visualization will be.</p>
 <p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/64/edit?js,output">Open in JS Bin</a></p>
 <p>Add the following to your JavaScript:</p>
@@ -37,14 +34,14 @@ var height = 400;
 var svg = d3.select(&#39;body&#39;)
   .append(&#39;svg&#39;)
   .attr(&#39;width&#39;, width)
-  .attr(&#39;height&#39;, height);</code></pre>
+  .attr(&#39;height&#39;, height);
+</code></pre>
 <p>This code uses <code>d3.select</code> to locate the <code>&lt;body&gt;</code> HTML element
 and adds an <code>&lt;svg&gt;</code> element to it.</p>
 <p>It then sets the <code>&lt;svg&gt;</code> element&#39;s <code>width</code> and <code>height</code> attributes
 using variables.</p>
 <p>You should see a box with a thin gray border appear.</p>
-<h2>3. Define the x and y scales</h2>
-<p>How do we convert from numbers in the data to visual variables, like
+<h2>3. Define the x and y scales</h2><p>How do we convert from numbers in the data to visual variables, like
 color, position, or size?</p>
 <p>D3 provides some <a href="https://github.com/mbostock/d3/wiki/Scales">scaling functions </a> to help us with this task.
 It defines the following major kinds of &quot;scales&quot;:</p>
@@ -68,29 +65,30 @@ It defines the following major kinds of &quot;scales&quot;:</p>
 <p>In this tutorial, we&#39;ll use <code>d3.scale.linear()</code> to map from
 hashtag frequencies onto bar width. We&#39;ll also use <code>d3.scale.ordinal()</code>
 to map hashtags to their vertical position in the bar chart.</p>
-<h3>Find the domains</h3>
-<p>Before we can figure out how to map hashtag frequency onto
+<h3>Find the domains</h3><p>Before we can figure out how to map hashtag frequency onto
 bar width, we need to know the min and max hashtag frequencies in the data.
 D3 provides functions that make this easy.</p>
 <p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/65/edit?js,console">Open in JS Bin</a></p>
 <p>Add the following code:</p>
 <pre><code class="language-javascript">var max_tweets = d3.max(data, function(d) {
   return d.num_tweets;
-});</code></pre>
+});
+</code></pre>
 <p>The code above goes through all of the rows <code>d</code> in the data,
 and finds the value of the <code>num_tweets</code> field for each row.
 D3&#39;s <code>max()</code> function then returns the maximum value from that field (1571329).</p>
 <p>We can add similar code to find the <em>smallest</em> value of <code>num_tweets</code> (24729):</p>
 <pre><code class="language-javascript">var min_tweets = d3.min(data, function(d) {
   return d.num_tweets;
-});</code></pre>
+});
+</code></pre>
 <p>Finally, we would like to have a list of all of the hashtags in the data,
 so we will use the <code>map()</code> function to extract this field:</p>
 <pre><code class="language-javascript">var tag_names = data.map(function(d){
   return d.hashtag;
-});</code></pre>
-<h3>Construct the scales</h3>
-<p>Now that we know the min and max of <code>num_tweets</code> and the
+});
+</code></pre>
+<h3>Construct the scales</h3><p>Now that we know the min and max of <code>num_tweets</code> and the
 hashtags in our data, we are ready to create D3 scales.</p>
 <p>Let&#39;s start with the x scale. The x scale should map
 from the domain <code>[0, max_tweets]</code> onto the range
@@ -100,28 +98,31 @@ because we want our bars to be based at zero.</p>
 <p>Add this:</p>
 <pre><code class="language-javascript">var x = d3.scale.linear()
   .range([0, width])
-  .domain([0, max_tweets]);</code></pre>
+  .domain([0, max_tweets]);
+</code></pre>
 <p>The <code>d3.scale.linear()</code> function produces an object
 that we can actually call like a function.
 You can try entering the following commands in the Console
 window in JS Bin to see what you get:</p>
 <pre><code class="language-javascript">x(0)          //should return 0 (px)
 x(200000)     //should return 63.64 (px)
-x(max_tweets) //should return 500 (px)</code></pre>
+x(max_tweets) //should return 500 (px)
+</code></pre>
 <p>Next, we will create an ordinal scale that maps hashtag
 names onto vertical positions. This will use
 a special D3 function <code>rangeRoundBands()</code> that
 is useful for ensuring your bars get spaced out correctly:</p>
 <pre><code class="language-javascript">var y = d3.scale.ordinal()
   .domain(tag_names)
-  .rangeRoundBands([ 0, height], 0.1);</code></pre>
+  .rangeRoundBands([ 0, height], 0.1);
+</code></pre>
 <p>As with <code>x</code>, you can call <code>y</code> like a function to
 get the y-position for different hashtag bars.
 Try this in the Console:</p>
 <pre><code class="language-javascript">y(&quot;superbowl&quot;)  //should return 11 (px)
-y(&quot;baltimore&quot;)  //should return 258 (px)</code></pre>
-<h2>4. Draw the axes</h2>
-<p>Now we&#39;re ready to move on to drawing the axes.
+y(&quot;baltimore&quot;)  //should return 258 (px)
+</code></pre>
+<h2>4. Draw the axes</h2><p>Now we&#39;re ready to move on to drawing the axes.
 We will use the D3 scales we created above to draw
 the x and y axes in the visualization, along with axis labels.</p>
 <p>D3 provides a utility specifically for drawing axes.
@@ -132,12 +133,14 @@ of your chart, and it does the rest.</p>
 <p>The code below initializes an axis &quot;renderer&quot;:</p>
 <pre><code class="language-javascript">var xAxis = d3.svg.axis()
   .scale(x)
-  .orient(&quot;top&quot;);</code></pre>
+  .orient(&quot;top&quot;);
+</code></pre>
 <p>We can then use the renderer to draw the SVG elements
 that make up the axis with this code:</p>
 <pre><code class="language-javascript">svg.append(&quot;g&quot;)
   .classed(&quot;x axis&quot;, true)
-  .call(xAxis);</code></pre>
+  .call(xAxis);
+</code></pre>
 <p><strong>But where is the axis?</strong></p>
 <p>You might see a small black line at the top of the SVG panel.
 If you use the debugger to inspect the SVG element, you&#39;ll see that
@@ -146,8 +149,7 @@ Unfortunately, they are off screen!</p>
 <p>Elements rendering in the wrong place is a common problem with D3.
 We&#39;ll fix that in the next step by adding some space
 around the outside of our visualization.</p>
-<h3>Add margins</h3>
-<p>We want to draw our visualization a little bit inside
+<h3>Add margins</h3><p>We want to draw our visualization a little bit inside
 the outside of the SVG element.
 To do this, we need to <em>back up</em> a little bit and
 change the way we set up the visualization.</p>
@@ -166,7 +168,8 @@ var graphHeight = height - margins.top - margins.bottom;
 var chart = svg.append(&#39;g&#39;)
   .attr(&#39;transform&#39;, &#39;translate(&#39; + margins.left + &#39;,&#39; + margins.top + &#39;)&#39;);
 
-//this goes before you start to define the scales...</code></pre>
+//this goes before you start to define the scales...
+</code></pre>
 <p>This sets up the margin sizes and adds a new SVG <code>&lt;g&gt;</code> (grouping) element
 to the drawing. It also <em>transforms</em> the group element by shifting it
 left and down using the margin sizes we configured above.
@@ -179,16 +182,14 @@ with <code>graphWidth</code> and <code>graphHeight</code>, respectively.</p>
 <p><strong>Append to chart:</strong> Further down, find the code where you draw the x-axis.
 Instead of using <code>svg.append</code>, you should change it to <code>chart.append</code>.</p>
 <p>Finally, you should see your x-axis miraculously appear in view!</p>
-<h3>Add the other axis</h3>
-<p>Ok, now we need to add the y-axis.
+<h3>Add the other axis</h3><p>Ok, now we need to add the y-axis.
 The code for this is very similar to what we used for the x-axis, so why don&#39;t you try this yourself?</p>
 <p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/68/edit?js,output">Open in JS Bin</a></p>
 <p>Note: you won&#39;t see a long black line for the y-axis like you do for the x-axis.
 This is because of some special CSS styles that we added to make the chart look better.</p>
 <p>If you get stuck, you can always click the JS Bin button in the next
 section to skip ahead to the answer.</p>
-<h2>5. Draw some bars</h2>
-<p>Ok that was a lot of work just to add axis labels.
+<h2>5. Draw some bars</h2><p>Ok that was a lot of work just to add axis labels.
 It is finally time to draw some bars.</p>
 <p>Remember the outline for this step that we gave
 at the beginning:</p>
@@ -223,12 +224,12 @@ somewhat similar to SQL, for example.</p>
 <li><a href="http://strongriley.github.io/d3/tutorial/circle.html">Three Little Circles</a>, an illustrative tutorial</li>
 <li><a href="http://bost.ocks.org/mike/join/">Thinking with Joins</a>, a more thorough explanation</li>
 </ul>
-<h3>Ok, now draw some bars</h3>
-<p>Enough theory. Let&#39;s go through these 5 steps with our bar chart.</p>
+<h3>Ok, now draw some bars</h3><p>Enough theory. Let&#39;s go through these 5 steps with our bar chart.</p>
 <p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/69/edit?js,output">Open in JS Bin</a></p>
 <p><strong>Steps 1 and 2:</strong> Add the following code:</p>
 <pre><code class="language-javascript">var bars = chart.selectAll(&#39;rect.bar&#39;)
-                .data(data);</code></pre>
+                .data(data);
+</code></pre>
 <p>The first line above asks D3 to select some rectangles (with class &quot;bar&quot;).
 Note that there are <em>no such rectangles</em> anywhere on
 the page yet. They are purely theoretical rectangles (<strong>step 1</strong>).</p>
@@ -238,13 +239,15 @@ are 0 (zero) <code>&lt;rect&gt;</code> elements in our selection. Therefore, we
 will ask D3 to create these missing elements:</p>
 <pre><code class="language-javascript">bars.enter()
     .append(&#39;rect&#39;)
-    .attr(&#39;class&#39;, &#39;bar&#39;);</code></pre>
+    .attr(&#39;class&#39;, &#39;bar&#39;);
+</code></pre>
 <p>The key to this step is the <code>enter()</code> function, which roughly
 translates to &quot;do this for every excess data point&quot;.</p>
 <p><strong>Step 4:</strong> It just so happens that we do not have <em>any</em>
 excess bars to delete. However, this is how we would ask D3 to do it:</p>
 <pre><code class="language-javascript">bars.exit()
-    .remove();</code></pre>
+    .remove();
+</code></pre>
 <p>Almost done. We now have <code>&lt;rect&gt;</code> elements on the visualization
 (you can find them in the inspector), but we dont&#39;t see them
 because we haven&#39;t set their position and size.</p>
@@ -256,7 +259,8 @@ because we haven&#39;t set their position and size.</p>
     .attr(&#39;height&#39;, y.rangeBand())
     .attr(&#39;width&#39;, function(d) {
       return x(d.num_tweets);
-    });</code></pre>
+    });
+</code></pre>
 <p>Let&#39;s break that down into sections.</p>
 <p>The first line, <code>.attr(&#39;x&#39;, 0)</code> just ensures
 that the left edge of each rectangle is at zero pixels.</p>
@@ -271,12 +275,9 @@ to make the bars look good. This is a magic D3 feature.</p>
 <p>Finally, we set the width of each bar using the x-scale to
 translate <code>num_tweets</code> into widths.</p>
 <p><a class="btn btn-default jsbin-button" href="http://jsbin.com/rogab/69/edit?js,output">Open in JS Bin</a></p>
-<h2>The End</h2>
-<p>That&#39;s all we&#39;re going to do with this visualization.
+<h2>The End</h2><p>That&#39;s all we&#39;re going to do with this visualization.
 Below is a live copy:</p>
-<iframe class="embed-visualization" height="430" width="530" src="resources/twitter_barchart/barchart.html"></iframe>
-
-<a href="//hds-lab.github.io/d3tutorial/" class="btn btn-default btn-lg back-button">Back to tutorials</a></article></div><div class="tutorial-nav"><div id="nav-anchor"></div><ul class="nav"></ul></div></div><div class="right-col"><div class="jsbin-placeholder"><p class="lead">JS Bin Loading...</p></div><div class="jsbin-container"></div></div></div></main><script src="//hds-lab.github.io/d3tutorial/vendor/jquery/jquery.min.js"></script><script src="//hds-lab.github.io/d3tutorial/vendor/bootstrap/js/bootstrap.min.js"></script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+<iframe class="embed-visualization" height="430" width="530" src="resources/twitter_barchart/barchart.html"></iframe><a href="//hds-lab.github.io/d3tutorial/" class="btn btn-default btn-lg back-button">Back to tutorials</a></article></div><div class="tutorial-nav"><div id="nav-anchor"></div><ul class="nav"></ul></div></div><div class="right-col"><div class="jsbin-placeholder"><p class="lead">JS Bin Loading...</p></div><div class="jsbin-container"></div></div></div></main><script src="//hds-lab.github.io/d3tutorial/vendor/jquery/jquery.min.js"></script><script src="//hds-lab.github.io/d3tutorial/vendor/bootstrap/js/bootstrap.min.js"></script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q || []).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');

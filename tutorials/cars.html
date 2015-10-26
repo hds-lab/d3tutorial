@@ -1,8 +1,6 @@
-<!DOCTYPE html><html class="full-page"><head><meta charset="utf8"/><title>D3 Workshop</title><link rel="stylesheet" href="//hds-lab.github.io/d3tutorial/css/global.css"/><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700|Open+Sans:700,400,300,300italic,400italic,700italic"/><link rel="stylesheet" href="//hds-lab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.css"><link rel="stylesheet" href="//hds-lab.github.io/d3tutorial/js/prism/prism.css"></head><body><header><nav role="navigation" class="navbar navbar-inverse navbar-fixed-top"><div class="container-fluid"><div class="navbar-header"><button data-toggle="collapse" data-target="#navbar-top-collapse-1" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="//hds-lab.github.io/d3tutorial/" class="navbar-brand">D3 Workshop</a></div><div id="navbar-top-collapse-1" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><!--li<!--a(href="#{baseUrl}/help.html") Instructions-->--><li><a href="https://github.com/mbostock/d3/wiki/API-Reference" target="_blank">D3 Docs</a></li><li><a href="https://github.com/mbostock/d3/wiki/Gallery" target="_blank">D3 Gallery</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JS Docs</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank">SVG Docs</a></li></ul></div></div></nav></header><main class="tutorial"><div class="split-panel"><div class="left-col"><div class="tutorial-label"><span>Tutorial Instructions</span><button type="button" class="btn btn-default btn-sm big-button">Large Text</button></div><div class="container-fluid"><article><h1>Visualizing the Cars Data</h1>
-<p>In this tutorial we will build a colorful scatter-plot-style visualization.
+<!DOCTYPE html><html class="full-page"><head><meta charset="utf8"/><title>D3 Workshop</title><link rel="stylesheet" href="//hds-lab.github.io/d3tutorial/css/global.css"/><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Code+Pro:300,400,700|Open+Sans:700,400,300,300italic,400italic,700italic"/><link rel="stylesheet" href="//hds-lab.github.io/d3tutorial/vendor/jquery.splitter/jquery.splitter.css"><link rel="stylesheet" href="//hds-lab.github.io/d3tutorial/js/prism/prism.css"></head><body><header><nav role="navigation" class="navbar navbar-inverse navbar-fixed-top"><div class="container-fluid"><div class="navbar-header"><button data-toggle="collapse" data-target="#navbar-top-collapse-1" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="//hds-lab.github.io/d3tutorial/" class="navbar-brand">D3 Workshop</a></div><div id="navbar-top-collapse-1" class="collapse navbar-collapse"><ul class="nav navbar-nav navbar-right"><!--li//a(href="//hds-lab.github.io/d3tutorial/help.html") Instructions--><li><a href="https://github.com/mbostock/d3/wiki/API-Reference" target="_blank">D3 Docs</a></li><li><a href="https://github.com/mbostock/d3/wiki/Gallery" target="_blank">D3 Gallery</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JS Docs</a></li><li><a href="https://developer.mozilla.org/en-US/docs/Web/SVG" target="_blank">SVG Docs</a></li></ul></div></div></nav></header><main class="tutorial"><div class="split-panel"><div class="left-col"><div class="tutorial-label"><span>Tutorial Instructions</span><button type="button" class="btn btn-default btn-sm big-button">Large Text</button></div><div class="container-fluid"><article><h1>Visualizing the Cars Data</h1><p>In this tutorial we will build a colorful scatter-plot-style visualization.
 We will use four dimensions from the Cars dataset, encoded as x and y position, size, and color.</p>
-<h2>1. The Cars Dataset <a id='car_data' class="anchor" ></a></h2>
-<p>The &quot;Cars&quot; dataset used in this tutorial is a subset
+<h2>1. The Cars Dataset <a id="car_data" class="anchor"></a></h2><p>The &quot;Cars&quot; dataset used in this tutorial is a subset
 of the 1983 ASA Data Exposition dataset that is used in the <a href="http://courses.washington.edu/hcde511/">HCDE 511</a> course.</p>
 <p>You can <a href="resources/cars/carsExercise.xls">download the data</a> in Excel format, although
 it is not necessary to complete the tutorial.</p>
@@ -17,14 +15,12 @@ The dataset includes the following fields:</p>
 <li>MPG: how many miles per gallon the car gets (fuel efficiency)</li>
 <li>Weight: how much the car weighs, in lbs.</li>
 </ul>
-<h2>2. Visual Encodings <a id='encoding' class="anchor" ></a></h2>
-<p>We will create a visualization of four of these fields.
+<h2>2. Visual Encodings <a id="encoding" class="anchor"></a></h2><p>We will create a visualization of four of these fields.
 The visual encodings are illustrated in the diagram below:</p>
 <p><img src="resources/cars/visual_encodings.png" alt="Visual encodings"></p>
 <p>Here is a screenshot of the final visualization:</p>
 <p><img src="resources/cars/cars_visualization.png" alt="Final cars visualization"></p>
-<h2>3. Initial Setup <a id='initial_setup' class="anchor" ></a></h2>
-<p>We&#39;ll skip over some of the basic setup for the visualization,
+<h2>3. Initial Setup <a id="initial_setup" class="anchor"></a></h2><p>We&#39;ll skip over some of the basic setup for the visualization,
 which we already covered in other tutorials.
 Here are the steps we are skipping:</p>
 <ol>
@@ -36,8 +32,7 @@ Here are the steps we are skipping:</p>
 <p><a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/8/edit?js,output">Open in JS Bin</a></p>
 <p>You can review the code for these in the JavaScript panel to the right, if you wish.
 We have also provided some CSS to make the chart look nice, but we won&#39;t go into it here.</p>
-<h2>4. Draw some dots <a id='draw_dots' class="anchor" ></a></h2>
-<p>Our first step will be to render a dot for each car, using SVG <code>&lt;circle&gt;</code> elements
+<h2>4. Draw some dots <a id="draw_dots" class="anchor"></a></h2><p>Our first step will be to render a dot for each car, using SVG <code>&lt;circle&gt;</code> elements
 (<a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Element/circle">documentation about circles</a>).
 That means we are going through the data join again.
 It has the same <em>select</em>, <em>append</em>, <em>remove</em>, <em>update</em>
@@ -47,19 +42,22 @@ steps here as it did in the bar chart visualization.</p>
 dat this point) and bind the cars data to them.</p>
 <p>Add the following code to the bottom of the JavaScript in JS Bin:</p>
 <pre><code class="language-javascript">var dots = chart.selectAll(&#39;.dot&#39;)
-                .data(data);</code></pre>
+                .data(data);
+</code></pre>
 <p>Next, use the D3 data join function <code>enter()</code>
 to create a dot for every dot that doesn&#39;t yet exist.
 For the cars data, this means 26 dots.</p>
 <pre><code class="language-javascript">dots.enter()
     .append(&quot;circle&quot;)
     .attr(&quot;class&quot;, &quot;dot&quot;)
-    .append(&quot;title&quot;);</code></pre>
+    .append(&quot;title&quot;);
+</code></pre>
 <p><em>Note that we also added an SVG <code>&lt;title&gt;</code> element inside each dot,
 which we will use later to show a tooltip.</em></p>
 <p>This doesn&#39;t do anything in our visualization, but
 it is normal at this point to also remove any dots that you don&#39;t need:</p>
-<pre><code class="language-javascript">dots.exit().remove();</code></pre>
+<pre><code class="language-javascript">dots.exit().remove();
+</code></pre>
 <p>Now, there are dots being rendered, but they don&#39;t look like anything.
 They have default size, color, and position.
 To actually see our dots, we need to set their position, size,
@@ -68,13 +66,13 @@ and color.</p>
 <pre><code class="language-javascript">dots.attr(&quot;r&quot;, function(d) { return radius(d.weight); })
     .attr(&quot;cx&quot;, function(d) { return x(d.horsepower); })
     .attr(&quot;cy&quot;, function(d) { return y(d.mpg); })
-    .style(&quot;fill&quot;, function(d) { return color(d.origin); });</code></pre>
+    .style(&quot;fill&quot;, function(d) { return color(d.origin); });
+</code></pre>
 <p>In the initial setup, we prepared several D3 &quot;scale&quot; objects
 that we are using here (<code>radius</code>, <code>x</code>, <code>y</code>, and <code>color</code>).
 You can scroll up through the JavaScript to find how
 these are defined.</p>
-<h2>5. Adding a legend <a id='add_legend' class="anchor" ></a></h2>
-<p>The chart as is stands is pictured below:</p>
+<h2>5. Adding a legend <a id="add_legend" class="anchor"></a></h2><p>The chart as is stands is pictured below:</p>
 <p><img src="resources/cars/no_legend.png" alt="Chart without legend"></p>
 <p>This is all very nice, but how is a user to know what is meant by size and color?
 To make things more clear, we&#39;ll now add a legend to the chart, in the upper
@@ -95,7 +93,8 @@ add the following code:</p>
   .enter().append(&quot;g&quot;)
   .attr(&quot;class&quot;, &quot;legend origin&quot;)
   .attr(&quot;transform&quot;,
-        function(d, i) { return &quot;translate(0,&quot; + i * 20 + &quot;)&quot;; });</code></pre>
+        function(d, i) { return &quot;translate(0,&quot; + i * 20 + &quot;)&quot;; });
+</code></pre>
 <p>This joins the list of car origins to a &quot;theoretical&quot;
 set of <code>.legend</code> and <code>.origin</code> elements.
 Because these elements don&#39;t exist yet,
@@ -125,8 +124,7 @@ one of these <code>&lt;g&gt;</code> elements:</p>
 <p>A lot of that was just moving stuff around to make it look good.
 The highlighted <code>.style()</code> the <code>.text()</code> lines are what
 actually produce the color and text labels from the car origins data.</p>
-<h2>6. Another legend <a id='another_legend' class="anchor" ></a></h2>
-<p>We also want to clearly explain what the size of dots means.</p>
+<h2>6. Another legend <a id="another_legend" class="anchor"></a></h2><p>We also want to clearly explain what the size of dots means.</p>
 <p><a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/5/edit?js,output">Open in JS Bin</a></p>
 <p>This mostly similar to the legend above:</p>
 <pre><code class="language-javascript">var legendOffset = origins.size() * 20 + 5;
@@ -149,11 +147,11 @@ weights.append(&quot;text&quot;)
   .attr(&quot;y&quot;, 9)
   .attr(&quot;dy&quot;, &quot;.35em&quot;)
   .style(&quot;text-anchor&quot;, &quot;end&quot;)
-  .text(function(d) { return d + &quot; lbs&quot;; });</code></pre>
+  .text(function(d) { return d + &quot; lbs&quot;; });
+</code></pre>
 <p>The only new thing here is that we have added a <code>legendOffset</code> to start
 drawing this legend below the first legend.</p>
-<h2>7. Interactivity <a id='interactivity' class="anchor" ></a></h2>
-<p>Let&#39;s add a little bit of interactivity so that we can see how
+<h2>7. Interactivity <a id="interactivity" class="anchor"></a></h2><p>Let&#39;s add a little bit of interactivity so that we can see how
 to listen and respond to mouse events with D3.</p>
 <p><a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/10/edit?js,output">Open in JS Bin</a></p>
 <p>As you&#39;ll see if you move your mouse over the dots and the color legend,
@@ -167,7 +165,8 @@ origins.on(&#39;mouseover&#39;, function(origin) {
   dots.classed(&#39;brushed&#39;, function(d) {
     return d.origin == origin;
   });
-})</code></pre>
+})
+</code></pre>
 <p>Now, when the <code>mousover</code> event fires on one of the legend items,
 the dots with a matching value for the <code>origin</code> field will
 have their class set to <code>brushed</code>.</p>
@@ -176,7 +175,8 @@ out of one of the legend boxes, the highlighting doesn&#39;t go away.
 To fix this, add the following directly below the code you just added:</p>
 <pre><code class="language-javascript">.on(&#39;mouseout&#39;, function(origin) {
   dots.classed(&#39;brushed&#39;, false);
-});</code></pre>
+});
+</code></pre>
 <p>Linking the legend to the data is good, but what about the reverse?
 We can use a similar procedure to make the legend light up when
 the user hovers over a dot:</p>
@@ -187,13 +187,12 @@ the user hovers over a dot:</p>
 })
 .on(&#39;mouseout&#39;, function(d) {
   origins.classed(&quot;brushed&quot;, false);
-});</code></pre>
+});
+</code></pre>
 <p>Here we go:</p>
 <p><a class="btn btn-default jsbin-button" href="http://jsbin.com/xexezo/11/edit?js,output">Open in JS Bin</a></p>
-<h2>Congratulations! <a id='congratulations' class="anchor" ></a></h2>
-<p>The visualization of the cars dataset is complete. Below is a live copy:</p>
-<iframe class="embed-visualization" height="430" width="530" src="resources/cars/cars.html"></iframe>
-<a href="//hds-lab.github.io/d3tutorial/" class="btn btn-default btn-lg back-button">Back to tutorials</a></article></div><div class="tutorial-nav"><div id="nav-anchor"></div><ul class="nav"></ul></div></div><div class="right-col"><div class="jsbin-placeholder"><p class="lead">JS Bin Loading...</p></div><div class="jsbin-container"></div></div></div></main><script src="//hds-lab.github.io/d3tutorial/vendor/jquery/jquery.min.js"></script><script src="//hds-lab.github.io/d3tutorial/vendor/bootstrap/js/bootstrap.min.js"></script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+<h2>Congratulations! <a id="congratulations" class="anchor"></a></h2><p>The visualization of the cars dataset is complete. Below is a live copy:</p>
+<iframe class="embed-visualization" height="430" width="530" src="resources/cars/cars.html"></iframe><a href="//hds-lab.github.io/d3tutorial/" class="btn btn-default btn-lg back-button">Back to tutorials</a></article></div><div class="tutorial-nav"><div id="nav-anchor"></div><ul class="nav"></ul></div></div><div class="right-col"><div class="jsbin-placeholder"><p class="lead">JS Bin Loading...</p></div><div class="jsbin-container"></div></div></div></main><script src="//hds-lab.github.io/d3tutorial/vendor/jquery/jquery.min.js"></script><script src="//hds-lab.github.io/d3tutorial/vendor/bootstrap/js/bootstrap.min.js"></script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q || []).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
