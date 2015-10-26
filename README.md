@@ -90,5 +90,5 @@ just run `grunt deploy`. This performs the following steps:
 2. Runs `harp compile -o dist` to build the site to the `dist` folder.
 3. Restore the original `harp.json` file.
 4. Commits the updated `dist` folder (if nothing has changed the task will fail here).
-5. Uses `git subtree push` to send the `dist` folder to the `gh-pages` branch.
+5. Uses `git subtree push --prefix dist origin gh-pages` to send the `dist` folder to the `gh-pages` branch.
 
