@@ -12,11 +12,12 @@
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-bowercopy": "^1.1.0",
-    "grunt-harp": "^0.1.4",
+    "grunt-harp": "^0.18.0-0.0.0",
     "grunt-shell": "^1.1.1",
     "load-grunt-tasks": "^1.0.0"
   },
   "dependencies": {
+    "grunt": "^0.4.1",
     "lodash": "^2.4.1"
   }
 }
