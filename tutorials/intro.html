@@ -9,7 +9,7 @@ This tutorial assumes you already have a brief understanding of HTML, basic prog
 </div>
 
 <h2>HTML: Tags, Elements, and Attributes <a id="html_basic" class="anchor"></a></h2><p>Let&#39;s look at a basic HTML example:</p>
-<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/xezife/7/edit?html,output">Open in JS Bin</a></p>
+<p><a class="btn btn-default jsbin-button" href="http://jsbin.com/xezife/6/edit?html,output">Open in JS Bin</a></p>
 <p>Before getting into the whole HTML document, let&#39;s look at one of the element to understand the syntax:
 <img src="resources/intro/element_breakdown.png" alt="Element components"></p>
 <h3>Tags <a id="tags" class="anchor"></a></h3><p>So let&#39;s break that down. For now, let&#39;s ignore the <code>href=...</code> part (Assuming it is transparent, so we have <code>&lt;a&gt;</code>).
@@ -36,7 +36,7 @@ An attribute is used to give the element some special properties, which are aptl
 <li><code>&lt;title&gt;</code> is the title of the document. Since it does not change the page structure, it appears only in the <code>&lt;head&gt;</code>.</li>
 <li><code>&lt;body&gt;</code> is the core of the document itself. All of the visible HTML you see will appear within the <code>&lt;body&gt;</code> tag.</li>
 </ul>
-<h3>Document Object Model (DOM) <a id="dom" class="anchor"></a></h3><p>When a browser loads a HTML document, it will actually parse it into the Document Object Model (DOM). Like the example we have seen at beginning will be parsed into something like this:
+<h3>Document Object Model (DOM) <a id="dom" class="anchor"></a></h3><p>When browsers load a HTML document, it will actually parse it into the Document Object Model (DOM). Like the example we have seen at beginning will be parsed into something like this:
 <img src="resources/intro/dom.png" alt="Element components">
 The DOM is a hierarchical representation that browsers use to render what we can see in a page. This is also what D3 is actually manipulating. You can learn more details about DOM in <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction">the MDN introduction to the DOM document</a>.</p>
 <p>If you want to visualize the DOM of a HTML file, you can use <a href="http://bioub.github.io/d3.domVisualizer/">d3.domVisualizer</a>. (The DOM visualization will be a little bit different from the illustration above, but it should still be useful.)</p>
@@ -47,7 +47,7 @@ The DOM is a hierarchical representation that browsers use to render what we can
 </code></pre>
 <p>Notice that this has two attributes for width and height. It is important to explicitly specify both of these attributes and give the SVG element a size. Unlike HTML elements, it will not auto-adjust the size with the content inside of it. In this case, it will be 100 pixels wide and 100 pixels tall. </p>
 <p>So two of the key elements in SVG that you&#39;ll use are the <code>circle</code> and the <code>rect</code>. </p>
-<p>Rect Attributes (The most important ones)</p>
+<p>Bar Attributes (The most important ones)</p>
 <table class="table">
     <thead>
         <tr><th>Attribute Name</th><th>Description</th></tr>
@@ -134,7 +134,7 @@ Here&#39;s a couple of other things you can try:
     </ul>
 </div>
 
-<p><a class="btn btn-primary btn-lg back-button" href="barchart.html">Go to the next tutorial</a></p><a href="//hds-lab.github.io/d3tutorial/" class="btn btn-default btn-lg back-button">Back to tutorials</a></article></div><div class="tutorial-nav"><div id="nav-anchor"></div><ul class="nav"></ul></div></div><div class="right-col"><div class="jsbin-placeholder"><p class="lead">JS Bin Loading...</p></div><div class="jsbin-container"></div></div></div></main><script src="//hds-lab.github.io/d3tutorial/vendor/jquery/jquery.min.js"></script><script src="//hds-lab.github.io/d3tutorial/vendor/bootstrap/js/bootstrap.min.js"></script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+<p><a class="btn btn-primary btn-lg back-button" href="barchart.html">Go to the next tutorial</a></p><a href="//hds-lab.github.io/d3tutorial/" class="btn btn-default btn-lg back-button">Back to tutorials</a></article></div><div class="tutorial-nav hidden"><div id="nav-anchor"></div><ul class="nav"></ul></div></div><div class="right-col"><div class="jsbin-placeholder"><p class="lead">JS Bin Loading...</p></div><div class="jsbin-container"></div></div></div></main><script src="//hds-lab.github.io/d3tutorial/vendor/jquery/jquery.min.js"></script><script src="//hds-lab.github.io/d3tutorial/vendor/bootstrap/js/bootstrap.min.js"></script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q || []).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
