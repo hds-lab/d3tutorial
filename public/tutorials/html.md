@@ -138,7 +138,7 @@ SVG is a language very similar to HTML, but unlike HTML is specifically meant fo
 ```markup
 <svg width="100" height="100">
 	... SVG elements ...
-<svg>
+</svg>
 ```
 
 Notice that this has two attributes for width and height. It is important to explicitly specify both of these attributes and give the SVG element a size. Unlike HTML elements, it will not auto-adjust the size with the content inside of it. In this case, it will be 100 pixels wide and 100 pixels tall. 
